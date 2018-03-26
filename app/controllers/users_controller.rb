@@ -20,7 +20,6 @@ class UsersController < ApplicationController
 
   private
     def user_params
-      params[:user][:api_key] = SecureRandom.base64
-      params.require(:user).permit(:name, :password, :email, :password_confirmation, :api_key)
+=      params.require(:user).permit(:name, :password, :email, :password_confirmation)
     end
 end
