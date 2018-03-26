@@ -17,7 +17,7 @@ describe "As a guest user" do
       fill_in "email", with: "arbitraryemail@thisisntreal.co"
       fill_in "name", with: "Opakawagalaga Eupanifahorious"
       fill_in "password", with: "password"
-      fill_in "confirm password", with: "password"
+      fill_in "password_confirmation", with: "password"
       click_on "Create Account"
 
       expect(current_path).to eq(dashboard_path)

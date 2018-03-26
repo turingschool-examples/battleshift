@@ -10,4 +10,6 @@ Rails.application.routes.draw do
 
   root 'registration#show'
   get "/register", :to => 'registration#new'
+  post "/register", :to => 'registration#create'
+  get "/dashboard", :to => 'dashboard#index'
 end
