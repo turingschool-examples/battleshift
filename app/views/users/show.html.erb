@@ -1,3 +1,4 @@
+<script src="/app/assets/javascripts/application.js"></script>
 <section class="welcome-main">
   <div class="video-background">
     <div class="video-foreground">
@@ -10,6 +11,27 @@
   </div>
   <section class="welcome-login">
     <h1>BattleShift</h1>
-    <%= link_to "Register", register_path %>
+    <div class="something-stupid">Register</div>
+    <form class="hidden">
+      Register to Play
+
+      <%= form_tag '/register' do %>
+
+        <%= label_tag 'name' %>
+        <%= text_field_tag 'name' %>
+
+        <%= label_tag 'email' %>
+        <%= email_field_tag 'email' %>
+
+        <%= label_tag 'password' %>
+        <%= password_field_tag 'password' %>
+
+        <%= label_tag 'password_confirmation' %>
+        <%= password_field_tag 'password_confirmation' %>
+
+        <%= submit_tag 'Create Account' %>
+
+      <% end %>
+    </form>
   </section>
 </section>
