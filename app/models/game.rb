@@ -7,4 +7,7 @@ class Game < ApplicationRecord
 
   validates :player_1_board, presence: true
   validates :player_2_board, presence: true
+
+  has_many :colosseums
+  has_many :users, through: :colosseums
 end
