@@ -37,7 +37,7 @@ describe "As a visitor" do
 
       expect(page).to_not have_content("Logged in as Jane123")
       expect(page).to_not have_content("This account has not yet been activated.  Please check your email.")
-      expect(current_path).to eq("/register")
+      expect(page).to have_field("Name", with: "Jane123")
     end
   end
 end
