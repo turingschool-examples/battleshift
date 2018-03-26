@@ -11,7 +11,7 @@ describe "As a visitor" do
     end
   end
 
-  context "when I visit register and fill in info" do
+  context "when I visit /register and fill in info" do
     scenario "I am redirected to dashboard" do
       visit register_path
 
