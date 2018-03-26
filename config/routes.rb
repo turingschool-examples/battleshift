@@ -8,8 +8,8 @@ Rails.application.routes.draw do
     end
   end
 
-  root 'registration#show'
-  get "/register", :to => 'registration#new'
-  post "/register", :to => 'registration#create'
+  root 'users#show'
+  get "/register", :to => 'users#new'
+  post "/register", :to => 'users#create'
   get "/dashboard", :to => 'dashboard#index'
 end
