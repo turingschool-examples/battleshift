@@ -25,6 +25,20 @@ describe "As a visitor" do
       expect(page).to have_content("This account has not yet been activated.  Please check your email.")
       expect(current_path).to eq("/dashboard")
     end
+
+    scenario "with non-matching password confirmation, am still on register path" do
+      visit register_path
+
+      fill_in "Name", with: "Jane123"
+      fill_in "Email", with: "jane@gmail.com"
+      fill_in "Password", with: "test1"
+      fill_in "Password confirmation", with: "test2"
+      click_on "Register"
+
+      expect(page).to_not have_content("Logged in as Jane123")
+      expect(page).to_not have_content("This account has not yet been activated.  Please check your email.")
+      expect(current_path).to eq("/register")
+    end
   end
 end
 
