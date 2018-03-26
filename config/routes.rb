@@ -7,4 +7,7 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  root 'registration#show'
+  get "/register", :to => 'registration#new'
 end
