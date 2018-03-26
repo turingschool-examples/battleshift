@@ -8,10 +8,11 @@ describe UserMailer, type: :mailer do
 
       email.deliver_now
 
-      expect(email.from).to eq('donotreply@battlshift.com')
-      expect(email.to).to eq(user.email)
+      expect(email.from).to eq(['donotreply@battleshift.com'])
+      expect(email.to).to eq([user.email])
       expect(email.subject).to eq('Activate your BattleShift account')
-      expect(email.body).to eq(File.open('./spec/fixtures/user_mailer/activation.html'))
+      expect(email.body.encoded).to include("Thanks for signing up #{user.name}!")
+      expect(email.body.encoded).to include("Click here to activate your account")
     end
   end
 end
