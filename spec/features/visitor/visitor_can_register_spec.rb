@@ -10,6 +10,22 @@ describe "As a visitor" do
       expect(current_path).to eq("/register")
     end
   end
+
+  context "when I visit register and fill in info" do
+    scenario "I am redirected to dashboard" do
+      visit register_path
+
+      fill_in "Name", with: "Jane123"
+      fill_in "Email", with: "jane@gmail.com"
+      fill_in "Password", with: "test1"
+      fill_in "Password confirmation", with: "test1"
+      click_on "Register"
+
+      expect(page).to have_content("Logged in as Jane123")
+      expect(page).to have_content("This account has not yet been activated.  Please check your email.")
+      expect(current_path).to eq("/dashboard")
+    end
+  end
 end
 
 
