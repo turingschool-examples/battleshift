@@ -22,7 +22,7 @@ describe "As a guest user" do
 
       expect(current_path).to eq(dashboard_path)
       expect(page).to have_content("Logged in as Opakawagalaga Eupanifahorious")
-      expect(page).to have_content("This account has not been activated")
+      expect(page).to have_content("This account has not yet been activated")
       expect(page).to have_content("Please check your email")
       expect(User.count).to eq(1)
       expect(User.first.name).to eq("Opakawagalaga Eupanifahorious")
