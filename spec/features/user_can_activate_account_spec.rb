@@ -7,10 +7,10 @@ describe "as unactivated user" do
 
     visit dashboard_path
 
-    expect(page).to have_content("Status: Inactive")
+    expect(page).to have_content("Status: inactive")
   end
 
-  xit "allows user to activate account" do
+  it "allows user to activate account" do
     user = create(:user)
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
@@ -19,6 +19,6 @@ describe "as unactivated user" do
 
     expect(current_path).to eq(dashboard_path)
     expect(page).to have_content("Thank you! Your account is now activated.")
-    expect(page).to have_content("Status: Active")
+    expect(page).to have_content("Status: active")
   end
 end
