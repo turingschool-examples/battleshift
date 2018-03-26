@@ -1,6 +1,15 @@
 class User < ApplicationRecord
   has_secure_password
   validates_confirmation_of :password, on: :create
-  validates_presence_of :name, :password_confirmation, on: :create
+  validates_presence_of :password_confirmation, on: :create
+  validates :name, :email, presence: true, uniqueness: true
+
+  before_validation :set_api_key
+
   enum status: %w(inactive active)
+
+  private
+    def set_api_key
+      self.api_key = SecureRandom.base64
+    end
 end
