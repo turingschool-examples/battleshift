@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get "/dashboard", to: "users#show"
   get "/register", to: "users#new"
   resources :users, only: [:create]
+  resources :activate, only: [:show]
 
   namespace :api do
     namespace :v1 do
