@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
   root to: "home#index"
 
+  get "/dashboard", to: "users#show"
   get "/register", to: "users#new"
-  resources :users, only: [:create] 
+  resources :users, only: [:create]
 
   namespace :api do
     namespace :v1 do
