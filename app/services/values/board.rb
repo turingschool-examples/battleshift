@@ -2,9 +2,18 @@ class Board
   attr_reader :length,
               :board
 
-  def initialize(length)
-    @length = length
+  def initialize(length = 4)
+    @length = check_length(length)
     @board = create_grid
+  end
+
+  def check_length(length)
+    if length > 26
+      p "The max size is 26. Generating a grid of 26"
+      26
+    else
+      length
+    end
   end
 
   def get_row_letters
@@ -203,4 +212,3 @@ class Board
     get_column(coordinate) == "1"
   end
 end
-
