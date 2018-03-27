@@ -16,7 +16,7 @@ RSpec.describe RegistrationMailer, type: :mailer do
     it "renders the headers" do
       expect(mail.subject).to eq("Activate Account")
       expect(mail.to).to eq([user.email])
-      expect(mail.from).to eq(["admin@battleshift.com"])
+      expect(mail.from).to eq(["app92045074@heroku.com"])
     end
 
     it "renders the body" do
