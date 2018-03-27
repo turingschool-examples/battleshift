@@ -17,6 +17,7 @@ class GamesController < ApplicationController
       redirect_to game_path(new_game)
     else
       UserMailer.register_invite(params[:opponent_email], current_user)
+      flash[:notice] = "We invited your friend @ #{params[:opponent_email]} to join Battleshift!"
       redirect_to dashboard_path
     end
   end
