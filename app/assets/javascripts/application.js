@@ -12,3 +12,12 @@
 //
 //= require rails-ujs
 //= require_tree .
+
+var button = document.querySelector(".something-stupid");
+console.log(button)
+button.addEventListener("click", showFun);
+
+function showFun () {
+  console.log('works')
+  // button.classList.toggle("hidden")
+}
