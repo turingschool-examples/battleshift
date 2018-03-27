@@ -2,8 +2,9 @@ require "rails_helper"
 
 describe "user can create game" do
   context "registered user" do
-    it "can create game against another player" do
+    it "can create game against another registered user" do
       user = create(:user, status: 1)
+      user_2 = create(:user, status: 1)
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
       visit dashboard_path
@@ -12,7 +13,7 @@ describe "user can create game" do
       expect(current_path).to eq("/games/new")
 
       select "Easy", from: "Difficulty"
-      fill_in "Opponent email", with: "test@email.com"
+      fill_in "Opponent email", with: user_2.email
       click_on "Invite your Opponent"
 
       expect(current_path).to eq("/games/1")
