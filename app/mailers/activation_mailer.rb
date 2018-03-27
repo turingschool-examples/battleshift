@@ -1,9 +1,9 @@
 class ActivationMailer < ApplicationMailer
-  default from: 'registration@battleshift.com'
+  default from: 'notifications@example.com'
 
   def activation_email(user)
     @user = user
-    @url = activate_url
+    @url = "http://localhost:3000/activate?activation_key=#{@user.activation_key}"
     mail(to: @user.email, subject: 'Welcome! Please complete registration') do |format|
       format.text
       format.html
