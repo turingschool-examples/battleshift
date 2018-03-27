@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180313201116) do
+ActiveRecord::Schema.define(version: 20180326211553) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "uuid-ossp"
+  enable_extension "pgcrypto"
+
+  create_table "colosseums", force: :cascade do |t|
+    t.uuid "user_id"
+    t.bigint "game_id"
+    t.integer "gladiator_number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_colosseums_on_game_id"
+    t.index ["user_id"], name: "index_colosseums_on_user_id"
+  end
 
   create_table "games", force: :cascade do |t|
     t.text "player_1_board"
@@ -26,4 +38,15 @@ ActiveRecord::Schema.define(version: 20180313201116) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.text "name"
+    t.text "email"
+    t.text "password_digest"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "status", default: 0
+  end
+
+  add_foreign_key "colosseums", "games"
+  add_foreign_key "colosseums", "users"
 end

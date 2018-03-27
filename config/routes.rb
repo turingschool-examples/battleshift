@@ -7,4 +7,16 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  root 'users#show'
+  get "/register", :to => 'users#new'
+  post "/register", :to => 'users#create'
+  get "/dashboard", :to => 'dashboard#index'
+  get "/games/new", :to => 'games#new', as: 'new_game'
+  post "/games/new", :to => 'games#create'
+  get "/games/:id", :to => 'games#show', as: 'game'
+  get "/activation/:id", :to => 'activation#update', as: 'activation'
+  get "/login", :to => 'sessions#new', as: 'login'
+  post "/login", :to => 'sessions#create'
+  delete "logout", :to => 'sessions#destroy', as: 'logout'
 end
