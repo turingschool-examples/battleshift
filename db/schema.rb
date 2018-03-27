@@ -27,16 +27,6 @@ ActiveRecord::Schema.define(version: 20180326211553) do
     t.index ["user_id"], name: "index_colosseums_on_user_id"
   end
 
-  create_table "colosseums", force: :cascade do |t|
-    t.uuid "user_id"
-    t.bigint "game_id"
-    t.integer "gladiator_number"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["game_id"], name: "index_colosseums_on_game_id"
-    t.index ["user_id"], name: "index_colosseums_on_user_id"
-  end
-
   create_table "games", force: :cascade do |t|
     t.text "player_1_board"
     t.text "player_2_board"
