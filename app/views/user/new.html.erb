@@ -1,0 +1,11 @@
+<%= form_tag("/register", method: "post") do %>
+  <%= label_tag(:email) %>
+  <%= text_field_tag(:email, required: true) %>
+  <%= label_tag(:name) %>
+  <%= text_field_tag(:name, required: true) %>
+  <%= label_tag(:password) %>
+  <%= password_field_tag(:password, required: true) %>
+  <%= label_tag(:password_confirmation) %>
+  <%= password_field_tag(:password_confirmation, required: true) %>
+  <%= submit_tag("Submit") %>
+<% end %>
