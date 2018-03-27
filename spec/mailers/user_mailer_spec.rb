@@ -1,5 +1,11 @@
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe UserMailer, type: :mailer do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "invite user to join the site" do
+    ActionMailer::Base.deliveries.should be_empty
+
+    user = create(:user)
+    UserMailer.welcome_email(user).deliver
+    ActionMailer::Base.deliveries.should_not be_empty
+  end
 end
