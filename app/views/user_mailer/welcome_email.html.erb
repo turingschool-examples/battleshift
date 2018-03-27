@@ -9,7 +9,7 @@
       You have successfully signed up to command-battleshift.herokuapp.com,
       your username is: <%= @user.email %>.<br>
     </p>
-    <p>Your API key is: </p>
+    <p>Your API key is: <%= @user.api_key.api_key %></p>
     <p>
       To login to the site, just follow this link: <%= @url %>.
     </p>
