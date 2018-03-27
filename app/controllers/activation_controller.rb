@@ -6,6 +6,8 @@ class ActivationController < ApplicationController
       user = User.find(key.user_id)
       user.update_attribute(:status, "active")
       session[:user_id] = user.id
+      user.assign_api_key(user)
+      UserMailer.welcome_email(user).deliver_now
       redirect_to activate_success_path
     else
       render :show
