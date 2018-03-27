@@ -13,7 +13,7 @@ class GamesController < ApplicationController
     invited_user = User.find_by(email: params[:opponent_email])
     if invited_user
       Colosseum.create(user_id: invited_user.id, game_id: new_game.id, gladiator_number: 2)
-      UserMailer.game_invite(params[:opponent_email])
+      UserMailer.game_invite(params[:opponent_email], current_user)
       redirect_to game_path(new_game)
     else
       UserMailer.register_invite(params[:opponent_email], current_user)
