@@ -1,9 +1,9 @@
 module Api
   module V1
-    class GamesController < ActionController::API
+    class GamesController < ApiController
+      before_action :require_game, only: [:show]
       def show
-        game = Game.find(params[:id])
-        render json: game
+        render json: Game.find(params[:id])
       end
 
       def create
