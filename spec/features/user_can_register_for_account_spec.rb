@@ -1,4 +1,5 @@
 require 'rails_helper'
+
 describe "as a guest user" do
   scenario "when I visit the root, I can register as a user" do
     visit root_path
