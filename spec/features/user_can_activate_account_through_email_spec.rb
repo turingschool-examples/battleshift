@@ -1,14 +1,12 @@
-# Background: The registration process will trigger this story
-
 require 'rails_helper'
 
 describe "As a non-activated user" do
-  scenario "When I check my email for the registration email" do
+  scenario "I complete my registration through an email link" do
     visit root_path
 
     click_on "Register"
 
-    expect(current_path).to eq("/register")
+    expect(current_path).to eq(register_path)
 
     fill_in "email", with: "katy.jane8@gmail.com"
     fill_in "name", with: "katy"
@@ -20,18 +18,14 @@ describe "As a non-activated user" do
     email = ActionMailer::Base.deliveries.last
     expect(email.subject).to have_content("Welcome! Please complete registration")
     expect(email).to have_content("Visit here to activate your account.")
-  end
 
-  scenario "I finish registration" do
-    user = create(:user)
+    visit activate_path(activation_key: User.last.activation_key.activation_key)
 
-    visit "https://command-battleshift.herokuapp.com/activate"
+    expect(current_path).to eq(activate_success_path)
+    expect(page).to have_content("Thank you! Your account is now activated.")
 
-    
-    # And when I click on that link
-    # Then I should be taken to a page that says "Thank you! Your account is now activated."
-    #
-    # And when I visit "/dashboard"
-    # Then I should see "Status: Active"
+    visit dashboard_path
+
+    expect(page).to have_content("Status: Active")
   end
 end

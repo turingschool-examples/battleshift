@@ -4,8 +4,9 @@ Rails.application.routes.draw do
   get "/register", to: "user#new"
   post "/register", to: "user#create"
   get "/dashboard", to: "user#show"
-  
-  get "/activate", as: "activate", to: "activation#new"
+
+  get "/activate", to: "activation#new"
+  get "/activate-success", as: "activate_success", to: "activation#show"
 
   namespace :api do
     namespace :v1 do

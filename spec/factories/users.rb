@@ -4,5 +4,6 @@ FactoryBot.define do
     email "me@me.com"
     password "pizza"
     password_confirmation "pizza"
+    
   end
 end

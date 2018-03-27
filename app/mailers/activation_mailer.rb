@@ -3,10 +3,10 @@ class ActivationMailer < ApplicationMailer
 
   def activation_email(user)
     @user = user
-    @url = 'https://command-battleshift.herokuapp.com/activate'
+    @url = "http://localhost:3000/activate?activation_key=#{@user.activation_key.activation_key}"
     mail(to: @user.email, subject: 'Welcome! Please complete registration') do |format|
       format.text
       format.html
-    end 
+    end
   end
 end

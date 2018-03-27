@@ -1,2 +1,6 @@
-<h1>Logged in as katy</h1>
-<h1>This account has not yet been activated. Please check your email.</h1>
+<% if current_user.inactive? %>
+  <h1>Logged in as <%= @user.name %></h1>
+  <h1>This account has not yet been activated. Please check your email.</h1>
+<% else %>
+  <p>Status: Active</p>
+<% end %>
