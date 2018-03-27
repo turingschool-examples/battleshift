@@ -1,11 +1,10 @@
-<%= form_for @game do |f| %>
+<%= form_tag do %>
+  <%= label_tag :difficulty %>
+  <%= select_tag :difficulty, options_for_select([["Easy", 4], ["Medium", 15], ["Hard", 26]]) %>
 
-  <%= f.label "Difficulty" %>
-  <%= select options_for_select([["easy", 4], ["medium", 15], ["hard", 26]]) %>
+  <%= label_tag :opponent_email %>
+  <%= text_field_tag :opponent_email %>
 
-  <%= f.label "Opponent Email" %>
-  <%= f.text_field "Opponent Email" %>
-
-  <%= f.submit "" %>
+  <%= submit_tag "Invite your Opponent" %>
 
 <% end %>
