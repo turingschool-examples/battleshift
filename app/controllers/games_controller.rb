@@ -1,4 +1,5 @@
 class GamesController < ApplicationController
+  before_action :require_activation, only: [:new, :show]
 
   def show
     @game = Game.find(params[:id])
@@ -21,5 +22,13 @@ class GamesController < ApplicationController
       redirect_to dashboard_path
     end
   end
+
+  private
+
+    def require_activation
+      unless current_user.active?
+        redirect_to dashboard_path, alert: "You must activate your account!"
+      end
+    end
 
 end

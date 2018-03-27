@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe "user can create game" do
-  context "registered user" do
+  context "active, registered user" do
     it "can create game against another registered user" do
       user = create(:user, status: 1)
       user_2 = create(:user, status: 1)
@@ -37,7 +37,17 @@ describe "user can create game" do
       expect(current_path).to eq("/dashboard")
       expect(page).to have_content("We invited your friend @ random@person.com to join Battleshift!")
     end
+  end
 
+  context "inactive, registered user" do
+    it "can't create game" do
+      user = create(:user)
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
+      visit new_game_path
+
+      expect(current_path).to eq(dashboard_path)
+      expect(page).to have_content("You must activate your account!")
+    end
   end
 end
