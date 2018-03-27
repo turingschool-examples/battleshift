@@ -5,6 +5,10 @@ RSpec.describe RegistrationMailer, type: :mailer do
     let(:user) { create(:user) }
     let(:mail) { RegistrationMailer.activate(user) }
 
+    before(:each) do
+      allow_any_instance_of(User).to receive(:set_api_key).and_return("5ThQc/y5nr34mDZWrU+FQ==")
+    end
+
     it 'queues the email' do
       expect { mail.deliver_now }.to change { ActionMailer::Base.deliveries.count }.by(1)
     end
@@ -18,8 +22,8 @@ RSpec.describe RegistrationMailer, type: :mailer do
     it "renders the body" do
       text_body = File.read('spec/fixtures/registration_mailer/activate.txt')
       html_body = File.read('spec/fixtures/registration_mailer/activate.html')
-      expect(mail.text_part.body.to_s).to match(text_body)
-      expect(mail.html_part.body.to_s).to match(html_body)
+      expect(mail.text_part.body.to_s.chomp).to match(text_body)
+      expect(mail.html_part.body.to_s.gsub(/[[:space:]]/, '')).to match(html_body.gsub(/[[:space:]]/, ''))
     end
   end
 
