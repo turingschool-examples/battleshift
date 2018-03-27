@@ -18,9 +18,8 @@ describe "As a non-activated user" do
     email = ActionMailer::Base.deliveries.last
     expect(email.subject).to have_content("Welcome! Please complete registration")
     expect(email).to have_content("Visit here to activate your account.")
-    expect(User.last).to have_attribute(:activation_key)
 
-    visit activate_path(activation_key: User.last.activation_key)
+    visit activate_path(activation_key: User.last.activation_key.activation_key)
 
     expect(current_path).to eq(activate_success_path)
     expect(page).to have_content("Thank you! Your account is now activated.")
