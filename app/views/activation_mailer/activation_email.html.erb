@@ -5,8 +5,6 @@
   </head>
   <body>
     <h1>Welcome <%= @user.name %> to command-battleshift! Just one more step and you're in.</h1>
-    <p>Visit here to activate your account.<br>
-      <%= @url %>
-    </p>
+    <%= link_to "Visit here to activate your account.", @url + {activation_key: "#{@user.activation_key}"}.to_param %>
   </body>
 </html>
