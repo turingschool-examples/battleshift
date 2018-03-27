@@ -7,7 +7,7 @@ class UserController < ApplicationController
     user = User.new(user_params)
     if user.save!
       session[:user_id] = user.id
-      user.update(create_activation_key(user))
+      ActivationKey.create(user_id: user.id, activation_key: create_activation_key(user)[:activation_key])
       ActivationMailer.activation_email(user).deliver_now
       redirect_to dashboard_path
     else
