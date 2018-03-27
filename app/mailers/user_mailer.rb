@@ -10,4 +10,9 @@ class UserMailer < ApplicationMailer
   def game_invite(email)
     mail(to: email, subject: "You have been invited to a game of BattleShift!")
   end
+
+  def register_invite(email, user)
+    mail(to: email, subject: "You have been invited to a game of BattleShift")
+  end
+
 end
