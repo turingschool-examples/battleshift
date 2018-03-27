@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe Board, type: :model do
   it "initializes with correct attributes" do
-    board = Board.new(4)
+    board = Board.new
 
     expect(board.length).to eq(4)
     expect(board.board.class).to eq(Array)

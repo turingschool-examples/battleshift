@@ -1,7 +1,7 @@
 class Space
   attr_reader :coordinates, :status, :contents
 
-  def initialize(coordinates)
+  def initialize(coordinates = "")
     @coordinates = coordinates
     @contents    = nil
     @status      = "Not Attacked"

@@ -9,7 +9,7 @@ class Board
 
   def check_length(length)
     if length > 26
-      p "The max size is 26. Generating a grid of 26"
+      p "Even the ocean isn't that big! Generating a grid of 26."
       26
     else
       length
