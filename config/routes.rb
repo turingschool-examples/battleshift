@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   get "/register", :to => 'users#new'
   post "/register", :to => 'users#create'
   get "/dashboard", :to => 'dashboard#index'
+  get "/games/new", :to => 'games#new', as: 'new_game'
+  post "/games", :to => 'games#create'
   get "/activation/:id", :to => 'activation#update', as: 'activation'
   get "/login", :to => 'sessions#new', as: 'login'
   post "/login", :to => 'sessions#create'

@@ -1,0 +1,11 @@
+<%= form_for @game do |f| %>
+
+  <%= f.label "Difficulty" %>
+  <%= select options_for_select([["easy", 4], ["medium", 15], ["hard", 26]]) %>
+
+  <%= f.label "Opponent Email" %>
+  <%= f.text_field "Opponent Email" %>
+
+  <%= f.submit "" %>
+
+<% end %>
