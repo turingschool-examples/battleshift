@@ -15,6 +15,8 @@ describe "As a visitor" do
     scenario "I am redirected to dashboard" do
       visit register_path
 
+      expect(ActionMailer::Base.deliveries.size).to eq(0)
+
       fill_in "Name", with: "Jane123"
       fill_in "Email", with: "jane@gmail.com"
       fill_in "Password", with: "test1"
@@ -23,6 +25,7 @@ describe "As a visitor" do
 
       expect(page).to have_content("Logged in as Jane123")
       expect(page).to have_content("This account has not yet been activated.  Please check your email.")
+      expect(ActionMailer::Base.deliveries.size).to eq(1)
       expect(current_path).to eq("/dashboard")
     end
 
