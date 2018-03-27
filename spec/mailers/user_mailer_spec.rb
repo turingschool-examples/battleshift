@@ -13,6 +13,7 @@ describe UserMailer, type: :mailer do
       expect(email.subject).to eq('Activate your BattleShift account')
       expect(email.body.encoded).to include("Thanks for signing up #{user.name}!")
       expect(email.body.encoded).to include("Click here to activate your account")
+      expect(email.body.encoded).to include("Your api key is: #{user.id}, please keep it secret.")
     end
   end
 end
