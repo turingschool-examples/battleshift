@@ -19,7 +19,7 @@ describe "As a non-activated user" do
 
     email = ActionMailer::Base.deliveries.last
     expect(email.subject).to have_content("Welcome to Command Battleshift!")
-    expect(email).to have_content("Your API key is:")
+    expect(email).to have_content("Your API key is: #{User.last.api_key.api_key}")
     expect(email).to have_content("To login to the site, just follow this link:")
   end
 end
