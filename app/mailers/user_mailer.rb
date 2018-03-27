@@ -16,7 +16,7 @@ class UserMailer < ApplicationMailer
   def register_invite(email, user)
     @user = user
     @url = "#{ENV['root']}/register"
-    mail(to: email, subject: "You have been invited to a game of BattleShift")
+    mail(to: email, subject: "You have been invited to a game of BattleShift!")
   end
 
 end
