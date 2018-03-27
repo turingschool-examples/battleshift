@@ -29,5 +29,20 @@ describe UserMailer, type: :mailer do
       expect(email.body.encoded).to include("#{user.name} has invited you to a game of BattleShift!")
       expect(email.body.encoded).to include("Join Game")
     end
+
+    it "#register_invite" do
+      user = create(:user, status: 1)
+      user.games.create()
+      email = UserMailer.register_invite("fake@fake.com", user)
+
+      email.deliver_now
+
+      expect(email.from).to eq(['donotreply@battleshift.com'])
+      expect(email.to).to eq(['fake@fake.com'])
+      expect(email.subject).to eq("You have been invited to a game of BattleShift!")
+      expect(email.body.encoded).to include("#{user.name} has invited you to a game of BattleShift, but you must register first!")
+      expect(email.body.encoded).to include("Register Here")
+      expect(email.body.encoded).to include("Then invite them to a new game!")
+    end
   end
 end
