@@ -28,5 +28,61 @@ describe "As a guest user" do
       expect(User.first.name).to eq("Opakawagalaga Eupanifahorious")
       expect(true).to be(true)
     end
+
+    it "I can't register without the correct email" do
+      visit register_path
+
+      fill_in "name", with: "Opakawagalaga Eupanifahorious"
+      fill_in "password", with: "password"
+      fill_in "password_confirmation", with: "password"
+      click_on "Create Account"
+
+      expect(page).to have_content("We sunk your Battleship. Unable to create user account")
+    end
+
+    it "I can't register without the correct name" do
+      visit register_path
+
+      fill_in "email", with: "arbitraryemail@thisisntreal.co"
+      fill_in "password", with: "password"
+      fill_in "password_confirmation", with: "password"
+      click_on "Create Account"
+
+      expect(page).to have_content("We sunk your Battleship. Unable to create user account")
+    end
+
+    it "I can't register without the correct password" do
+      visit register_path
+
+      fill_in "email", with: "arbitraryemail@thisisntreal.co"
+      fill_in "name", with: "Opakawagalaga Eupanifahorious"
+      fill_in "password_confirmation", with: "password"
+      click_on "Create Account"
+
+      expect(page).to have_content("We sunk your Battleship. Unable to create user account")
+    end
+
+    it "I can't register without the correct password confirmation" do
+      visit register_path
+
+      fill_in "email", with: "arbitraryemail@thisisntreal.co"
+      fill_in "name", with: "Opakawagalaga Eupanifahorious"
+      fill_in "password", with: "password"
+      click_on "Create Account"
+
+      expect(page).to have_content("We sunk your Battleship. Unable to create user account")
+    end
+    
+    it "I can't register without the correctly formated email" do
+      visit register_path
+
+      fill_in "email", with: "You'll never get me alive!"
+      fill_in "name", with: "Opakawagalaga Eupanifahorious"
+      fill_in "password", with: "password"
+      fill_in "password_confirmation", with: "password"
+      click_on "Create Account"
+
+      expect(page).to have_content("We sunk your Battleship. Unable to create user account")
+    end
   end
 end
