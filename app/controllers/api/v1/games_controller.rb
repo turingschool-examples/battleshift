@@ -12,7 +12,7 @@ class Api::V1::GamesController < ApiController
       player_1: Player.new(Board.new, player_1_api_key),
       player_2: Player.new(Board.new, player_2_api_key)
     }
-
-    render json: Game.create(game_attributes)
+    game = Game.create(game_attributes)
+    render json: game
   end
 end
