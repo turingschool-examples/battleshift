@@ -10,7 +10,9 @@ class Api::V1::GamesController < ApiController
     player_2_board = Board.new
     game_attributes = {
       player_1_board: player_1_board,
-      player_2_board: player_2_board
+      player_2_board: player_2_board,
+      player_1: request.headers['X-API-KEY'],
+      player_2: User.find_by(email: params[:opponent_email]).api_key
     }
     game = Game.create(game_attributes)
 
