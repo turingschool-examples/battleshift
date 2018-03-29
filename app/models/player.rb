@@ -1,5 +1,6 @@
 class Player
-  attr_reader :board, :turns, :api_key
+  attr_accessor :board, :turns
+  attr_reader :api_key
 
   def initialize(board, api_key)
     @board = board
