@@ -10,13 +10,20 @@ describe "Api::V1::Games" do
 
       headers = { "X-API-KEY" => user_1.api_key.api_key,
                   "CONTENT-TYPE" => "application/json" }
-      post "/api/v1/games", :headers => headers
+      params = { :opponent_email => "#{user_2.email}" }.to_json
+      post "/api/v1/games", :params => params, :headers => headers
 
       @result = JSON.parse(response.body)
 
       expect(response).to be_success
       expect(@result[:message]).to be_nil
+      expect(@result[:current_turn]).to be_nil
+      expect(@result[:player_1_turns]).to be_nil
+      expect(@result[:player_2_turns]).to be_nil
       expect(start_fresh).to all(be == "Not Attacked")
+      expect(GamePlayer.last.game_id).to eq(Game.last.id)
+      expect(GamePlayer.last.player_1_id).to eq(user_1.id)
+      expect(GamePlayer.last.player_2_id).to eq(user_2.id)
     end
   end
 end
