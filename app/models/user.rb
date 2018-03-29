@@ -3,6 +3,8 @@ class User < ApplicationRecord
   validates_presence_of :name, :email, :password, :status
   has_one :activation_key
   has_one :api_key
+  has_many :game_players
+  has_many :games, through: :game_players
   enum status: ["inactive", "active"]
 
   def generate_key
