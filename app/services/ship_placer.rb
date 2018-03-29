@@ -16,9 +16,31 @@ class ShipPlacer
     end
   end
 
+  def message
+    "Successfully placed ship with a size of #{ship.length}. " + rest_of_message
+  end
+
   private
   attr_reader :board, :ship,
     :start_space, :end_space
+
+  def spaces_occupied
+    board.board.flatten.count { |space| space.values.first.contents }
+  end
+
+  def remaining_ship_size
+    5 - spaces_occupied
+  end
+
+  def rest_of_message
+    if remaining_ship_size == 0
+      "You have 0 ship(s) to place."
+    elsif remaining_ship_size == 5
+      "You have 2 ship(s) to place" + " with a size of #{remaining_ship_size}."
+    else
+      "You have 1 ship(s) to place" + " with a size of #{remaining_ship_size}."
+    end
+  end
 
   def same_row?
     start_space[0] == end_space[0]
@@ -31,8 +53,7 @@ class ShipPlacer
   def place_in_row
     row = start_space[0]
     range = start_space[1]..end_space[1]
-    msg = "Ship size must be equal to the number of spaces you are trying to fill."
-    raise InvalidShipPlacement unless range.count == ship.length
+    raise InvalidShipPlacement.new("Ship size must be equal to the number of spaces you are trying to fill.") unless range.count == ship.length
     range.each { |column| place_ship(row, column) }
   end
 
