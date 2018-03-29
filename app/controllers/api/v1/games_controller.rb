@@ -9,6 +9,16 @@ module Api
           render :status => 400
         end
       end
+
+      def index
+      end
+
+      def create
+        game = Game.create(player_1_board: Board.new(4),
+                           player_2_board: Board.new(4))
+        render json: game
+      end
     end
   end
 end
+# response.request.env["HTTP_X_API_KEY"]
