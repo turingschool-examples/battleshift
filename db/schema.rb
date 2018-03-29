@@ -30,10 +30,10 @@ ActiveRecord::Schema.define(version: 20180328183500) do
   end
 
   create_table "game_players", force: :cascade do |t|
-    t.bigint "user_id"
     t.bigint "game_id"
+    t.integer "player_1_id"
+    t.integer "player_2_id"
     t.index ["game_id"], name: "index_game_players_on_game_id"
-    t.index ["user_id"], name: "index_game_players_on_user_id"
   end
 
   create_table "games", force: :cascade do |t|
@@ -57,5 +57,4 @@ ActiveRecord::Schema.define(version: 20180328183500) do
   end
 
   add_foreign_key "game_players", "games"
-  add_foreign_key "game_players", "users"
 end
