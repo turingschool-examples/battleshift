@@ -9,18 +9,17 @@ describe "Api::V1::Games" do
       @user_1.api_key = create(:api_key, user: @user_1)
       @user_2.api_key = create(:api_key, api_key: "542345243642", user: @user_2)
       headers = { "X-API-KEY" => @user_1.api_key.api_key,
-        "CONTENT-TYPE" => "application/json" }
-        params = { :opponent_email => "#{@user_2.email}" }.to_json
-        post "/api/v1/games", :params => params, :headers => headers
+                  "CONTENT-TYPE" => "application/json" }
+      params = { :opponent_email => "#{@user_2.email}" }.to_json
+      post "/api/v1/games", :params => params, :headers => headers
     end
 
     it "user can place two ships" do
       headers = { "X-API-KEY" => @user_1.api_key.api_key,
-        "CONTENT-TYPE" => "application/json" }
+                  "CONTENT-TYPE" => "application/json" }
 
-      params = {ship: {ship_size: 3, start_space: "A1", end_space: "A3"}}.to_json
-
-      post "/api/v1/games/#{Game.last.id}/ships", params: params, :headers => headers
+      params_ship_1 = {ship: {ship_size: 3, start_space: "A1", end_space: "A3"}}.to_json
+      post "/api/v1/games/#{Game.last.id}/ships", params: params_ship_1, :headers => headers
 
       result = JSON.parse(response.body)
 
@@ -29,16 +28,17 @@ describe "Api::V1::Games" do
       result["player_1_board"]["rows"].first["data"][0..2].each do |a_row|
         expect(a_row["contents"]).to_not be_nil
       end
+
       expect(result["message"]).to eq("Successfully placed ship with a size of 3. You have 1 ship(s) to place with a size of 2.")
 
-      params = {ship: {ship_size: 2, start_space: "B1", end_space: "C1"}}.to_json
+      #user places second ship:
 
-      post "/api/v1/games/#{Game.last.id}/ships", params: params, :headers => headers
+      params_ship_2 = {ship: {ship_size: 2, start_space: "B1", end_space: "C1"}}.to_json
+      post "/api/v1/games/#{Game.last.id}/ships", params: params_ship_2, :headers => headers
 
       result = JSON.parse(response.body)
 
       expect(response).to be_success
-
       expect(result["message"]).to eq("Successfully placed ship with a size of 2. You have 0 ship(s) to place.")
     end
   end
