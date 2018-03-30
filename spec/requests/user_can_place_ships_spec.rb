@@ -14,7 +14,7 @@ describe "Api::V1::Games" do
         post "/api/v1/games", :params => params, :headers => headers
     end
 
-    it "places ships" do
+    it "user places 1 ship" do
       ship_payload = {ship_size: 3, start_space: "A1", end_space: "A3"}
 
       post "/api/v1/games/#{Game.last.id}/ships", :params => { ship: ship_payload }
