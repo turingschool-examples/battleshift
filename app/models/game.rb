@@ -1,5 +1,4 @@
 class Game < ApplicationRecord
-  attr_accessor :messages
   has_many :game_players
   has_many :users, through: :game_players
   has_one :player_1, through: :game_players
