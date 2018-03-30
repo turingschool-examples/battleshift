@@ -11,6 +11,8 @@ module Api
                 start_space: params[:ship]["start_space"],
                 end_space: params[:ship]["end_space"])
           shipplacer.run
+          game.save
+          game.update(current_turn: 0)
 
           render json: game, message: shipplacer.messages
         end
