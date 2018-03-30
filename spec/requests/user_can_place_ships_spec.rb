@@ -4,20 +4,23 @@ describe "Api::V1::Games" do
   context "POST /api/v1/games/:id/ships" do
 
     before :all do
-      user_1 = create(:user)
-      user_2 = create(:user, email: "ellen@ellen.com")
-      user_1.api_key = create(:api_key, user: user_1)
-      user_2.api_key = create(:api_key, api_key: "542345243642", user: user_2)
-      headers = { "X-API-KEY" => user_1.api_key.api_key,
+      @user_1 = create(:user)
+      @user_2 = create(:user, email: "ellen@ellen.com")
+      @user_1.api_key = create(:api_key, user: @user_1)
+      @user_2.api_key = create(:api_key, api_key: "542345243642", user: @user_2)
+      headers = { "X-API-KEY" => @user_1.api_key.api_key,
         "CONTENT-TYPE" => "application/json" }
-        params = { :opponent_email => "#{user_2.email}" }.to_json
+        params = { :opponent_email => "#{@user_2.email}" }.to_json
         post "/api/v1/games", :params => params, :headers => headers
     end
 
     it "user can place two ships" do
-      ship_payload = {ship_size: 3, start_space: "A1", end_space: "A3"}
+      headers = { "X-API-KEY" => @user_1.api_key.api_key,
+        "CONTENT-TYPE" => "application/json" }
 
-      post "/api/v1/games/#{Game.last.id}/ships", :params => { ship: ship_payload }
+      params = {ship: {ship_size: 3, start_space: "A1", end_space: "A3"}}.to_json
+
+      post "/api/v1/games/#{Game.last.id}/ships", params: params, :headers => headers
 
       result = JSON.parse(response.body)
 
@@ -28,9 +31,9 @@ describe "Api::V1::Games" do
       end
       expect(result["message"]).to eq("Successfully placed ship with a size of 3. You have 1 ship(s) to place with a size of 2.")
 
-      ship_payload_2 = {ship_size: 2, start_space: "B1", end_space: "C1"}
+      params = {ship: {ship_size: 2, start_space: "B1", end_space: "C1"}}.to_json
 
-      post "/api/v1/games/#{Game.last.id}/ships", :params => { ship: ship_payload_2 }
+      post "/api/v1/games/#{Game.last.id}/ships", params: params, :headers => headers
 
       result = JSON.parse(response.body)
 
