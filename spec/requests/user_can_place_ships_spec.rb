@@ -14,7 +14,7 @@ describe "Api::V1::Games" do
         post "/api/v1/games", :params => params, :headers => headers
     end
 
-    it "user places 1 ship" do
+    it "user can place two ships" do
       ship_payload = {ship_size: 3, start_space: "A1", end_space: "A3"}
 
       post "/api/v1/games/#{Game.last.id}/ships", :params => { ship: ship_payload }
@@ -27,6 +27,16 @@ describe "Api::V1::Games" do
         expect(a_row["contents"]).to_not be_nil
       end
       expect(result["message"]).to eq("Successfully placed ship with a size of 3. You have 1 ship(s) to place with a size of 2.")
+
+      ship_payload_2 = {ship_size: 2, start_space: "B1", end_space: "C1"}
+
+      post "/api/v1/games/#{Game.last.id}/ships", :params => { ship: ship_payload_2 }
+
+      result = JSON.parse(response.body)
+
+      expect(response).to be_success
+
+      expect(result["message"]).to eq("Successfully placed ship with a size of 2. You have 0 ship(s) to place.")
     end
   end
 end
