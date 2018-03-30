@@ -5,14 +5,6 @@ class ShipPlacer
     @ship        = ship
     @start_space = start_space
     @end_space   = end_space
-    @message_1 = ""
-    @message_2 = ""
-    @spaces_left_to_place = 5
-    @ships_left_to_place = 2
-  end
-
-  def messages
-    @message_1 + @message_2
   end
 
   def run
@@ -43,9 +35,6 @@ class ShipPlacer
     msg = "Ship size must be equal to the number of spaces you are trying to fill."
     raise InvalidShipPlacement unless range.count == ship.length.to_i
     range.each { |column| place_ship(row, column) }
-    @ships_left_to_place -= 1
-    @message_1 = "Successfully placed ship with a size of #{ship.length}. "
-    @message_2 = "You have #{@ships_left_to_place} ship(s) to place with a size of #{@spaces_left_to_place}."
   end
 
   def place_in_column
@@ -53,9 +42,6 @@ class ShipPlacer
     range   = start_space[0]..end_space[0]
     raise InvalidShipPlacement unless range.count == ship.length.to_i
     range.each { |row| place_ship(row, column) }
-    @ships_left_to_place -= 1
-    @message_1 = "Successfully placed ship with a size of #{ship.length}. "
-    @message_2 = "You have #{@ships_left_to_place} ship(s) to place with a size of #{@spaces_left_to_place}."
   end
 
   def place_ship(row, column)
@@ -65,7 +51,6 @@ class ShipPlacer
       raise InvalidShipPlacement.new("Attempting to place ship in a space that is already occupied.")
     else
       space.occupy!(ship)
-      @spaces_left_to_place -= 1
     end
   end
 end
