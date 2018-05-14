@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'user registration process' do
-  let(:user) { create(:user) }
+  let(:user) { create(:unregistered_user) }
 
   context 'a non-activiated user' do
     context 'confirms email activiation' do
