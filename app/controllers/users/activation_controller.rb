@@ -7,7 +7,7 @@ module Users
     def update
       user = User.find_by_id(params[:id])
       user.activate
-      redirect_to user
+      redirect_to dashboard_path 
     end
   end
 end
