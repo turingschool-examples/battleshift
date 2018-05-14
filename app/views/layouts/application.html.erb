@@ -9,6 +9,18 @@
   </head>
 
   <body>
+    <% if current_user %>
+      <p>Logged in as <%= current_user.name %><p>
+    <% end %>
+
+    <div class="alert-<%= flash.keys[0]%>">
+      <% flash.each do |key, value| %>
+        <div class=" <%= flash_class(key) %> ">
+          <%= value.html_safe %>
+        </div>
+      <% end %>
+    </div>
+
     <%= yield %>
   </body>
 </html>
