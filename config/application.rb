@@ -35,5 +35,6 @@ module BattleshipWeb
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+    config.action_mailer.default_url_options = { host: '127.0.0.1:3000' }
   end
 end
