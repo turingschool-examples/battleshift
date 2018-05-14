@@ -11,7 +11,7 @@ class UsersController < ApplicationController
       flash[:success] = "Logged in as #{user.name}"
 
       redirect_to '/dashboard'
-      UserActivatorMailer.welcome_email(user).deliver_now
+      UserActivatorMailer.with(user: user).welcome_email(user).deliver_now
     else
       redirect_to new_user_path
     end
@@ -28,6 +28,7 @@ class UsersController < ApplicationController
     else
       flash[:error] = "Oops, something went wrong"
     end
+    redirect_to dashboard_path
   end
 
   private
