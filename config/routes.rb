@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   get '/register', to: 'users#new', as: 'registration'
   get '/dashboard', to: 'users#show'
 
+  resources :users, only: [:create]
+
   namespace :api do
     namespace :v1 do
       resources :games, only: [:show] do
