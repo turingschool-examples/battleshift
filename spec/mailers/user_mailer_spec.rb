@@ -6,10 +6,8 @@ RSpec.describe UserMailer, type: :mailer do
     let(:email) { UserMailer.with(user: user).activation_email }
 
     it 'should send an activation email' do
-      expect(email.body.encoded).to have_link('Visit here to activate your account.')
-
-      link = find('a')
-      binding.pry
+      link = "#{ENV['base_url']}/activate/#{user.activation_key}"
+      expect(email.body.encoded).to have_link('Visit here to activate your account.', href: link)
     end
   end
 end
