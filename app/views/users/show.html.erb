@@ -1,4 +1,6 @@
 <h1>Logged in as <%= current_user.name %></h1>
 <% unless current_user.activated %>
     <p>This account has not been activated yet. Please check your email.</p>
+<% else %>
+    <p>Status: Active</p>
 <% end %>

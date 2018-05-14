@@ -12,6 +12,7 @@ context 'A user clicking the activate link in an email' do
     visit "/activate/#{user.activation_key}"
 
     expect(page).to have_content('Thank you! Your account is now activated.')
+    user.reload
 
     visit '/dashboard'
 
