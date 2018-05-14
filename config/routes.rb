@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   get '/register', to: 'users#new'
   post '/register', to: 'users#create'
+  get '/dashboard', to: 'users#show'
 
   namespace :users do
     get '/:id/activate', to: 'activation#new', as: :activation
