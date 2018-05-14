@@ -7,4 +7,12 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  root 'welcome#index'
+
+  resources :users, only: [:create]
+  get '/register', to: 'users#new'
+  get '/dashboard', to: 'dashboard#index'
+
+  get '/authenticate', to: 'registration#update'
 end
