@@ -19,9 +19,21 @@ describe 'As a guest user' do
       user = User.last
       expect(user.name).to eq('Josh')
       expect(user.email).to eq('ilanarox@fake.com')
-      
+
       expect(page).to have_content "Logged in as Josh"
       expect(page).to have_content "This account has not yet been activated. Please check your email."
+
+      email = ActionMailer::Base.deliveries.last
+      expect(email.recipients).to eq(user.email)
+      expect(email.body).to have_link("Visit here to activate your account.")
+
+      within(email.body) do
+        click_on "Visit here to activate your account."
+      end
+
+      expect(current_path).to eq("/dashboard")
+      expect(page).to have_content("Thank you! Your account is now activated.")
+      expect(page).to have_content("Status: Active")
     end
   end
 end
