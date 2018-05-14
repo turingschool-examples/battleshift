@@ -6,13 +6,15 @@ git_source(:github) do |repo_name|
 end
 
 gem 'rails', '~> 5.1.5'
+
+gem 'active_model_serializers', '0.10'
+gem 'bcrypt'
+gem 'figaro'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.7'
 gem 'sass-rails', '~> 5.0'
+gem 'sendgrid-ruby'
 gem 'uglifier', '>= 1.3.0'
-gem 'active_model_serializers', '0.10'
-gem 'figaro'
-gem 'bcrypt'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
