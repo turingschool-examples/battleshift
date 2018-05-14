@@ -10,6 +10,7 @@ RSpec.describe UserMailer, type: :mailer do
       expect(email.html_part.body.encoded).to have_link('Visit here to activate your account.', href: link)
       expect(email.text_part.body.to_s).to include('Visit the below link to activate your account.')
       expect(email.text_part.body.to_s).to include(link)
+      expect(email.text_part.body.to_s).to include("#{user.api_key}")
     end
   end
 end

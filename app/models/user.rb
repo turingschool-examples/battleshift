@@ -10,5 +10,9 @@ class User < ApplicationRecord
       self.activation_key = rand(36**32).to_s(32).upcase
       save
     end
+    if self.api_key.nil?
+      self.api_key = rand(36**32).to_s(32).upcase
+      save
+    end
   end
 end
