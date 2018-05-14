@@ -27,4 +27,20 @@ feature 'Registration' do
     expect(page).to have_content('Logged in as Thor')
     expect(page).to have_content('This account has not yet been activated. Please check your email.')
   end
+
+  scenario 'registered user can log back in' do
+    user = create(:user)
+    visit '/'
+
+    click_on 'Login'
+    expect(current_path).to eq(login_path)
+
+    fill_in 'email', with: user.email
+    fill_in 'password', with: user.password
+
+    click_on 'Submit'
+
+    expect(current_path).to eq('/dashboard')
+    expect(page).to have_content("Logged in as #{user.name}")
+  end
 end
