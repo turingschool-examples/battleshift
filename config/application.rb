@@ -10,6 +10,7 @@ require "action_mailer/railtie"
 require "action_view/railtie"
 require "action_cable/engine"
 require "sprockets/railtie"
+
 # require "rails/test_unit/railtie"
 
 # Require the gems listed in Gemfile, including any gems
@@ -35,5 +36,19 @@ module BattleshipWeb
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    config.action_mailer.delivery_method = :smtp
+
+    config.action_mailer.smtp_settings = {
+      address:              'smtp.sendgrid.net',
+      port:                 '587',
+      domain:               'http://still-harbor-52317.herokuapp.com/',
+      user_name:            ENV["SENDGRID_USERNAME"],
+      password:             ENV["SENDGRID_PASSWORD"],
+      authentication:       'plain',
+      enable_starttls_auto: true
+    }
+   # Do not swallow errors in after_commit/after_rollback callbacks.
+
   end
 end
