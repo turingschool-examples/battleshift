@@ -5,6 +5,5 @@ class UserMailer < ApplicationMailer
     @api_key = @user.api_key
 
     mail(to: @user.email, subject: 'Activate Your Battleshift Account')
-
   end
 end
