@@ -41,7 +41,7 @@ module BattleshipWeb
 
     config.action_mailer.smtp_settings = {
       address:              'smtp.sendgrid.net',
-      port:                 '3000',
+      port:                 '587',
       domain:               'http://still-harbor-52317.herokuapp.com/',
       user_name:            ENV["SENDGRID_USERNAME"],
       password:             ENV["SENDGRID_PASSWORD"],
