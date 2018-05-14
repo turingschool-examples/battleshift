@@ -64,7 +64,11 @@ describe 'GET /api/v1/games/1' do
     it 'returns a 400' do
       get "/api/v1/games/1"
 
+      body = JSON.parse(response.body, symbolize_names: true)
+
       expect(response.status).to be(400)
+      expect(body[:status]).to eq(400)
+      expect(body[:message]).to eq('Game does not exist')
     end
   end
 end
