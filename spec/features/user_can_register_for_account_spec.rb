@@ -34,7 +34,6 @@ describe 'User' do
 
       click_on 'Submit'
 
-      expect(current_path).to eq('/register')
       expect(page).to have_content("Unable to create account")
     end
   end
