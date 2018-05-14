@@ -10,5 +10,7 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
 
+  resources :users, only: [:create]
   get '/register', to: 'users#new'
+
 end
