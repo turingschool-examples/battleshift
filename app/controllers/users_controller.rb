@@ -9,7 +9,7 @@ class UsersController < ApplicationController
       session[:id] = @user.id
       UserMailer.registration_email(@user).deliver_now
       flash[:notice] = "Logged in as #{@user.name}"
-        redirect_to '/dashboard'
+        redirect_to dashboard_path
     else
       flash[:notice] = "Please try again!"
       render :new
@@ -17,7 +17,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    @user = User.find(session[:id])
   end
 
   private
