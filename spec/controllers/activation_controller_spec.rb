@@ -1,5 +1,5 @@
 require 'rails_helper'
 
-RSpec.describe ActivationController, type: :controller do
+RSpec.describe Users::ActivationController, type: :controller do
 
 end
