@@ -7,7 +7,8 @@ Rails.application.routes.draw do
   get '/dashboard', to: 'users#show'
 
   namespace :users do
-    get '/:id/activate', to: 'activation#new', as: :activation
+    get '/:id/activate', to: 'activation#edit', as: :activation
+    patch '/:id/activate', to: 'activation#update', as: :activate
   end
 
   namespace :api do
