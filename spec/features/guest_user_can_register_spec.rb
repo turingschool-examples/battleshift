@@ -9,7 +9,7 @@ describe 'Guest user can register' do
 
       click_on 'Register'
 
-      expect(current_path).to eq('/register')
+      expect(current_path).to eq(register_path)
 
       fill_in 'Email', with: 'testemail@email.com'
       fill_in 'Name', with: 'Awesome Guys'
