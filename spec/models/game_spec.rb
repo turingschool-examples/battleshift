@@ -1,5 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Game, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'validations' do
+    it { is_expected.to validate_presence_of(:player_1_board) }
+    it { is_expected.to validate_presence_of(:player_2_board) }
+  end
 end
