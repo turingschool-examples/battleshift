@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
   root 'welcome#index'
 
   get '/register', to: 'users#new'
@@ -7,7 +7,8 @@ Rails.application.routes.draw do
   get '/dashboard', to: 'users#show'
 
   namespace :users do
-    get '/:id/activate', to: 'activation#new', as: :activation
+    get '/:id/activate', to: 'activation#edit', as: :activation
+    patch '/:id/activate', to: 'activation#update', as: :activate
   end
 
   namespace :api do

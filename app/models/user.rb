@@ -3,4 +3,12 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
 
   has_secure_password
+  
+  def activate
+    update(activated: true)
+  end
+
+  def activated?
+    activated
+  end
 end
