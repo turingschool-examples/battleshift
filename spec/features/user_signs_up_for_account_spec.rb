@@ -29,7 +29,7 @@ describe 'As a guest user' do
       expect(email.html_part.body.to_s).to have_content("Visit here to activate your account.")
 
       link = email.html_part.body.raw_source.match(/href="(?<url>.+?)">/)[:url]
-      binding.pry
+
       visit(link)
 
       expect(current_path).to eq("/dashboard")
