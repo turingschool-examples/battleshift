@@ -8,7 +8,7 @@ describe 'user registration process' do
       scenario 'they are successfully registered' do
         welcome_message  = 'Thank you! Your account is now activated.'
 
-        visit activiation_path
+        visit activation_path
         
         click_on 'Activate'
 

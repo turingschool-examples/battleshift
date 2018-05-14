@@ -5,6 +5,10 @@ Rails.application.routes.draw do
   get '/register', to: 'users#new'
   post '/register', to: 'users#create'
 
+  namespace :users do
+    get '/:id/activate', to: 'activation#new', as: :activation
+  end
+
   namespace :api do
     namespace :v1 do
       resources :games, only: [:show] do
