@@ -59,3 +59,29 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 end
+
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.test_framework :rspec
+    with.library :rails
+  end
+end
+
+VCR.configure do |config|
+  config.cassette_library_dir = 'spec/cassettes'
+  config.hook_into :webmock
+end
+
+DatabaseCleaner.strategy = :truncation
+
+RSpec.configure do |config|
+  config.before(:each) do
+
+  config.include Capybara::DSL
+    DatabaseCleaner.clean
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
+end
