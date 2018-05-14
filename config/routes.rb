@@ -14,4 +14,5 @@ Rails.application.routes.draw do
   get '/register', to: 'users#new'
   get '/dashboard', to: 'dashboard#index'
 
+  get '/authenticate', to: 'registration#update'
 end
