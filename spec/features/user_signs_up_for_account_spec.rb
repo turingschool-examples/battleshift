@@ -26,7 +26,7 @@ describe 'As a guest user' do
 =======
 
       email = ActionMailer::Base.deliveries.last
-binding.pry
+
       expect(email.subject).to include(user.name)
       expect(email.html_part.body.to_s).to have_content("Visit here to activate your account.")
       expect(email.html_part.body.to_s).to have_content("Here's your api key:")
