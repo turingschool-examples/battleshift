@@ -11,11 +11,12 @@ describe 'user registration process' do
         visit users_activation_path(user)
 
         expect(current_path).to eq(users_activate_path(user))
+
         click_on 'Activate'
 
         expect(current_path).to eq(users_activated_path(user))
         expect(page).to have_content(welcome_message)
-        expect(User.first.activated?).to eq(true)
+        expect(User.first.activated?).to be_truthy 
       end
     end
   end
