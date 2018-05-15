@@ -7,7 +7,7 @@ module Api
       end
 
       def create
-        TODO: create first player
+        # TODO: create first player
         game = Game.new
         render json: game
       end
