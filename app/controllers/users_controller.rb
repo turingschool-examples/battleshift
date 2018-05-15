@@ -10,6 +10,8 @@ class UsersController < ApplicationController
       session[:user_id] = user.id
       UserActivatorMailer.welcome_email(user).deliver_now
       flash[:success] = "Logged in as #{user.name}"
+      user.apikey = SecureRandom.hex
+      UserActivatorMailer.with(user: user).welcome_email(user).deliver_now
       redirect_to '/dashboard'
     else
       redirect_to new_user_path
