@@ -6,8 +6,7 @@ module Users
 
     def update
       user = User.find_and_activate(params[:id])
-      session[:id] = user.id
-      redirect_to users_activated_path(user) 
+      login(user)
     end
 
     def show
