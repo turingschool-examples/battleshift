@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   namespace :users do
     get '/:id/activate', to: 'activation#edit', as: :activation
+    get '/:id/activated', to: 'activation#show', as: :activated
     patch '/:id/activate', to: 'activation#update', as: :activate
   end
 
