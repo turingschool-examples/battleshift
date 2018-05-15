@@ -7,7 +7,12 @@ module Users
     def update
       user = User.find_by_id(params[:id])
       user.activate
-      redirect_to dashboard_path 
+      session[:id] = user.id
+      redirect_to users_activated_path(user) 
+    end
+
+    def show
+      @user = User.find_by_id(params[:id])
     end
   end
 end
