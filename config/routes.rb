@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get '/dashboard', to: 'users#show'
   get '/activate/:key', to: 'activation#show'
   post '/api/v1/games', to: 'api/v1/games#create'
+  post '/api/v1/:game_id/ships', to: 'api/v1/ships#create'
 
   resources :users, only: [:create]
 
