@@ -25,6 +25,7 @@ describe User do
       user = User.create!(name: 'thrasher', email: 'thrasherman@fluffy.com', password: 'test')
 
       expect(user.api_key).to be_a String
+      expect(user.api_key).to_not be_nil
     end
   end
 end
