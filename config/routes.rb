@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   post '/register', to: 'users#create'
   get '/dashboard', to: 'users#show'
 
+  # need to do the post '/register' to 'sessions#create'
+  #need to have a delete 'logout' to 'sessions#destroy'
+
   namespace :users do
     get '/:id/activate', to: 'activation#edit', as: :activation
     get '/:id/activated', to: 'activation#show', as: :activated
