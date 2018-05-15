@@ -14,6 +14,17 @@ class UsersController < ApplicationController
     end
   end
 
+  def update
+    @user = User.find(params[:id])
+    @user.status = 'active'
+    if @user.save
+      flash[:success] = 'Thank you! Your account is now activated.'
+    else
+      flash[:error] = 'Sorry, your account was not activated.'
+    end
+    redirect_to dashboard_path
+  end
+  
   private
 
   def user_params

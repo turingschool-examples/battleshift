@@ -1,4 +1,7 @@
 <h1>Hello <%= @user.name %></h1>
 
-Visit here to activate your account:
-<!-- link to activation -->
+<p>Here is your API Key:</p>
+
+
+<p>Visit here to activate your account:</p>
+<%= link_to 'Activate', "/activate?id=#{@user.id}" %>
