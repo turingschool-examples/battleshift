@@ -1,9 +1,13 @@
 class User < ApplicationRecord
-  validates_presence_of :name, :email, :password
-  validates_uniqueness_of :email
   has_secure_password
+
+  validates_presence_of :name, :email
+  validates_presence_of :password, on: :create
+  validates_uniqueness_of :email
+
   enum status: ['inactive', 'active']
-  before_save :key_gen
+
+  before_create :key_gen
 
   def key_gen
     self.api_key = SecureRandom.urlsafe_base64

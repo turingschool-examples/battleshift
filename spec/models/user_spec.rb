@@ -14,8 +14,17 @@ describe User do
 
       user.status = 'active'
       user.save
+
       expect(user.status).to_not eq('inactive')
       expect(user.status).to eq('active')
+    end
+  end
+
+  describe 'instance methods' do
+    it 'creates a random key' do
+      user = User.create!(name: 'thrasher', email: 'thrasherman@fluffy.com', password: 'test')
+
+      expect(user.api_key).to be_a String
     end
   end
 end
