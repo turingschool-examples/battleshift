@@ -11,6 +11,11 @@ module Api
       end
 
 
+      def create
+        render json: Game.create_default
+      end
+
+
       private
 
         def not_found
