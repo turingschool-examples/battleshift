@@ -3,13 +3,17 @@ class Ship
               :end_space
 
   def initialize(length)
+    # unused
+    #
+    # @start_space = nil 
+    # @end_space = nil
+    
     @length = length
     @damage = 0
-    @start_space = nil
-    @end_space = nil
   end
 
   def place(start_space, end_space)
+    # not used
     @start_space = start_space
     @end_space = end_space
   end
@@ -19,6 +23,7 @@ class Ship
   end
 
   def is_sunk?
+    # not used
     @damage == @length
   end
 end
