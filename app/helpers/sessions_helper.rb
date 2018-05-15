@@ -2,7 +2,7 @@ module SessionsHelper
   def login(user)
     session[:user_id] = user.id
     flash[:success] = "Logged in as #{user.name}"
-    redirect_to dashboard_path 
+    redirect_to dashboard_path
   end
 
   def logout
@@ -11,7 +11,7 @@ module SessionsHelper
   end
 
   def current_user
-    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+    @current_user ||= User.find_by_id(session[:user_id]) if session[:user_id]
   end
 
 end

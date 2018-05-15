@@ -3,8 +3,8 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.find(params[:session][:id])
-    if user && user.authenticate(params[:session][:password])
+    user = User.find_by_email(params[:email])
+    if user && user.authenticate(params[:password])
       login(user)
     else
       flash.now[:danger] = 'Invalid credentials'
