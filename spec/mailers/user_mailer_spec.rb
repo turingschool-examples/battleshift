@@ -9,7 +9,6 @@ RSpec.describe UserMailer, type: :mailer do
       text_body = File.read('spec/fixtures/user_mailer/activation.txt')
       html_body = File.read('spec/fixtures/user_mailer/activation.html')
 
-      binding.pry
       expect(email.subject).to eq('Activate your Battleshift account')
       expect(email.to).to eq(["#{user.email}"])
       expect(email.from).to eq(['from@example.com'])
