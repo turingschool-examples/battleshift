@@ -22,7 +22,7 @@ class UsersController < ApplicationController
   def update
     user = User.find(params[:id])
     user.active!
-    session[:user_id] = @user.id
+    session[:user_id] = user.id
     if user.save
       flash[:active] = "Thank you! Your account is now activated."
     else
