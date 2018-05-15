@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "Api::V1::Shots" do
+describe "Api::V2::Shots" do
   context "POST /api/v2/games/:id/shots" do
     let(:player_1_board)   { Board.new(4) }
     let(:player_2_board)   { Board.new(4) }
@@ -40,7 +40,7 @@ describe "Api::V1::Shots" do
       allow_any_instance_of(AiSpaceSelector).to receive(:fire!).and_return("Miss")
 
       headers = { "CONTENT_TYPE" => "application/json" }
-      json_payload = {target: "A2"}.to_json
+      json_payload = {target: "A1"}.to_json
 
       post "/api/v2/games/#{game.id}/shots", params: json_payload, headers: headers
 
