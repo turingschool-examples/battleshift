@@ -11,6 +11,9 @@ Rails.application.configure do
     }
   # Code is not reloaded between requests.
   config.cache_classes = true
+  config.action_mailer.perform_caching = false
+
+  config.action_mailer.default_url_options = { host: "https://immense-woodland-83336.herokuapp.com" }
 
   # config.action_mailer.delivery_method = :smtp
   # config.action_mailer.smtp_settings = { :address => "immense-woodland-83336.herokuapp", :port => 587 }
