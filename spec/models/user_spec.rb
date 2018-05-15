@@ -26,7 +26,7 @@ RSpec.describe User, type: :model do
     let(:user) { create(:unregistered_user) }
 
     it '.find_and_activate' do
-      found = User.find_and_activate(user.id)
+      found = User.find_and_activate(user.api_key)
 
       expect(found).to eq(user)  
       expect(found.activated?).to be_truthy

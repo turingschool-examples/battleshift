@@ -5,7 +5,7 @@ module Users
     end
 
     def update
-      user = User.find_and_activate(params[:id])
+      user = User.find_and_activate(params[:key])
       login(user)
     end
 

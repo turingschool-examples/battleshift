@@ -13,8 +13,8 @@ class User < ApplicationRecord
   end
 
 
-  def self.find_and_activate(id)
-    user = find(id)
+  def self.find_and_activate(key)
+    user = find_by_api_key(key)
     user.activate!
     user
   end
