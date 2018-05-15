@@ -10,7 +10,7 @@ RSpec.describe User, type: :model do
   end
 
   describe 'class methods' do
-    describe '#set_api_key and #generate_api_key' do
+    describe '#set_keys and #generate_keys' do
       it 'generate an api key (in combination) before save' do
         user = User.new(username: 'username', email: 'email@email.com', password: 'password')
 
@@ -19,6 +19,15 @@ RSpec.describe User, type: :model do
         user.save!
 
         expect(user.api_key).to_not be_nil
+      end
+      it 'generate a token (in combination) before save' do
+        user = User.new(username: 'username', email: 'email@email.com', password: 'password')
+
+        expect(user.token).to be_nil
+
+        user.save!
+
+        expect(user.token).to_not be_nil
       end
     end
   end
