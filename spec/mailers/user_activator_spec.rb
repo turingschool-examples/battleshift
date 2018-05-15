@@ -12,7 +12,8 @@ RSpec.describe UserActivatorMailer, type: :mailer do
     expect(ActionMailer::Base.deliveries.last).to eq(email)
 
     # Test the body of the sent email contains what we expect it to
-    expect(email.from).to eq(['no-reply@megnmarg.com'])
+
+    expect(email.from).to eq(["app96560814@heroku.com"])
     expect(email.to).to eq(['kewlkid@hotmail.com'])
     expect(email.subject).to eq('Welcome to BattleShift, Megan')
     # assert_equal read_fixture('invite').join, email.body.to_s
