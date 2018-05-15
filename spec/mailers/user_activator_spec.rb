@@ -3,11 +3,10 @@ require "rails_helper"
 RSpec.describe UserActivatorMailer, type: :mailer do
   it "sends an email" do
     # Create the email and store it for further assertions
-    user = User.create(name: 'Megan', email: 'kewlkid@hotmail.com', password: 'gIrLsRuLeBoYsDrOOl')
+    user = User.create(name: 'Megan', email: 'kewlkid@hotmail.com', password: 'gIrLsRuLeBoYsDrOOl', apikey: ENV['USER_KEY'])
     email = UserActivatorMailer.welcome_email(user)
     # Send the email, then test that it got queued
     email.deliver_now
-
 
     expect(ActionMailer::Base.deliveries.last).to eq(email)
 
