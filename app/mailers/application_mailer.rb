@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'from@battletheshift.herokuapp.com'
+  default from: ENV['default_from']
   layout 'mailer'
 end
