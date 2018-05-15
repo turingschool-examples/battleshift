@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :user do
+  factory :user, class: User do
     sequence(:name) { |n| "User #{n}" }
     sequence(:email) { |n| "foo#{n}@foo.com" }
     password "password"
@@ -7,7 +7,7 @@ FactoryBot.define do
     api_key "VN81BL5DRAK704A5O41HG0Q8RGA1VSH5O"
   end
 
-  factory :activated_user do
+  factory :activated_user, class: User do
     sequence(:name) { |n| "User #{n}" }
     sequence(:email) { |n| "foo#{n}@foo.com" }
     password "password"
@@ -15,7 +15,7 @@ FactoryBot.define do
     activated true
     api_key "VN81BL5DRAK704A5O41HG0Q8RGA1VSH5O"
   end
-  factory :activated_user_2 do
+  factory :activated_user_2, class: User do
     sequence(:name) { |n| "User #{n}" }
     sequence(:email) { |n| "foo2#{n}@foo.com" }
     password "password"

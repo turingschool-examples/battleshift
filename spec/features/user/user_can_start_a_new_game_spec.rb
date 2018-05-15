@@ -6,14 +6,14 @@ describe 'as player 1' do
       user = create(:activated_user)
       user = create(:activated_user_2)
 
-      conn.post do |req|
-        req.url '/nigiri'
+      response = Faraday.post do |req|
+        req.url '/api/v1/games'
         req.headers['Content-Type'] = 'application/json'
-        req.headers['Authorization'] = "#{activated_user_2.api_key}"
-        req.body = '{ "email": "foo2#{n}@foo.com" }'
+        req.headers['Authorization'] = "#{activated_user.api_key}"
+        req.body = '{ "player_2_email": "foo2#{n}@foo.com"}'
       end
 
-      binding.pry
+      expect(response).to be_success
       #test that both are in the system
     end
   end
