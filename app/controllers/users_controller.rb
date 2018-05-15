@@ -24,7 +24,7 @@ class UsersController < ApplicationController
     end
     redirect_to dashboard_path
   end
-  
+
   private
 
   def user_params
