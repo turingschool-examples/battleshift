@@ -18,7 +18,7 @@ feature 'Registration' do
     expect(mail.subject).to eq('Confirm your registration')
 
     # I should see a message that says "Visit here to activate your account."
-    expect(mail.body).to have_content('Visit here to activate your account.')
+    expect(mail.body).to have_content('Visit here to activate your account:')
     # And when I click on that link
     click_on 'activate'
     # Then I should be taken to a page that says "Thank you! Your account is now activated."
