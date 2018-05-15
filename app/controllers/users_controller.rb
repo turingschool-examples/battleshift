@@ -10,6 +10,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       flash[:success] = "Logged in as #{@user.username}"
       UserMailer.with(user: @user).create_activation.deliver_now
+      
       redirect_to dashboard_path
     else
       flash.now[:error] = "Failed to create a new account"
