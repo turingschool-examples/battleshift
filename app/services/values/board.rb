@@ -49,8 +49,14 @@ class Board
       end
     end
   end
+  
+
+  #=========================================
+  # Everything below here can be removed.
+  #=========================================
 
   def get_spaces_between(coordinate1, coordinate2)
+    # delete
     return get_row_spaces_between(coordinate1, coordinate2) if same_row?(coordinate1, coordinate2)
     return get_column_spaces_between(coordinate1, coordinate2) if same_column?(coordinate1, coordinate2)
   end
@@ -61,35 +67,43 @@ class Board
   # end
 
   def get_column_spaces_between(coordinate1, coordinate2)
+    # delete
     rows = (get_smaller_row(coordinate1, coordinate2)..get_bigger_row(coordinate1, coordinate2)).to_a
     rows.map { |row| row + get_column(coordinate1) }
   end
 
   def get_bigger_column(coordinate1, coordinate2)
+    # delete
     get_column(coordinate1).to_i > get_column(coordinate2).to_i ? get_column(coordinate1) : get_column(coordinate2)
   end
 
   def get_smaller_column(coordinate1, coordinate2)
+    # delete
     get_column(coordinate1).to_i < get_column(coordinate2).to_i ? get_column(coordinate1) : get_column(coordinate2)
   end
 
   def get_bigger_row(coordinate1, coordinate2)
+    # delete
     get_row(coordinate1) > get_row(coordinate2) ? get_row(coordinate1) : get_row(coordinate2)
   end
 
   def get_smaller_row(coordinate1, coordinate2)
+    # delete
     get_row(coordinate1) < get_row(coordinate2) ? get_row(coordinate1) : get_row(coordinate2)
   end
 
   def get_row(coordinate)
+    # delete
     coordinate.split("")[0]
   end
 
   def get_column(coordinate)
+    # delete
     coordinate[1..-1]
   end
 
   def get_horizontal_length(coordinate1, coordinate2)
+    # delete
     return false if !same_row?(coordinate1, coordinate2)
     column1 = get_column(coordinate1).to_i
     column2 = get_column(coordinate2).to_i
@@ -97,6 +111,7 @@ class Board
   end
 
   def get_vertical_length(coordinate1, coordinate2)
+    # delete
     return false if !same_column?(coordinate1, coordinate2)
     row1 = get_row_letters.index(get_row(coordinate1))
     row2 = get_row_letters.index(get_row(coordinate2))
@@ -104,6 +119,7 @@ class Board
   end
 
   def set_space_occupied(coordinate)
+    # delete
     get_space(coordinate).occupied = true
   end
 
@@ -118,48 +134,59 @@ class Board
   # end
 
   def set_column_spaces_occupied(coordinate1, coordinate2)
+    # delete
     get_column_spaces_between(coordinate1, coordinate2).each do |coordinate|
       set_space_occupied(coordinate)
     end
   end
 
   def set_space_attacked(coordinate)
+    # delete
     get_space(coordinate).attacked = true
   end
 
   def has_north_neighbor?(coordinate)
+    # delete
     get_row_letters.index(get_row(coordinate)) > 0
   end
 
   def has_south_neighbor?(coordinate)
+    # delete
     get_row_letters.index(get_row(coordinate)) < @length - 1
   end
 
   def has_east_neighbor?(coordinate)
+    # delete
     (coordinate[1..-1].to_i > 0) && (coordinate[1..-1].to_i < @length)
   end
 
   def has_west_neighbor?(coordinate)
+    # delete
     coordinate[1..-1].to_i > 1
   end
 
   def get_north_neighbor(coordinate)
+    # delete
     get_row_letters[get_row_letters.index(get_row(coordinate)) - 1] + get_column(coordinate)
   end
 
   def get_south_neighbor(coordinate)
+    # delete
     get_row_letters[get_row_letters.index(get_row(coordinate)) + 1] + get_column(coordinate)
   end
 
   def get_east_neighbor(coordinate)
+    # delete
     get_row(coordinate) + (get_column(coordinate).to_i + 1).to_s
   end
 
   def get_west_neighbor(coordinate)
+    # delete
     get_row(coordinate) + (get_column(coordinate).to_i - 1).to_s
   end
 
   def neighbors(coordinate)
+    # delete
     neighbors = []
     neighbors << get_north_neighbor(coordinate) if has_north_neighbor?(coordinate)
     neighbors << get_east_neighbor(coordinate) if has_east_neighbor?(coordinate)
@@ -169,37 +196,47 @@ class Board
   end
 
   def neighbors?(coordinate1, coordinate2)
+    # delete
     neighbors(coordinate1).include?(coordinate2)
   end
+
   def contains?(coordinate)
+    # delete
     create_space_names.include?(coordinate)
   end
 
   def same_row?(coordinate1, coordinate2)
+    # delete
     get_row(coordinate1) == get_row(coordinate2)
   end
 
   def same_column?(coordinate1, coordinate2)
+    # delete
     get_column(coordinate1) == get_column(coordinate2)
   end
 
   def space_occupied?(coordinate)
+     # delete
      get_space(coordinate).occupied
   end
 
   def space_attacked?(coordinate)
+    # delete
     get_space(coordinate).attacked
   end
 
   def contains_hit?(coordinate)
+    # delete
     space_attacked?(coordinate) && space_occupied?(coordinate)
   end
 
   def contains_miss?(coordinate)
+    # delete
     space_attacked?(coordinate) && !space_occupied?(coordinate)
   end
 
   def first_column?(coordinate)
+    # delete
     get_column(coordinate) == "1"
   end
 end
