@@ -17,8 +17,8 @@ describe 'as a user' do
         req.headers['X-API-Key'] = user.api_key
         req.body = '{ "player_2_email": "foo21@foo.com" }'
       end
-      binding.pry
-      expect(response).to be_success
+
+      expect(response).to be_successful
     end
   end
 end

@@ -11,8 +11,11 @@ module Api
       end
 
       def create
-        token = request.env["HTTP_X_API_KEY"]
-        if User.find_by(api_key: token) != nil
+        player_1_token = request.env["HTTP_X_API_KEY"]
+        binding.pry
+
+        if User.find_by(api_key: player_1_token) != nil
+          player_1 = Player.new(Board.new, )
           player_1_board = Board.new(4)
           player_2_board = Board.new(4)
           game = Game.create(player_1_board: player_1_board, player_2_board: player_2_board)

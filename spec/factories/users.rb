@@ -4,7 +4,7 @@ FactoryBot.define do
     sequence(:email) { |n| "foo#{n}@foo.com" }
     password "password"
     password_confirmation "password"
-    sequence(:api_key) { |n| "API_KEY_#{n}" }
+    api_key ENV["BATTLESHIFT_API_KEY"]
   end
 
   factory :activated_user, class: User do
@@ -13,6 +13,6 @@ FactoryBot.define do
     password "password"
     password_confirmation "password"
     activated true
-    sequence(:api_key) { |n| "API_KEY_#{n}" }
+    api_key ENV["BATTLESHIFT_API_KEY"]
   end
 end
