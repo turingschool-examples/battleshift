@@ -3,6 +3,6 @@ class UserMailer < ApplicationMailer
 
   def activation_request(user)
     @user = user
-    mail to: @user.email, subect: 'Registration Confirmation'
+    mail to: @user.email, subject: 'BattleShift Registration Confirmation'
   end
 end
