@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get "/register", to: "users#new"
   post '/users', to: "users#create"
   get '/dashboard', to: "users#show"
-  get '/activate', to: 'users#update'
+  get '/activate/:id', to: 'users#update', as: 'activate'
 
   namespace :api do
     namespace :v1 do
