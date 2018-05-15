@@ -8,7 +8,7 @@ class UsersController < ApplicationController
     if @user.save
       session[:user_id] = @user.id
       UserMailer.activation_request(@user).deliver_now
-      redirect_to '/dashboard'
+      redirect_to dashboard_path
     else
       render :new
     end
@@ -16,8 +16,8 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    @user.status = 'active'
-    if @user.save
+    session[:user_id] = @user.id
+    if @user.update(status: 'active')
       flash[:success] = 'Thank you! Your account is now activated.'
     else
       flash[:error] = 'Sorry, your account was not activated.'
