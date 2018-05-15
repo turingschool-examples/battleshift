@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   # need to have a delete 'logout' to 'sessions#destroy'
 
   namespace :users do
-    get '/:id/activate', to: 'activation#update', as: :activation
+    get '/activation', to: 'activation#update'
   end
 
   namespace :api do
