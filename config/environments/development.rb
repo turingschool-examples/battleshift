@@ -27,7 +27,7 @@ Rails.application.configure do
   end
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
 
   config.action_mailer.perform_caching = false
 
@@ -51,4 +51,29 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+
+  config.action_mailer.delivery_method = :letter_opener
+  # config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = { :address => "localhost", :port => 1025 }
+
+  config.action_mailer.perform_deliveries = true
+  # config.action_mailer.smtp_settings = {
+  #   :user_name => ENV['SENDGRID_USERNAME'],
+  #   :password => ENV['SENDGRID_PASSWORD'],
+  #   :domain => 'yourdomain.com',
+  #   :address => 'smtp.sendgrid.net',
+  #   :port => 587,
+  #   :authentication => :plain,
+  #   :enable_starttls_auto => true
+  # }
+
+  LetterOpener.configure do |config|
+    # To overrider the location for message storage.
+    # Default value is <tt>tmp/letter_opener</tt>
+    config.location = Rails.root.join('tmp', 'my_mails')
+
+    # To render only the message body, without any metadata or extra containers or styling.
+    # Default value is <tt>:default</tt> that renders styled message with showing useful metadata.
+    config.message_template = :light
+  end
 end

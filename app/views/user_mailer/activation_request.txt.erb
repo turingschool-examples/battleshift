@@ -1,0 +1,7 @@
+Hello <%= @user.name %>
+
+Here is your API Key:
+
+
+Visit here to activate your account:
+<%= link_to 'Activate', "/activate?id=#{@user.id}" %>
