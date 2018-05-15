@@ -8,9 +8,8 @@ class UsersController < ApplicationController
     user = User.new(user_params)
     if user.save
       session[:user_id] = user.id
+      UserActivatorMailer.welcome_email(user).deliver_now
       flash[:success] = "Logged in as #{user.name}"
-
-      UserActivatorMailer.with(user: user).welcome_email(user).deliver_now
       redirect_to '/dashboard'
     else
       redirect_to new_user_path
@@ -22,7 +21,8 @@ class UsersController < ApplicationController
 
   def update
     user = User.find(params[:id])
-    user.status = 'active'
+    user.active!
+    session[:user_id] = user.id
     if user.save
       flash[:active] = "Thank you! Your account is now activated."
     else
