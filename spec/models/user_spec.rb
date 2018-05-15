@@ -11,13 +11,22 @@ RSpec.describe User, type: :model do
     let(:registered) { create(:user) }
 
     it '#activated?' do
-      expect(unregistered.activated?).to eq(false)
-      expect(registered.activated?).to eq(true)
+      expect(unregistered.activated?).to be_falsey 
+      expect(registered.activated?).to be_truthy 
     end
 
-    it '#activate' do
-      unregistered.activate
-      expect(unregistered.activated?).to eq(true)
+    it '#activate!' do
+      unregistered.activate!
+      expect(unregistered.activated?).to be_truthy 
+    end
+  end
+
+  describe 'class methods' do
+    let(:user) { create(:unregistered_user) }
+
+    it '.find_and_activate' do
+      expect(User.find_and_activate(user.id)).to eq(user)  
+      expect(User.first.activated?).to be_truthy
     end
   end
 end
