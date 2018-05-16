@@ -11,7 +11,7 @@ describe 'as player 1' do
         req.url '/api/v1/games'
         req.headers['Content-Type'] = 'application/json'
         req.headers['X-API-Key'] = user.api_key
-        req.body = { 'player_2_email': user2.email }.to_json
+        req.body = { 'email': ENV['BATTLESHIFT_OPPONENT_EMAIL'] }.to_json
       end
 
       expect(response).to be_success
