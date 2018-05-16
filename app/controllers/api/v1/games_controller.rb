@@ -18,7 +18,7 @@ module Api
         player_1_board = Board.new(4)
         player_2_board = Board.new(4)
         game = Game.create(player_1_id: player_1.id, player_2_id: player_2.id, player_1_board: player_1_board, player_2_board: player_2_board)
-        binding.pry
+        
         render json: game
       end
 

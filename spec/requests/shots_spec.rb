@@ -5,8 +5,12 @@ describe "Api::V1::Shots" do
     let(:player_1_board)   { Board.new(4) }
     let(:player_2_board)   { Board.new(4) }
     let(:sm_ship) { Ship.new(2) }
+    let(:player_1_id) { create(:activated_user).id }
+    let(:player_2_id) { create(:activated_user).id }
     let(:game)    {
       create(:game,
+        player_1_id: player_1_id,
+        player_2_id: player_2_id,
         player_1_board: player_1_board,
         player_2_board: player_2_board
       )
