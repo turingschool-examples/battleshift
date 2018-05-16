@@ -15,6 +15,8 @@ module Api
       end
 
       def create
+        player_1_key = request.headers['X-API-KEY']
+        player_2_key = User.find_by(email: params['opponent_email']).api_key
         require 'pry'; binding.pry
         render json: Game.new()
       end
