@@ -7,6 +7,16 @@ RSpec.describe User, type: :model do
     it { is_expected.to validate_presence_of(:password_digest) }
   end
 
+  describe 'creation' do
+    let(:user) { create(:user) }
+    let(:unregistered) { create(:unregistered_user) }
+
+    it 'should have an api key' do
+      expect(user.api_key).to_not be_nil  
+      expect(unregistered.api_key).to_not be_nil  
+    end
+  end
+
   describe 'instance methods' do
     let(:unregistered) { create(:unregistered_user) }
     let(:registered) { create(:user) }
