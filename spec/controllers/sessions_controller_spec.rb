@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe SessionsController, type: :controller do
   describe 'endpoints' do
     describe 'GET new' do
-        it 'has a successful response' do
+      it 'has a successful response' do
         get :new
       
         expect(response.status).to eq(200)
