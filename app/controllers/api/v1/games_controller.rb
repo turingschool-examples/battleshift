@@ -2,12 +2,10 @@ module Api
   module V1
     class GamesController < ActionController::API
       def show
-        begin
-          game = Game.find(params[:id])
-          render json: game
-        rescue ActiveRecord::RecordNotFound
-          render nothing: true, status: 400
-        end
+        game = Game.find(params[:id])
+        render json: game
+      rescue ActiveRecord::RecordNotFound
+        render nothing: true, status: 400
       end
 
       def create
@@ -17,7 +15,9 @@ module Api
         player_2 = Player.new(Board.new(4), player_2_key)
 
         game = Game.create(player_1: player_1,
-                           player_2: player_2)
+                           player_2: player_2,
+                           player_1_board: player_1.board,
+                           player_2_board: player_2.board)
         render json: game
       end
     end

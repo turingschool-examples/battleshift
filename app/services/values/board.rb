@@ -43,6 +43,7 @@ class Board
   end
 
   def locate_space(coordinates)
+    binding.pry
     @board.each do |row|
       row.each do |space_hash|
         return space_hash[coordinates] if space_hash.keys[0] == coordinates

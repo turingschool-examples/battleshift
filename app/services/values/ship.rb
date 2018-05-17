@@ -5,14 +5,14 @@ class Ship
   def initialize(length)
     @length = length
     @damage = 0
-    @start_space = nil
-    @end_space = nil
+    # @start_space = nil
+    # @end_space = nil
   end
 
-  def place(start_space, end_space)
-    @start_space = start_space
-    @end_space = end_space
-  end
+  # def place(start_space, end_space)
+  #   @start_space = start_space
+  #   @end_space = end_space
+  # end
 
   def attack!
     @damage += 1
