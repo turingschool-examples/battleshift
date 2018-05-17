@@ -23,8 +23,8 @@ class ShipPlacer
       "Successfully placed ship with a size of 2. You have 0 ship(s) to place."
     end
   end
-  
-  private
+
+  # private
   attr_reader :board, :ship,
     :start_space, :end_space
 
