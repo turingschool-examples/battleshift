@@ -1,15 +1,17 @@
 class Api::V1::ShipsController < ApiController
     def create
-      
-      ShipPlacer.new(ship_params)
+      ship_placer = ShipPlacer.new(ship_params)
+      ship_placer.run
+      binding.pry
     end
 
-      # def ship_params
-      # {
-      #   board: current_board
-      #   ship: Ship.new(response.body[:ship_size])
-      #   start_space: response.body[:start_space]
-      #   end_space: response.body[:end_space]
-      # }
-      # end
+    private
+    def ship_params
+    {
+      board: current_board,
+      ship: Ship.new(params["ship_size"]),
+      start_space: params["start_space"],
+      end_space: params["end_space"]
+    }
+    end
 end

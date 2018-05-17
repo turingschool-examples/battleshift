@@ -13,6 +13,6 @@ FactoryBot.define do
     password "password"
     password_confirmation "password"
     activated true
-    api_key ENV["BATTLESHIFT_API_KEY"]
+    api_key ENV["BATTLESHIFT_OPPONENT_API_KEY"]
   end
 end
