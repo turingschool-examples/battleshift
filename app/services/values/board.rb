@@ -6,6 +6,10 @@ class Board
     @length = length
     @board = create_grid
   end
+  
+  def player(key = nil)
+    @player ||= key 
+  end
 
   def get_row_letters
     ("A".."Z").to_a.shift(@length)
