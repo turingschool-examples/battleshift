@@ -1,8 +1,9 @@
 class Api::V1::ShipsController < ApiController
     def create
-      ship_placer = ShipPlacer.new(ship_params)
-      ship_placer.run
-      binding.pry
+      board = ShipPlacer.new(ship_params)
+      board.run
+      
+      render json: current_game
     end
 
     private
