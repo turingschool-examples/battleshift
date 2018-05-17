@@ -10,7 +10,12 @@ class Game < ApplicationRecord
 
   def self.create_default
     create(player_1_board: Board.new(4),
-           player_2_board: Board.new(4))
+           player_2_board: Board.new(4),
+           current_turn: 'challenger')
 
+  end
+
+  def turn_sum
+    player_1_turns + player_2_turns
   end
 end
