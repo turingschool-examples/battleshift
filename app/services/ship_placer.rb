@@ -29,6 +29,7 @@ class ShipPlacer
     :start_space, :end_space
 
   def same_row?
+    binding.pry
     start_space[0] == end_space[0]
   end
 
