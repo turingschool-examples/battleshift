@@ -6,13 +6,13 @@ module Api
         if game
           render json: game
         else
-          render json: not_found, status: 400  
+          render json: not_found, status: 400
         end
       end
 
 
       def create
-        render json: Game.create_default
+        render json: Game.create_default(params, request.headers)
       end
 
 
