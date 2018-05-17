@@ -15,7 +15,8 @@ class Game < ApplicationRecord
     create(player_1: challenger(headers),
            player_2: opponent(params),
            player_1_board: Board.new(4),
-           player_2_board: Board.new(4))
+           player_2_board: Board.new(4),
+           current_turn: [0, 1].sample)
 
   end
 

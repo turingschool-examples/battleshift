@@ -8,7 +8,7 @@ module Api
             board = game.player_1_board
           else
             board = game.player_2_board
-          end 
+          end
           ship_placer = ShipPlacer.new(board: board, ship: Ship.new(params['ship_size']), start_space: params['start_space'], end_space: params['end_space'])
           message = ship_placer.message #call the message from the ShipPlacer
           render json: game, message: message
