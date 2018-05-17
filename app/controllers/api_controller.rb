@@ -11,8 +11,8 @@ class ApiController < ActionController::API
   def current_board
     if current_player == current_game.player_1
       current_game.player_1_board
-    else current_player == current_game.player_1
-      current_game.player_1_board
+    elsif current_player == current_game.player_2
+      current_game.player_2_board
     end
   end
 
