@@ -8,8 +8,9 @@ class Space
   end
 
   def attack!
-    @status = if contents && not_attacked?
-                contents.attack!
+    binding.pry
+    @status = if @contents && not_attacked?
+                @contents.attack!
                 "Hit"
               else
                 "Miss"
