@@ -25,7 +25,12 @@ describe 'as a user' do
         req.url "/api/v1/games/#{game_json[:id]}/ships"
         req.headers['Content-Type'] = 'application/json'
         req.headers['X-API-Key'] = ENV['BATTLESHIFT_API_KEY']
-        req.body = { 'email': ENV['BATTLESHIFT_OPPONENT_EMAIL'] }.to_json
+        req.body = {
+          'email': ENV['BATTLESHIFT_OPPONENT_EMAIL'],
+          'ship_size': 2,
+          'start_space': "A1",
+          'end_space': "A2"
+        }.to_json
       end
 
       expect(response).to be_success
