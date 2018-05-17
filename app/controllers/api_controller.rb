@@ -1,16 +1,15 @@
 class ApiController < ActionController::API
-  helper_method :current_player
 
   def current_player
-    api_key = request.headers['X-API-KEY']
-    if api_key = current_game.player_1.api_key
-      player_1
-    elsif api_key = current_game.player_2.api_key
-      player_2
+    if request.headers['X-API-KEY'] == current_game.player_1_id.api_key
+      current_game.player_1_i
+    elsif request.headers['X-API-KEY'] == current_game.player_2_id.api_key
+      current_game.player_2_id
     end
   end
 
   def current_game
-    @game ||= Game.find(params[:id])
+    Game.find(params[:game_id])
   end
+
 end

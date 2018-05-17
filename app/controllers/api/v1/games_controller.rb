@@ -22,7 +22,7 @@ module Api
           render json: game
         rescue
           raise ActiveRecord::RecordNotFound
-        end 
+        end
       end
 
     end
