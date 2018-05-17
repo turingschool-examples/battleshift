@@ -1,9 +1,10 @@
 class Api::V1::ShipsController < ApiController
     def create
-      board = ShipPlacer.new(ship_params)
-      board.run
-      
-      render json: current_game
+      ship_placer = ShipPlacer.new(ship_params)
+      ship_placer.run
+      current_game.save!
+
+      render json: current_game, message: ship_placer.message
     end
 
     private
@@ -15,4 +16,5 @@ class Api::V1::ShipsController < ApiController
       end_space: params["end_space"]
     }
     end
+
 end
