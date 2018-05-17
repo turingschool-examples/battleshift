@@ -11,9 +11,10 @@ class Game < ApplicationRecord
   validates :player_1_board, presence: true
   validates :player_2_board, presence: true
 
-  def self.create_default
-    binding.pry
-    create(player_1: challenger, player_2: opponent, player_1_board: Board.new(4),
+  def self.create_default(params, headers)
+    create(player_1: challenger(headers),
+           player_2: opponent(params),
+           player_1_board: Board.new(4),
            player_2_board: Board.new(4))
 
   end
@@ -22,13 +23,14 @@ class Game < ApplicationRecord
     player_1_turns + player_2_turns
   end
 
-  def challenger
-    #find user by api_key
-    #maybe have the Player class instantiating with an api_key?
+  private
+
+  def self.challenger(headers)
+    User.find_by_api_key(headers['X-API-key'])
   end
 
-  def opponent
-    #find opponent by api_key
+  def self.opponent(params)
+    User.find_by_email(params[:opponent_email])
   end
 
 end

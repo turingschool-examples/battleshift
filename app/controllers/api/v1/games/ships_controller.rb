@@ -4,7 +4,6 @@ module Api
       class ShipsController < ActionController::API
         def index
           game = Game.find_by_id(params[:game_id])
-          binding.pry
           if game.turn_sum.even?
             if game.player_2_board.player.nil?
               game.player_2_board.player(User.find_by_api_key(request.headers['X-API-key']))
