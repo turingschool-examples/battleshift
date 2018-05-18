@@ -16,13 +16,8 @@ module Api
 
         private
 
-        def cheater
-          { status: 400,
-            message: 'It is not your turn' }
-        end
-
         def bad_user(game)
-          game.player_1_turns - game.player_2_turns == (2 || -2)
+          game.player_1_turns - game.player_2_turns == (2 || -1)
         end
       end
     end
