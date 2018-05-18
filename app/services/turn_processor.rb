@@ -37,9 +37,10 @@ class TurnProcessor
       result = Shooter.fire!(board: player.board, target: target)
     end
     game.cycle_turn
-    
+
     if player_1_loss? || player_2_loss?
       go = 'Game over.'
+      game.winner = @winner_email
     end
 
     @messages << "Your shot resulted in a #{result}."
@@ -51,11 +52,13 @@ class TurnProcessor
 
 
   def player_1_loss?
+    @winner_email = game.player_1.email
     game.p1_board.board.flatten.map{|x| x.flatten[1]}.map(&:contents).compact.map(&:is_sunk?).select{|x| x == true}.size >= 2
   end
 
   def player_2_loss?
-    game.p1_board.board.flatten.map{|x| x.flatten[1]}.map(&:contents).compact.map(&:is_sunk?).select{|x| x == true}.size >= 2
+    @winner_email = game.player_2.email
+    game.p2_board.board.flatten.map{|x| x.flatten[1]}.map(&:contents).compact.map(&:is_sunk?).select{|x| x == true}.size >= 2
   end
 
   def ai_attack_back
