@@ -17,7 +17,11 @@ module Api
         private
 
         def bad_user(game)
-          game.player_1_turns - game.player_2_turns == (2 || -1)
+          if game.current_turn == 'computer'
+             request.headers['X-API-key'] == game.p2.api_key 
+          else 
+            request.headers['X-API-key'] == game.p1.api_key
+          end
         end
       end
     end
