@@ -1,6 +1,5 @@
 class Api::V1::ShipsController < ApiController
   def create
-    binding.pry
       ship_placer = ShipPlacer.new(ship_params)
       ship_placer.run
       current_game.save!
