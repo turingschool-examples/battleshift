@@ -8,9 +8,13 @@ module Api
             render json: game, message: "Invalid move. It's your opponent's turn", status: 400 
           else
             turn_processor = TurnProcessor.new(game, params[:shot][:target])
-            turn_processor.run!
+            turn = turn_processor.run!
             game.save!
-            render json: game, message: turn_processor.message
+            if turn == true
+              render json: game, message: turn_processor.message
+            else
+              render json: game, message: turn_processor.message, status: 400
+            end
           end
         end
 
