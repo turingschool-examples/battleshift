@@ -17,9 +17,8 @@ context 'A user posting to /api/v1/games/:id/shots' do
       @conn.post do |req|
         req.url "/api/v1/games/#{@game_json[:id]}/ships"
         req.headers['Content-Type'] = 'application/json'
-        req.headers['X-API-Key'] = ENV['BATTLESHIFT_API_KEY']
+        req.headers['X-API-Key'] = ENV['BATTLESHIFT_OPPONENT_API_KEY']
         req.body = {
-          'email': ENV['BATTLESHIFT_OPPONENT_EMAIL'],
           'ship_size': 2,
           'start_space': "A1",
           'end_space': "A2"
@@ -31,7 +30,7 @@ context 'A user posting to /api/v1/games/:id/shots' do
       response = @conn.post do |req|
         req.url "/api/v1/games/#{@game_json[:id]}/shots"
         req.headers['Content-Type'] = 'application/json'
-        req.headers['X-API-Key'] = ENV['BATTLESHIFT_OPPONENT_API_KEY']
+        req.headers['X-API-Key'] = ENV['BATTLESHIFT_API_KEY']
         req.body = { target: "A1" }.to_json
       end
 
@@ -46,7 +45,7 @@ context 'A user posting to /api/v1/games/:id/shots' do
       response = @conn.post do |req|
         req.url "/api/v1/games/#{@game_json[:id]}/shots"
         req.headers['Content-Type'] = 'application/json'
-        req.headers['X-API-Key'] = ENV['BATTLESHIFT_OPPONENT_API_KEY']
+        req.headers['X-API-Key'] = ENV['BATTLESHIFT_API_KEY']
         req.body = { target: "D1" }.to_json
       end
 
