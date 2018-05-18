@@ -21,6 +21,12 @@ class TurnProcessor
     @messages.join(" ")
   end
 
+  def valid_coordinate?
+    @opponent.board.board.flatten.map do |coord|
+      coord.keys[0]
+    end.include?(target)
+  end
+
   private
 
   attr_reader :game, :target
