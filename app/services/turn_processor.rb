@@ -23,9 +23,14 @@ class TurnProcessor
   attr_reader :game, :target
 
   def attack_opponent
-    result = Shooter.fire!(board: opponent.board, target: target)
+    if game.current_turn == 'computer'
+      result = Shooter.fire!(board: opponent.board, target: target)
+    else
+      result = Shooter.fire!(board: player.board, target: target)
+    end
+    game.cycle_turn
+
     @messages << "Your shot resulted in a #{result}."
-    binding.pry
     game.player_1_turns += 1
   end
 
