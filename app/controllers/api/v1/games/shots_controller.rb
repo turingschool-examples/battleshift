@@ -3,6 +3,7 @@ module Api
     module Games
       class ShotsController < ApiController
         before_action :require_correct_player
+        # before_action :require_correct_coordinate
 
         def create
           # game = Game.find(params[:game_id])
@@ -16,14 +17,20 @@ module Api
           end
 
           turn_processor = TurnProcessor.new(current_game, params[:shot][:target], player, opponent)
-
-          turn_processor.run!
-          render json: current_game, message: turn_processor.message
+          if turn_processor.valid_coordinate?
+            turn_processor.run!
+            render json: current_game, message: turn_processor.message
+          else
+            incorrect_coordinate
+          end
         end
 
         def require_correct_player
-          require 'pry'; binding.pry
           render status: 400, json: current_game, message: "Invalid move. It's your opponent's turn" unless current_player?
+        end
+
+        def incorrect_coordinate
+          render status: 400, json: current_game, message: "Invalid coordinates."
         end
       end
     end
