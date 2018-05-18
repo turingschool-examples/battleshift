@@ -19,9 +19,9 @@ class ApiController < ActionController::API
 
   def opponent_board
     if current_player == current_game.player_1
-      current_game.player_2_board
+      :player_2_board
     elsif current_player == current_game.player_2
-      current_game.player_1_board
+      :player_1_board
     end
   end
 

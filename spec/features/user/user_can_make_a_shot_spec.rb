@@ -54,7 +54,7 @@ context 'A user posting to /api/v1/games/:id/shots' do
       data = JSON.parse(response.body, symbolize_names: true)
 
       expect(data[:message]).to include("Your shot resulted in a Miss")
-      expect(data[:player_2_board][:rows][3][:data].first[:status]).to eq("Hit")
+      expect(data[:player_2_board][:rows][3][:data].first[:status]).to eq("Miss")
     end
   end
 end
