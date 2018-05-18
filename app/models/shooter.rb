@@ -9,11 +9,7 @@ class Shooter
     if valid_shot?
       space.attack!
     else
-      begin
-        e = raise InvalidAttack.new("Invalid coordinates.")
-      rescue e
-        'Invalid Coordinates'
-      end
+      raise InvalidAttack.new("Invalid coordinates.")
     end
   end
 
