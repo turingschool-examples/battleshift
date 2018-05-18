@@ -10,4 +10,12 @@ class ApiController < ActionController::API
                         when current_game.player_2.api_key then current_game.player_2
                         end
   end
+
+  # def current_player?
+  #   request.headers['X-API-Key'] == current_player.api_key
+  # end
+
+  def current_player?
+    current_game.current_turn == 'player_1' && request.headers['X-API-KEY'] == current_game.player_1.api_key || current_game.current_turn == 'player_2' && request.headers['X-API-KEY'] == current_game.player_2.api_key
+  end
 end
