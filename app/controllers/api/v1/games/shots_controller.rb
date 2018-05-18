@@ -4,21 +4,25 @@ module Api
       class ShotsController < ApiController
         def create
           game = Game.find(params[:game_id])
-          if bad_user(game)
-            render json: game, message: "Invalid move. It's your opponent's turn", status: 400
-          else
-            if game.winner.nil?
-              turn_processor = TurnProcessor.new(game, params[:shot][:target])
-              turn = turn_processor.run!
-              game.save!
-              if turn == true
-                render json: game, message: turn_processor.message
-              else
-                render json: game, message: turn_processor.message, status: 400
-              end
+          if !User.find_by_api_key(request.headers['X-API-key']).nil?
+            if bad_user(game)
+              render json: game, message: "Invalid move. It's your opponent's turn", status: 400
             else
-              render json: game, message: "Invalid move. Game over.", status: 400
+              if game.winner.nil?
+                turn_processor = TurnProcessor.new(game, params[:shot][:target])
+                turn = turn_processor.run!
+                game.save!
+                if turn == true
+                  render json: game, message: turn_processor.message
+                else
+                  render json: game, message: turn_processor.message, status: 400
+                end
+              else
+                render json: game, message: "Invalid move. Game over.", status: 400
+              end
             end
+          else
+            render json: game, message: "Unauthorized", status: 401
           end
         end
 
