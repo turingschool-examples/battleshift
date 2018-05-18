@@ -52,13 +52,13 @@ class TurnProcessor
 
 
   def player_1_loss?
-    @winner_email = game.player_1.email
-    game.p1_board.board.flatten.map{|x| x.flatten[1]}.map(&:contents).compact.map(&:is_sunk?).select{|x| x == true}.size >= 2
+    @winner_email = game.player_2.email
+    game.p1_board.board.flatten.map{|x| x.flatten[1]}.map(&:contents).compact.map(&:is_sunk?).select{|x| x == true}.size >= 5
   end
 
   def player_2_loss?
-    @winner_email = game.player_2.email
-    game.p2_board.board.flatten.map{|x| x.flatten[1]}.map(&:contents).compact.map(&:is_sunk?).select{|x| x == true}.size >= 2
+    @winner_email = game.player_1.email
+    game.p2_board.board.flatten.map{|x| x.flatten[1]}.map(&:contents).compact.map(&:is_sunk?).select{|x| x == true}.size >= 5
   end
 
   def ai_attack_back
