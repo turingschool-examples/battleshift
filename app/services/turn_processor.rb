@@ -10,6 +10,7 @@ class TurnProcessor
     begin
       attack_opponent
       ai_attack_back
+      binding.pry
       game.save!
     rescue InvalidAttack => e
       @messages << e.message
@@ -26,6 +27,7 @@ class TurnProcessor
 
   def attack_opponent
     result = Shooter.fire!(board: board, target: target)
+    binding.pry
     @messages << "Your shot resulted in a #{result}."
     game.player_1_turns += 1
   end
