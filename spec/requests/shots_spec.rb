@@ -28,7 +28,7 @@ describe "Api::V1::Shots" do
 
       post "/api/v1/games/#{game.id}/shots", params: json_payload, headers: headers
 
-      expect(response).to be_success
+      expect(response).to be_successful
 
       game = JSON.parse(response.body, symbolize_names: true)
 

@@ -25,6 +25,9 @@ class ApiController < ActionController::API
     end
   end
 
+  def current_turn
+  end
+
   def current_game
     @game ||= Game.find(params[:game_id])
   end
