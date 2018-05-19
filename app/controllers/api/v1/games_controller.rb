@@ -1,10 +1,10 @@
 module Api
   module V1
     class GamesController < ApiController 
-      before_action :find_game, only: [:create]
+      before_action :find_game, only: [:show, :create]
       
       def show
-        render_400('Game does not exist') unless game
+        return render_400('Game does not exist') unless @game
         render_game
       end
 

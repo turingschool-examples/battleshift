@@ -8,14 +8,9 @@ describe 'user registration process' do
       scenario 'they are successfully registered' do
         welcome_message  = 'Thank you! Your account is now activated.'
 
-        visit users_activation_path(user)
+        visit "/users/activation?key=#{user.api_key}" 
 
-        expect(current_path).to eq(users_activate_path(user))
-
-        click_on 'Activate'
-
-        expect(current_path).to eq(users_activated_path(user))
-        expect(page).to have_content(welcome_message)
+        expect(current_path).to eq(dashboard_path)
         expect(User.first.activated?).to be_truthy 
       end
     end
