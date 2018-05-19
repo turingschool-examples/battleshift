@@ -19,7 +19,6 @@ class Ship
   end
 
   def is_sunk?
-    # not used
     @damage == @length
   end
 end
