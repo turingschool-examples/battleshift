@@ -28,11 +28,22 @@ class Game < ApplicationRecord
     player_1_turns + player_2_turns
   end
 
+  def invalid_turn?(key)
+    case current_turn
+    when 'computer'   then key == p2.api_key 
+    when 'challenger' then key == p1.api_key
+    end
+  end
+
   def cycle_turn
     case self.current_turn
     when 'challenger' then self.current_turn = 'computer'; save
     when 'computer'   then self.current_turn = 'challenger'; save
     end
+  end
+
+  def in_progress?
+    winner.nil?
   end
 
   private
