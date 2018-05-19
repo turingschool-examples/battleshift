@@ -9,8 +9,13 @@ module Api
           turn_processor = TurnProcessor.new(game, params[:shot][:target], opponent_board)
 
           turn_processor.run!
-          render json: game, message: turn_processor.message
+          if turn_processor.message == "Invalid coordinates."
+            render json: game, message: turn_processor.message, status: 400
+          else
+            render json: game, message: turn_processor.message
+          end
         end
+
 
         def validate_turn
           render json: current_game,
