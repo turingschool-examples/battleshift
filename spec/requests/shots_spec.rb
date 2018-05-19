@@ -2,24 +2,21 @@ require 'rails_helper'
 
 describe "Api::V1::Shots" do
   context "POST /api/v1/games/:id/shots" do
+    let(:player_1) { create(:user) }
+    let(:player_2) { create(:user_2) }
     let(:player_1_board)   { Board.new(4) }
     let(:player_2_board)   { Board.new(4) }
     let(:sm_ship) { Ship.new(2) }
-    let(:game)    {
-      create(:game,
-        player_1_board: player_1_board,
-        player_2_board: player_2_board
-      )
-    }
 
     it "updates the message and board with a hit" do
+    game = Game.create!( player_1: player_1, player_2: player_2, player_1_board: player_1_board, player_2_board: player_2_board)
       allow_any_instance_of(AiSpaceSelector).to receive(:fire!).and_return("Miss")
       ShipPlacer.new(board: player_2_board,
                      ship: sm_ship,
                      start_space: "A1",
                      end_space: "A2").run
 
-      headers = { "CONTENT_TYPE" => "application/json" }
+      headers = { "CONTENT_TYPE" => "application/json", 'X-API-key' => player_1.api_key }
       json_payload = {target: "A1"}.to_json
 
       post "/api/v1/games/#{game.id}/shots", params: json_payload, headers: headers

@@ -8,7 +8,9 @@ RSpec.describe Game, type: :model do
 
   describe 'class methods' do
     describe '.create_default' do
-      let(:game) { Game.create_default }
+      let(:headers) { { 'X-API-key': 'ez123' } }
+      let(:params) { { opponent_email: 'SomeBody@once.com' } }
+      let(:game) { Game.create_default(params, headers) }
 
       it 'creates a game with a 4x4 board' do
         size1 = game.player_1_board.board.size
