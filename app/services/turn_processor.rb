@@ -18,13 +18,10 @@ class TurnProcessor
     @messages.join(" ")
   end
 
-  def winner
-    if player_1_loss?
-      'player_2'
-    else
-      'player_1'
-    end
-  end
+  # def winner
+  #   # return player_2' if player_1_loss?'
+  #   # 'player_1'
+  # end
 
   private
 
@@ -61,12 +58,6 @@ class TurnProcessor
     game.p2_board.board.flatten.map{|x| x.flatten[1]}.map(&:contents).compact.map(&:is_sunk?).select{|x| x == true}.size >= 5
   end
 
-  def ai_attack_back
-    result = AiSpaceSelector.new(player.board).fire!
-    @messages << "The computer's shot resulted in a #{result}."
-    game.player_2_turns += 1
-  end
-
   def player
     Player.new(game.player_1_board)
   end
@@ -74,5 +65,4 @@ class TurnProcessor
   def opponent
     Player.new(game.player_2_board)
   end
-
 end
