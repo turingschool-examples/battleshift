@@ -66,9 +66,8 @@ class TurnProcessor
   end
 
   def winner_email(player)
-    game.winner = User.find_by(api_key: player.api_key)
+    game.winner = User.find_by(api_key: player.api_key).email
     game.save
-    # require 'pry'; binding.pry
   end
 
   def player_2_board_total_hits
