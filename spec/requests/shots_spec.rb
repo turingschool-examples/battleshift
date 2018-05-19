@@ -5,8 +5,12 @@ describe "Api::V1::Shots" do
     let(:player_1_board)   { Board.new(4) }
     let(:player_2_board)   { Board.new(4) }
     let(:sm_ship) { Ship.new(2) }
+    let(:player_1_id) { create(:activated_user).id }
+    let(:player_2_id) { create(:activated_user).id }
     let(:game)    {
       create(:game,
+        player_1_id: player_1_id,
+        player_2_id: player_2_id,
         player_1_board: player_1_board,
         player_2_board: player_2_board
       )
@@ -24,7 +28,7 @@ describe "Api::V1::Shots" do
 
       post "/api/v1/games/#{game.id}/shots", params: json_payload, headers: headers
 
-      expect(response).to be_success
+      expect(response).to be_successful
 
       game = JSON.parse(response.body, symbolize_names: true)
 
@@ -59,7 +63,8 @@ describe "Api::V1::Shots" do
     it "updates the message but not the board with invalid coordinates" do
       player_1_board = Board.new(1)
       player_2_board = Board.new(1)
-      game = create(:game, player_1_board: player_1_board, player_2_board: player_2_board)
+      game = create(:game, player_1_id: player_1_id,
+      player_2_id: player_2_id, player_1_board: player_1_board, player_2_board: player_2_board)
 
       headers = { "CONTENT_TYPE" => "application/json" }
       json_payload = {target: "B1"}.to_json
