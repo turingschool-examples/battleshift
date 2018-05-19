@@ -32,13 +32,13 @@ describe 'GET /api/v1/games/1' do
                      end_space: "D1"
                     ).run
 
-      game_attributes = {
-                      player_1_board: player_1_board,
-                      player_2_board: player_2_board,
-                      player_1_turns: 0,
-                      player_2_turns: 0,
-                      current_turn: "challenger"
-                    }
+      game_attributes = {player_1_board: player_1_board,
+                         player_2_board: player_2_board,
+                         player_1_turns: 0,
+                         player_2_turns: 0,
+                         current_turn: "challenger",
+                         player_1: create(:user),
+                         player_2: create(:user_2)}
 
       game = Game.new(game_attributes)
       game.save!
@@ -65,6 +65,7 @@ describe 'GET /api/v1/games/1' do
       get "/api/v1/games/1"
 
       expect(response.status).to be(400)
+      expect(response.body).to eq('Game does not exist')
     end
   end
 end
