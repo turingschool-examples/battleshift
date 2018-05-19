@@ -5,7 +5,7 @@ module Api
         before_action :find_game, only: [:index]
 
         def index
-          if request.headers['X-API-key'] == @game.player_1.api_key
+          if api_key == @game.player_1.api_key
             board = @game.player_1_board
           else
             board = @game.player_2_board

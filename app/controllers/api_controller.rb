@@ -1,6 +1,10 @@
 class ApiController < ActionController::API
   protected
 
+  def api_key
+    request.headers['X-API-key']
+  end
+
   def find_game
     @game = if params[:id]
              Game.find_by_id(params[:id])
