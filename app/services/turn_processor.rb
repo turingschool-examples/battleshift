@@ -18,35 +18,46 @@ class TurnProcessor
     @messages.join(" ")
   end
 
-  # def winner
-  #   # return player_2' if player_1_loss?'
-  #   # 'player_1'
-  # end
-
   private
 
   attr_reader :game, :target
 
   def attack_opponent
-    if game.current_turn == 'computer'
-      result = Shooter.fire!(board: opponent.board, target: target)
-    else
-      result = Shooter.fire!(board: player.board, target: target)
-    end
+    game_cycle(result)
+  end
+
+  def result
+    board = opponent.board if game.current_turn == 'computer'
+    board = player.board if game.current_turn == 'challenger'
+    Shooter.fire!(board: board, target: target)
+  end
+
+  def game_cycle(result)
     game.cycle_turn
-
-    if player_1_loss? || player_2_loss?
-      go = 'Game over.'
-      game.winner = @winner_email
-    end
-
-    @messages << "Your shot resulted in a #{result}."
-    @messages <<  go if go
-
-
+    game_over
+    messages(result)
     game.player_1_turns += 1
   end
 
+  def messages(result)
+    @messages << "Your shot resulted in a #{result}."
+    @messages <<  game_over_message if game_over_message
+  end
+
+  def game_over
+    if player_1_loss? || player_2_loss?
+      game_over_message
+      game_winner
+    end
+  end
+
+  def game_over_message
+    'Game over.'
+  end
+
+  def game_winner
+    game.winner = @winner_email
+  end
 
   def player_1_loss?
     @winner_email = game.player_2.email
