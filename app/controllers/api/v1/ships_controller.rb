@@ -1,5 +1,5 @@
 class Api::V1::ShipsController < ApiController
-    def create
+  def create
       ship_placer = ShipPlacer.new(ship_params)
       ship_placer.run
       current_game.save!
@@ -16,5 +16,4 @@ class Api::V1::ShipsController < ApiController
       end_space: params["end_space"]
     }
     end
-
 end
