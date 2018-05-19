@@ -26,6 +26,11 @@ class ApiController < ActionController::API
   end
 
   def current_turn
+    if current_game.current_turn == "player_1"
+      current_game.player_1
+    elsif current_game.current_turn == "player_2"
+      current_game.player_2
+    end
   end
 
   def current_game
