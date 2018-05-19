@@ -40,6 +40,51 @@ class TurnProcessor
     else
       game.current_turn = 'player_1'
     end
+
+    if winner?
+      @messages << "Game over."
+    end
+
+  end
+
+  def winner?
+    game && player_1_winner? || game && player_2_winner?
+  end
+
+  def player_1_winner?
+    if player_2_board_total_hits >= player_2_total_occupied_spaces
+      winner_email(game.player_1)
+      return true
+    end
+  end
+
+  def player_2_winner?
+    if player_1_board_total_hits >= player_1_total_occupied_spaces
+      winner_email(game.player_2)
+      return true
+    end
+  end
+
+  def winner_email(player)
+    game.winner = User.find_by(api_key: player.api_key)
+    game.save
+    # require 'pry'; binding.pry
+  end
+
+  def player_2_board_total_hits
+    game.player_2.board.board.flatten.map(&:values).flatten.map(&:contents).compact.select { |contents| contents.damage != 0 }.size
+  end
+
+  def player_2_total_occupied_spaces
+    game.player_2.board.board.flatten.map(&:values).flatten.map(&:contents).compact.size
+  end
+
+  def player_1_board_total_hits
+    game.player_1.board.board.flatten.map(&:values).flatten.map(&:contents).compact.select { |contents| contents.damage != 0 }.size
+  end
+
+  def player_1_total_occupied_spaces
+    game.player_1.board.board.flatten.map(&:values).flatten.map(&:contents).compact.size
   end
 
   #

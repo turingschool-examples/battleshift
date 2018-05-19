@@ -6,7 +6,7 @@ module Api
         # before_action :require_correct_coordinate
 
         def create
-          # game = Game.find(params[:game_id])
+          # game = Game.find(params[:game_id]
 
           if current_game.current_turn.last.to_i.odd?
             player = current_game.player_1
