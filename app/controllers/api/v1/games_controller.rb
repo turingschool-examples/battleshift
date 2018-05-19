@@ -15,7 +15,7 @@ module Api
       private
 
       def render_game
-        render json: game
+        render json: @game
       end
     end
   end

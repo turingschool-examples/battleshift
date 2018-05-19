@@ -2,7 +2,11 @@ class ApiController < ActionController::API
   protected
 
   def find_game
-    game = Game.find_by_id(params[:id])
+    @game = if params[:id]
+             Game.find_by_id(params[:id])
+           else
+             Game.find_by_id(params[:game_id])
+           end
   end
 
   def render_400(message)
