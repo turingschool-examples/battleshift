@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180517170553) do
+ActiveRecord::Schema.define(version: 20180519211331) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,8 @@ ActiveRecord::Schema.define(version: 20180517170553) do
     t.datetime "updated_at", null: false
     t.bigint "player_1_id"
     t.bigint "player_2_id"
+    t.integer "player_1_ships", default: 2
+    t.integer "player_2_ships", default: 2
     t.index ["player_1_id"], name: "index_games_on_player_1_id"
     t.index ["player_2_id"], name: "index_games_on_player_2_id"
   end

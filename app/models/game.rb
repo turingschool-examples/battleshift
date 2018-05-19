@@ -19,19 +19,22 @@ class Game < ApplicationRecord
     end
   end
 
-  def sunken_ships
-    if current_player == current_game.player_1
-      current_game.player_2_ships -= 1
-    else current_player == current_game.player_2
-        current_game.player_1_ships -= 1
+  def won?
+    if self.player_1_ships == 0
+      self.winner = self.player_2.email
+    elsif self.player_2_ships == 0
+      self.winner = self.player_1.email
     end
+    self.save!
   end
 
-  def won?
-    if current_game.player_1_ships == 0
-      current_game.winner = current_game.player_2.email
-    elsif current_game.player_2_ships == 0
-      current_game.winner = current_game.player_1.email
+  def sunken_ships
+    if self.current_turn == "player_1"
+      self.player_2_ships -= 1
+    else self.current_turn == "player_2"
+      self.player_1_ships -= 1
     end
+    self.save!
   end
+
 end

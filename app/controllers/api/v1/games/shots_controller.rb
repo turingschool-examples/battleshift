@@ -12,6 +12,7 @@ module Api
           if turn_processor.message == "Invalid coordinates."
             render json: game, message: turn_processor.message, status: 400
           else
+            binding.pry
             render json: game, message: turn_processor.message
           end
         end

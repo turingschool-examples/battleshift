@@ -11,7 +11,6 @@ class Space
     @status = if contents && not_attacked?
                  contents.attack!
                  if contents.is_sunk?
-                   #put it here to add a sunken ship to this player
                    "Hit. Battleship sunk"
                  else
                    "Hit"
