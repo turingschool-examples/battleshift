@@ -13,8 +13,9 @@ module Api
         end
 
         def validate_turn
-          response = { message: "Invalid move. It's your opponent's turn" }.to_json
-          render json: response, status: 400 and return false if current_turn != current_player
+          render json: current_game,
+            message: "Invalid move. It's your opponent's turn.",
+            status: 400 and return false if current_turn != current_player
         end
       end
     end
