@@ -10,4 +10,12 @@ class Game < ApplicationRecord
 
   validates :player_1_board, presence: true
   validates :player_2_board, presence: true
+
+  def swap_turn!
+    if self.current_turn == "player_1"
+     self.current_turn = "player_2"
+    elsif self.current_turn == "player_2"
+      self.current_turn = "player_1"
+    end
+  end
 end
