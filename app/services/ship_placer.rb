@@ -17,8 +17,9 @@ class ShipPlacer
   end
 
   private
+
   attr_reader :board, :ship,
-    :start_space, :end_space
+              :start_space, :end_space
 
   def same_row?
     start_space[0] == end_space[0]
