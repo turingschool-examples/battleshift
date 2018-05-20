@@ -6,8 +6,6 @@ module Api
         # before_action :require_correct_coordinate
 
         def create
-          # game = Game.find(params[:game_id])
-
           if current_game.current_turn.last.to_i.odd?
             player = current_game.player_1
             opponent = current_game.player_2
@@ -17,7 +15,10 @@ module Api
           end
 
           turn_processor = TurnProcessor.new(current_game, params[:shot][:target], player, opponent)
-          if turn_processor.valid_coordinate?
+
+          if current_game.game_over?
+            render status: 400, json: current_game, message: 'Invalid move. Game over.'
+          elsif turn_processor.valid_coordinate?
             turn_processor.run!
             render json: current_game, message: turn_processor.message
           else
