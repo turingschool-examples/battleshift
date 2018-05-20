@@ -7,4 +7,8 @@ class Game < ApplicationRecord
 
   validates :player_1, presence: true
   validates :player_2, presence: true
+
+  def game_over?
+    winner != nil
+  end
 end

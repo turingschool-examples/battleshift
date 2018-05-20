@@ -71,7 +71,7 @@ class TurnProcessor
   end
 
   def player_2_board_total_hits
-    game.player_2.board.board.flatten.map(&:values).flatten.map(&:contents).compact.select { |contents| contents.damage != 0 }.size
+    game.player_2.board.board.flatten.map(&:values).flatten.map(&:contents).compact.select { |contents| contents.damage == contents.length }.size
   end
 
   def player_2_total_occupied_spaces
@@ -79,7 +79,7 @@ class TurnProcessor
   end
 
   def player_1_board_total_hits
-    game.player_1.board.board.flatten.map(&:values).flatten.map(&:contents).compact.select { |contents| contents.damage != 0 }.size
+    game.player_1.board.board.flatten.map(&:values).flatten.map(&:contents).compact.select { |contents| contents.damage == contents.length }.size
   end
 
   def player_1_total_occupied_spaces
