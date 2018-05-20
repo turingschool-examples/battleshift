@@ -65,5 +65,9 @@ describe Board do
       expect(num_rows).to eq(4)
       expect(num_columns).to eq(4)
     end
+    it '#locate_space' do
+      first_space = @board.locate_space('A1')
+      expect(first_space).to eq(@board.board.flatten[0].values[0])
+    end
   end
 end
