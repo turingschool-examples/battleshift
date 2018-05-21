@@ -15,7 +15,10 @@ module Api
         private
 
         def turn_processor
-          @turn_processor ||= TurnProcessor.new(current_game, params[:shot][:target], @player, @opponent)
+          @turn_processor ||= TurnProcessor.new(current_game,
+                                                params[:shot][:target],
+                                                @player,
+                                                @opponent)
         end
 
         def set_player

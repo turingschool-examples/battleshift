@@ -22,11 +22,11 @@ describe Ship do
       ship.attack!
       ship.attack!
 
-      expect(ship.is_sunk?).to eq(false)
+      expect(ship.sunk?).to eq(false)
 
       ship.attack!
 
-      expect(ship.is_sunk?).to eq(true)
+      expect(ship.sunk?).to eq(true)
     end
   end
 end

@@ -4,6 +4,5 @@ class Player
   def initialize(board, api_key)
     @api_key = api_key
     @board = board
-    @turns = 0
   end
 end
