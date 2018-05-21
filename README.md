@@ -11,11 +11,9 @@ For Information on the Technical Specifications for the Project:<br>
 [Turing School BattleShift Project](http://backend.turing.io/module3/projects/battleshift)
 
 ### Table Of Contents
-- [Versions/Prerequisites](#versions-prerequisites)
 - [Setup](#setup)
-- [Database](#database)
 - [The Test Suite](#the-test-suite)
-- [Spinning Up A Server](#spinning-up-a-server)
+- [Running the Spec Harness](#running-the-spec-harness)
 - [Authors](#authors)
 
 ### Versions/Prerequisites
