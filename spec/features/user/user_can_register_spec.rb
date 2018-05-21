@@ -43,4 +43,26 @@ feature 'Registration' do
     expect(current_path).to eq('/dashboard')
     expect(page).to have_content("Logged in as #{user.name}")
   end
+
+  scenario 'registered user can log back out' do
+    user = create(:user, status: 1)
+    visit '/'
+
+    click_on 'Login'
+    expect(current_path).to eq(login_path)
+
+    fill_in 'email', with: user.email
+    fill_in 'password', with: user.password
+
+    click_on 'Submit'
+
+    expect(current_path).to eq('/dashboard')
+    expect(page).to have_content("Logged in as #{user.name}")
+
+    click_on 'Log Out'
+
+    expect(current_path).to eq(root_path)
+    expect(page).to have_content("Login")
+    expect(page).to_not have_content("Log Out")
+  end
 end
