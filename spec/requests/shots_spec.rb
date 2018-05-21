@@ -112,5 +112,35 @@ describe 'Api::V1::Shots' do
       game = JSON.parse(response.body, symbolize_names: true)
       expect(game[:message]).to eq 'Invalid coordinates.'
     end
+
+    it 'rejects request made by player not in the game' do
+      user3 = create(:user)
+      game_attributes = {
+                      player_1: player_1,
+                      player_2: player_2,
+                      player_1_board: player_1_board,
+                      player_2_board: player_2_board,
+                      current_turn: "player_1"
+                    }
+      game = Game.create(game_attributes)
+
+      ShipPlacer.new(board: game.player_2.board,
+                     ship: sm_ship,
+                     start_space: 'A1',
+                     end_space: 'A2').run
+
+      ShipPlacer.new(board: game.player_1.board,
+                     ship: sm_ship,
+                     start_space: 'A1',
+                     end_space: 'A2').run
+
+      game.save
+      headers = { 'CONTENT_TYPE' => 'application/json', 'X-API-KEY' => user3.api_key }
+      json_payload = { target: 'A1' }.to_json
+      post "/api/v1/games/#{game.id}/shots", params: json_payload, headers: headers
+
+      game = JSON.parse(response.body, symbolize_names: true)
+      expect(game[:message]).to eq 'Unauthorized'
+    end
   end
 end
