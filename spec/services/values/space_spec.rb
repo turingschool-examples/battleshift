@@ -41,8 +41,11 @@ describe Space do
     end
     it '#not_attacked?' do
       space = Space.new('A1')
-
       expect(space.not_attacked?).to be_truthy
+      ship = Ship.new(1)
+      space.occupy!(ship)
+      space.attack!
+      expect(space.not_attacked?).to be_falsey
     end
   end
 end
