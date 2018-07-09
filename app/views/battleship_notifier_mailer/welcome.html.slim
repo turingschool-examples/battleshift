@@ -1,7 +1,7 @@
 p
   ' Welcome to the Battleshift application
-    = @user.name.capitalize
+    = @user.first_name.capitalize
     '. Here is your API key
     = @user.api_key
     '. Visit this link to activate your account.
-    = link_to 'Activate account', "/activate/user?name=#{@user.user_name}&api_key=#{@user.api_key}"
+    = link_to 'Activate account', "/activate/user?name=#{@user.username}&api_key=#{@user.api_key}"
