@@ -1,0 +1,5 @@
+<h1> Welcome! </h1>
+
+<p>Your API key is <%= @api_key %></p>
+
+<%= link_to "Visit here to activate your account.", "#{ENV["URL"]}/activate?key=#{@api_key}" %>
