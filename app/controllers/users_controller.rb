@@ -30,7 +30,7 @@ class UsersController < ApplicationController
     @user = User.new(params)
     if @user.save
       login(@user)
-      BattleshipNotifierMailer.welcome(@user).deliver_now
+      BattleshipNotifierMailer.welcome(@user, request.base_url).deliver_now
       flash[:notice] = "Logged in as #{@user.username}"
       redirect_to "/dashboard/#{@user.id}" 
     else
@@ -40,7 +40,6 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1
   def update
-    require 'pry'; binding.pry
     if @user.update(user_params)
       redirect_to @user, notice: 'User was successfully updated.'
     else
