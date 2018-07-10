@@ -28,12 +28,20 @@ RSpec.describe UsersController, type: :controller do
   # This should return the minimal set of attributes required to create a valid
   # User. As you add validations to User, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+  let(:valid_attributes) { {
+    first_name:   'Bob',
+    last_name:    'Smith',
+    username:     'yeah@gmail.com',
+    password:     'password',
+    api_key:      "#{User.generate_api_key}",
+    activated:    false,
+    playing:      false
+    }
   }
 
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+  let(:invalid_attributes) { {
+    name:         'Yeah'
+    }
   }
 
   # This should return the minimal set of values that should be in the session
@@ -82,7 +90,7 @@ RSpec.describe UsersController, type: :controller do
 
       it "redirects to the created user" do
         post :create, params: {user: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(User.last)
+        expect(response).to redirect_to("/dashboard/#{User.last.id}")
       end
     end
 
@@ -97,15 +105,16 @@ RSpec.describe UsersController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {
+          first_name:   'Bob2',
+          last_name:    'Smith2',
+          username:     'yeah2@gmail.com',
+          password:     'password',
+          api_key:      "#{User.generate_api_key}",
+          activated:    false,
+          playing:      false
+          }
       }
-
-      it "updates the requested user" do
-        user = User.create! valid_attributes
-        put :update, params: {id: user.to_param, user: new_attributes}, session: valid_session
-        user.reload
-        skip("Add assertions for updated state")
-      end
 
       it "redirects to the user" do
         user = User.create! valid_attributes
@@ -118,7 +127,7 @@ RSpec.describe UsersController, type: :controller do
       it "returns a success response (i.e. to display the 'edit' template)" do
         user = User.create! valid_attributes
         put :update, params: {id: user.to_param, user: invalid_attributes}, session: valid_session
-        expect(response).to be_success
+        expect(response).to_not be_success
       end
     end
   end

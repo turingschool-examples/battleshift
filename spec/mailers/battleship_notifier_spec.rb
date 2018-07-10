@@ -2,15 +2,15 @@ require "rails_helper"
 
 RSpec.describe BattleshipNotifierMailer, type: :mailer do
   describe 'user recieves email with appropriate subject, body, and link' do
-    let(:user){mock_model User, first_name: 'John', last_name: 'Livingston', email: 'jliv316@gmail.com'}
-    let(:mail){BattleshipNotifierMailer.welcome(user)}
+    let(:user){create(:user)}
+    let(:mail){BattleshipNotifierMailer.welcome(user, "http://localhost:3000")}
 
     it 'renders the subject' do
       expect(mail.subject).to eq("#{user.first_name}, welcome to Battleshift.")
     end
 
     it 'renders the reciever email' do
-      expect(mail.to).to eq([user.email])
+      expect(mail.to).to eq(user.username)
     end
 
     it 'renders the senders email' do
