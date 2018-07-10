@@ -1,0 +1,9 @@
+
+ <p> Welcome to the Battleshift application <%= @user.first_name.capitalize %>. Here is your API key <%= @user.api_key %> 
+ Visit this link to activate your account.
+
+<form action="<%= @url %>/activate/user" method="POST">
+  <input type="hidden" value=<%="#{@user.api_key}"%> name="api_key">
+  <input type="hidden" value=<%="#{@user.username}"%> name="username">
+  <input type="submit" value="submit">
+</form>

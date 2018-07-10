@@ -1,0 +1,9 @@
+' Welcome to the Battleshift application
+    = @user.name.capitalize
+    '. Here is your API key
+    = @user.api_key
+    '. Visit this link to activate your account.
+    http://www.app.heroku.com/activate/user?name=
+    =@user.user_name
+    &api_key=
+    =@user.api_key
