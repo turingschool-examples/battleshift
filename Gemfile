@@ -24,6 +24,12 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'rspec-rails'
   gem 'pry'
+  gem 'active_designer'
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'launchy'
+  gem 'shoulda-matchers'
+  gem 'simplecov'
 end
 
 group :test do

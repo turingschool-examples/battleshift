@@ -3,6 +3,11 @@ p id="notice"
 - if current_user
   p
     = @user.first_name
+  p
+    = @user.last_name
+  p
+    = @user.username
+  p
     - if @user.activated
       ' Status: Active
     - else

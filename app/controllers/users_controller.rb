@@ -40,7 +40,6 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1
   def update
-    require 'pry'; binding.pry
     if @user.update(user_params)
       redirect_to @user, notice: 'User was successfully updated.'
     else
