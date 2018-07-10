@@ -9,6 +9,11 @@
   </head>
 
   <body>
+  <% if flash[:notice] %>
+    <div class="notice"><%= flash[:notice].html_safe %></div>
+  <% elsif flash[:error] %>
+  <div class="error"><%= flash[:error] %></div>
+  <% end %>
     <%= yield %>
   </body>
 </html>
