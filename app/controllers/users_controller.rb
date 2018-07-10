@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   # GET /users/1
   def show
     @user = User.find(params[:id])
-    if sessions[:activate] == true
+    if session[:activate] == true
       @user.update(activated: true)
       flash.now[:notice] = "User was activated."
     end
