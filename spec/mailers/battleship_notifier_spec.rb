@@ -10,7 +10,7 @@ RSpec.describe BattleshipNotifierMailer, type: :mailer do
     end
 
     it 'renders the reciever email' do
-      expect(mail.to).to eq([user.username])
+      expect(mail.to).to eq(user.username)
     end
 
     it 'renders the senders email' do

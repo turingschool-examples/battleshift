@@ -4,6 +4,7 @@ class User < ApplicationRecord
   validates :last_name, presence: true
   validates :username, presence: true, uniqueness: { case_sensitive: false }
   validates_confirmation_of :password
+  has_many :games
   
   def self.generate_api_key
     [*('a'..'z'),*('0'..'9')].shuffle[0,20].join
