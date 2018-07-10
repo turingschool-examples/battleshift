@@ -21,5 +21,8 @@ describe "user can place a ship" do
         expect(data).to be_a(Hash)
         
         expect(data['message']).to eq('Successfully placed ship with a size of 3. You have 1 ship(s) to place with a size of 2.')
-    end 
+    end
+    it "will tell user when they are out of ships to place" do
+        
+    end
 end 
