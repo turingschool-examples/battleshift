@@ -1,8 +1,8 @@
 class Api::V1::Games::ShipsController < ApiController
   def create
     game = Game.find(params[:game_id])
-    ship = Ship.new(params[:ship_size])
-    # binding.pry
+    ship = Ship.new(params[:ship_size].to_i)
+    #binding.pry
     # board = nil
     # if game.current_turn == "challenger"
     #   board = game.player_1_board

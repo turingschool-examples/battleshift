@@ -1,6 +1,6 @@
 <h1> Welcome! </h1>
 
-<p>Your API key is <%= @api_key %></p>
+<p>Your API key is <%= @register_presenter.api_key %></p>
 
 
-<%= link_to "Visit here to activate your account.", "#{@url}/activate?key=#{@api_key}" %>
+<%= link_to "Visit here to activate your account.", "#{@register_presenter.url}/activate?key=#{@register_presenter.api_key}" %>
