@@ -30,7 +30,8 @@ class UsersController < ApplicationController
     @user = User.new(params)
     if @user.save
       login(@user)
-      format.html { redirect_to "/dashboard/#{@user.id}", notice: "Logged in as #{@user.username}" }
+      redirect_to "/dashboard/#{@user.id}" 
+      flash[:notice] = "Logged in as #{@user.username}"
     else
       render :new
     end

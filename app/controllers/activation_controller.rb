@@ -4,7 +4,7 @@ class ActivationController < ApplicationController
     if session[:id] == @user.id && @user.api_key == params[:api_key]
       update_hash = {activated: true}
       @user.update(update_hash)
-      flash[:notice] = "Successfully activated your account."
+      flash[:notice] = "Thank you! Your account is now activated."
       redirect_to "/dashboard/#{@user.id}"
     else
       session[:activate] = true
