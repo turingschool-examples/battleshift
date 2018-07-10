@@ -5,8 +5,10 @@ describe 'create a game' do
     user1 = create(:user)
     user2 = create(:user2)
 
-    post '/api/v1/games', headers: { 'X-API-Key': user1.api_key, 'CONTENT_TYPE': 'application/json'}, body: "{'opponent_email': user2.email}"
+    post "/api/v1/games?opponent_email=#{user2.email}", headers: { 'X-API-Key': user1.api_key, 'CONTENT_TYPE': 'application/json'}
 
-    binding.pry
+    data = JSON.parse(response.body)
+    expect(data).to be_a(Hash)
+    expect(data["current_turn"]).to eq("challenger")
   end
 end

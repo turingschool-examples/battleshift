@@ -1,5 +1,5 @@
 class Game < ApplicationRecord
-  attr_accessor :messages
+  attr_reader :message
 
   enum current_turn: ["challenger", "computer"]
   serialize :player_1_board
@@ -7,4 +7,8 @@ class Game < ApplicationRecord
 
   validates :player_1_board, presence: true
   validates :player_2_board, presence: true
+
+  def set_message(message)
+    @message = message
+  end
 end
