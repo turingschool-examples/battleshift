@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "users/show", type: :view do
   before(:each) do
-    @user = assign(:user, User.create!(first_name: 'Bob', last_name: 'Smith', username: 'New@gmail.com', password_digest: 'password'))
+    @user = assign(:user, User.create!(first_name: 'Bob', last_name: 'Smith', username: 'Newest@gmail.com', password_digest: 'password'))
   end
 
   it "renders attributes in <p>" do

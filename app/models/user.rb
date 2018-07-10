@@ -9,7 +9,7 @@ class User < ApplicationRecord
     [*('a'..'z'),*('0'..'9')].shuffle[0,20].join
   end
 
-  def send_email(user)
-    BattleshipNotifierMailer.welcome(user).deliver_now
+  def send_email(user, url)
+    BattleshipNotifierMailer.welcome(user, url).deliver_now
   end
 end
