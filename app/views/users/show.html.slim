@@ -1,5 +1,9 @@
 p id="notice"
   = notice
-
-p
-  = @user.first_name
+- if current_user
+  p
+    = @user.first_name
+    - if @user.activated
+      ' Status: Active
+    - else
+      'This account has not yet been activated. Please check your email.

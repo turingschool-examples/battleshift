@@ -8,6 +8,11 @@ class UsersController < ApplicationController
 
   # GET /users/1
   def show
+    @user = User.find(params[:id])
+    if sessions[:activate] == true
+      @user.update(activated: true)
+      flash.now[:notice] = "User was activated."
+    end
   end
 
   # GET /users/new
@@ -21,10 +26,11 @@ class UsersController < ApplicationController
 
   # POST /users
   def create
-    @user = User.new(user_params)
-
+    params = user_params.merge(api_key: User.generate_api_key)
+    @user = User.new(params)
     if @user.save
-      redirect_to "/dashboard/#{@user.id}", notice: 'User was successfully created.'
+      login(@user)
+      format.html { redirect_to "/dashboard/#{@user.id}", notice: "Logged in as #{@user.username}" }
     else
       render :new
     end
@@ -32,6 +38,7 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1
   def update
+    require 'pry'; binding.pry
     if @user.update(user_params)
       redirect_to @user, notice: 'User was successfully updated.'
     else
@@ -53,6 +60,6 @@ class UsersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def user_params
-      params.require(:user).permit(:username, :first_name, :last_name, :password)
+      params.require(:user).permit(:username, :first_name, :last_name, :password, :api_key, :activated)
     end
 end
