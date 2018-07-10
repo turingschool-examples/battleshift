@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20180709224432) do
     t.string "api_key"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "is_activated?", default: false
+    t.boolean "is_activated", default: false
   end
 
 end

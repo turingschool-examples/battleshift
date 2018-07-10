@@ -13,4 +13,5 @@ Rails.application.routes.draw do
   root to: 'home#index'
   get '/register', to: 'users#new'
   get '/dashboard', to: 'users#show'
+  get '/activate', to: 'activation#show'
 end
