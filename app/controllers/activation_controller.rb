@@ -6,7 +6,7 @@ class ActivationController < ApplicationController
       if user.save!
         session[:user_id] = user.id
       else 
-        
+        #testing comment
       end 
     end
 
