@@ -30,7 +30,7 @@ class UsersController < ApplicationController
     @user = User.new(params)
     if @user.save
       login(@user)
-      BattleshipNotifierMailer.welcome(@user).deliver_now
+      BattleshipNotifierMailer.welcome(@user, request.base_url).deliver_now
       flash[:notice] = "Logged in as #{@user.username}"
       redirect_to "/dashboard/#{@user.id}" 
     else
