@@ -6,7 +6,7 @@ class ActivationController < ApplicationController
       if user.save!
         session[:user_id] = user.id
       else 
-        binding.pry
+        
       end 
     end
 
