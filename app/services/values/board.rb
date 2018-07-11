@@ -7,6 +7,13 @@ class Board
     @board = create_grid
   end
 
+  def ships
+    space_names.group_by do |space_name| 
+      space = locate_space(space_name)
+      space.contents
+    end.keys.compact
+  end
+
   def get_row_letters
     ("A".."Z").to_a.shift(@length)
   end
@@ -171,9 +178,10 @@ class Board
   def neighbors?(coordinate1, coordinate2)
     neighbors(coordinate1).include?(coordinate2)
   end
-  def contains?(coordinate)
-    create_space_names.include?(coordinate)
-  end
+
+  # def contains?(coordinate)
+  #   create_space_names.include?(coordinate)
+  # end
 
   def same_row?(coordinate1, coordinate2)
     get_row(coordinate1) == get_row(coordinate2)
