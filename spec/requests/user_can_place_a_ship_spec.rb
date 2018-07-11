@@ -40,7 +40,7 @@ describe "user can place a ship" do
         
         post "/api/v1/games/#{game.id}/ships?ship_size=2&start_space=B1&end_space=C1", headers: { 'X-API-Key': user1.api_key, 'CONTENT_TYPE': 'application/json'}
         data = JSON.parse(response.body)
-
+        
         expect(data).to be_a(Hash)
         expect(data['message']).to eq('Successfully placed ship with a size of 2. You have 0 ship(s) to place.')
     end

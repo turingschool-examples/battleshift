@@ -14,6 +14,24 @@ class Board
     end.keys.compact
   end
 
+  def left_to_place
+    2 - ships.count
+  end
+
+  def length_of_remaining_ship
+    if left_to_place == 1
+      existing_length = ships.first.length
+      if existing_length == 2
+        " with a size of 3"
+      else 
+        " with a size of 2"
+      end 
+    else
+      ""
+    
+    end
+  end
+
   def get_row_letters
     ("A".."Z").to_a.shift(@length)
   end
