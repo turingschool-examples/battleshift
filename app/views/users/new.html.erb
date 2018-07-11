@@ -1,0 +1,17 @@
+<h1>Register here!</h1>
+
+<%= form_for @user do |f| %>
+<%= f.label :email %>
+<%= f.text_field :email %>
+<%= f.label :name %>
+<%= f.text_field :name %>
+<div class='first_password'>
+<%= f.label :password %>
+<%= f.password_field :password%>
+</div>
+<div class='password_confirmation'>
+<%= f.label :password_confirmation %>
+<%= f.password_field :password_confirmation %>
+</div>
+<%= f.submit "Sign up" %>
+<% end %>
