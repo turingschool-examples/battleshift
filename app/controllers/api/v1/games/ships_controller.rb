@@ -2,8 +2,11 @@ class Api::V1::Games::ShipsController < ApiController
   def create
     game = Game.find(params[:game_id])
     ship = Ship.new(params[:ship_size].to_i)
-    board = game.player_1_board
-
+    if request.env["HTTP_X_API_KEY"]
+      board = game.player_2_board
+    else
+      board = game.player_1_board
+    end 
     ShipPlacer.new(
       board: board,
       ship: ship,
