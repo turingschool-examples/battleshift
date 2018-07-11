@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
 
   # Activation resources
-  post '/activate/user', to: 'activation#show'
+  get '/activate/user', to: 'activation#show'
 
   # API resources
   namespace :api do
