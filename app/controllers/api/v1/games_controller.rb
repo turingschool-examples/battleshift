@@ -41,8 +41,8 @@ module Api
         render json: { message: "Your opponent must create an account before you can play a game. They can check their email for a registration link."}, status: 400
       end
 
-      def invite_player_2(p2, game)
-        # BattleshipNotifierMailer.invitation(p2, request.base_url).deliver_now
+      def invite_player_2(p1, p2, game)
+        BattleshipNotifierMailer.invitation(p1, p2, game, request.base_url).deliver_now
         render json: { message: "#{p2.first_name} has been invited to play a game of Battleship with you.", id: "#{game.id}" }
       end
     end

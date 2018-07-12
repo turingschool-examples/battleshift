@@ -1,0 +1,30 @@
+<p> 
+  Welcome to the Battleshift application <%= @p2.first_name.capitalize %>. Here is your API key <%= @player2.api_key %> 
+  We've activated your account.
+<p>
+  You've been invited to play a game of Battleship with <%= @p1.first_name.capitalize %>. 
+</p>
+<p>
+  In order to play, you will need your API key (<%= @p2.api_key %>), the game ID (<%= @game_id %>) and a browser or application capable of sending POST requests.
+  The first step is to set your ship locations on your board. Your board is a 4x4 square, made of spaces named A1-D4. You have two ships, one of length 2 and one of length 3.
+  In order to set your ships, send a POST request to the endpoint <%= @url %>/api/games/<%= @game_id %>/ships with a body consisting of a JSON object similar to the one below.
+</p>
+<p>
+  { "ship_size": "3", "start_space": "A1", "end_space": "A3" }
+</p>
+<p>
+  This will place a ship of size 3 on the coordinates A1, A2, and A3. You may place a ship either horizontally or vertically on the board, but not diagonally.
+  To finish setting your ships, send another POST request to the aforementioned endpoint and place a ship of length 2 in a different location. 
+</p>
+<p>
+  Once you and your opponent have finished setting ships, you will be able to the first shot. In order to take a shot, send a POST request to the endpoint
+  /api/v1/games/<%= @game_id %>/shots with a body in as a JSON object formated like the one below.
+</p>
+<p>
+  { "target": "A1" }
+</p>
+<p>
+  This example command would send a shot to the A1 location on your opponents board. The response from the server will tell you whether 
+  that shot was a hit or miss and will also include information about the current game and board. Continue trading shots until one player has sunk
+  all of the other players ships. Once that happens, a winner will be declared and the game will be over.
+</p>

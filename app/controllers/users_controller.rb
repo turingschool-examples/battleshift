@@ -58,11 +58,13 @@ class UsersController < ApplicationController
       params = user_params.merge(api_key: User.generate_api_key)
       @user = User.new(params)
       @user.activated = true
+      player_1 = User.find(params[:start])
       if @user.save
         login(@user)
-        BattleshipNotifierMailer.special_invitation(@user, request.base_url).deliver_now
-        flash[:notice] = "Logged in as #{@user.username}. Your account has been activated. Check your email for game invite from #{User.find(user_params[:start]).first_name}"
-        redirect_to "/dashboard/#{@user.id}" 
+        response = Faraday.post('/api/v1/games', {params: { api_key: "#{player_1.api_key}", player_2_username: "#{@user.username}"}})
+        BattleshipNotifierMailer.special_invitation(User.find(params[:start]), @user, response.body[:id], request.base_url).deliver_now
+        flash[:notice] = "Logged in as #{@user.username}. Your account has been activated. Check your email for game invite from #{player_1.first_name}"
+        redirect_to "/dashboard/#{@user.id}"
       else
         render :new
       end
@@ -75,7 +77,7 @@ class UsersController < ApplicationController
         login(@user)
         BattleshipNotifierMailer.welcome(@user, request.base_url).deliver_now
         flash[:notice] = "Logged in as #{@user.username}"
-        redirect_to "/dashboard/#{@user.id}" 
+        redirect_to "/dashboard/#{@user.id}"
       else
         render :new
       end

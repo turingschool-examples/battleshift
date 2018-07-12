@@ -6,6 +6,5 @@ FactoryBot.define do
     api_key User.generate_api_key
     password_digest "password"
     activated true
-    playing true
   end
 end
