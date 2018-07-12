@@ -9,6 +9,6 @@ describe 'create a game' do
 
     data = JSON.parse(response.body)
     expect(data).to be_a(Hash)
-    expect(data["current_turn"]).to eq("challenger")
+    expect(data["current_turn"]).to eq("player 1")
   end
 end
