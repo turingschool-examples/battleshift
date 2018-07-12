@@ -14,13 +14,19 @@ module Api
             game.current_turn = "player 2"
           else
             game.set_message("Invalid move. It's your opponent's turn")
+            
             return render json: game, status: 400
           end
           turn_processor = TurnProcessor.new(game, board, params[:target])
 
           turn_processor.run!
-          game.set_message(turn_processor.message)
-          render json: game
+          message = game.set_message(turn_processor.message)
+          if message.include?("Invalid coordinates")
+            status = 400
+          else 
+            status = 200
+          end
+          render json: game, status: status
         end
       end
     end

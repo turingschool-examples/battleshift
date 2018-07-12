@@ -21,7 +21,9 @@ class Api::V1::Games::ShipsController < ApiController
     ).run
     game.save
     game.set_message("Successfully placed ship with a size of #{ship.length}. You have #{board.left_to_place} ship(s) to place#{board.length_of_remaining_ship}.")
+  
     render json: game
+    
   end
 
 end

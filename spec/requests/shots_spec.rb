@@ -55,7 +55,14 @@ describe "Api::V1::Shots" do
         post "/api/v1/games/#{game.id}/shots?target=A2", headers: { 'X-API-Key': user3.api_key, 'CONTENT_TYPE': 'application/json'}
 
         expect(response).to_not be_success
+      # Player 1 fires at invalid coordinates
+      post "/api/v1/games/#{game.id}/shots?target=F7", headers: { 'X-API-Key': user1.api_key, 'CONTENT_TYPE': 'application/json'}
 
+        expect(response).to_not be_success
+        body = JSON.parse(response.body, symbolize_names: true)
+
+        expected_messages = "Invalid coordinates."
+        expect(body[:message]).to eq expected_messages
         #Player 1 sinks a ship
       end
 
