@@ -14,7 +14,7 @@ module Api
           player_2_board: b2,
           player_1_turns: 0,
           player_2_turns: 0,
-          current_turn: "challenger"
+          current_turn: "player 1"
         }
         game = Game.create(attributes)
 
