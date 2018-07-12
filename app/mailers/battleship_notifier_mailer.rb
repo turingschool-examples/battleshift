@@ -5,7 +5,8 @@ class BattleshipNotifierMailer < ApplicationMailer
     mail(to: user.username, subject: "#{user.first_name}, welcome to Battleshift.")
   end
 
-  def register(email)
+  def register(email, p1)
+    @p1 = p1
     mail(to: email, subject: "Please create an account to play a game.")
-  end 
+  end
 end
