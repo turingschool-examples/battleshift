@@ -26,11 +26,37 @@ describe "Api::V1::Shots" do
 
         expect(response).to be_success
 
-        game = JSON.parse(response.body, symbolize_names: true)
+        body = JSON.parse(response.body, symbolize_names: true)
 
         expected_messages = "Your shot resulted in a Hit."
-        expect(game[:message]).to eq expected_messages
+        expect(body[:message]).to eq expected_messages
 
+        # Firing on opponents turn
+        post "/api/v1/games/#{game.id}/shots?target=A2", headers: { 'X-API-Key': user1.api_key, 'CONTENT_TYPE': 'application/json'}
+
+        expect(response).to_not be_success
+        body = JSON.parse(response.body, symbolize_names: true)
+
+        expected_messages = "Invalid move. It's your opponent's turn"
+        expect(body[:message]).to eq expected_messages
+
+        # Player 2 misses
+        post "/api/v1/games/#{game.id}/shots?target=A2", headers: { 'X-API-Key': user2.api_key, 'CONTENT_TYPE': 'application/json'}
+
+        expect(response).to be_success
+        body = JSON.parse(response.body, symbolize_names: true)
+
+        expected_messages = "Your shot resulted in a Miss."
+        expect(body[:message]).to eq expected_messages
+
+        # Other player fires
+        user3 = User.create(email: 'pop@pop.pop', name: 'pop', password: '1234', api_key: '2468')
+
+        post "/api/v1/games/#{game.id}/shots?target=A2", headers: { 'X-API-Key': user3.api_key, 'CONTENT_TYPE': 'application/json'}
+
+        expect(response).to_not be_success
+
+        #Player 1 sinks a ship
       end
 
 
