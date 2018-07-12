@@ -2,15 +2,37 @@ require 'rails_helper'
 
 describe "Api::V1::Shots" do
   context "POST /api/v1/games/:id/shots" do
+    let(:user1) {create(:user)}
+    let(:user2) {create(:user2)}
     let(:player_1_board)   { Board.new(4) }
     let(:player_2_board)   { Board.new(4) }
     let(:sm_ship) { Ship.new(2) }
     let(:game)    {
-      create(:game,
-        player_1_board: player_1_board,
-        player_2_board: player_2_board
-      )
+        Game.create(player_1: user1, player_2: user2, player_1_board: player_1_board, player_2_board: player_2_board, current_turn: "player 1", player_1_turns: 0, player_2_turns: 0)
     }
+
+    it 'can fire shots' do
+      ShipPlacer.new(board: player_2_board,
+        ship: sm_ship,
+        start_space: "A1",
+        end_space: "A2").run
+
+      ShipPlacer.new(board: player_1_board,
+        ship: sm_ship,
+        start_space: "B1",
+        end_space: "B2").run
+
+        post "/api/v1/games/#{game.id}/shots?target=A1", headers: { 'X-API-Key': user1.api_key, 'CONTENT_TYPE': 'application/json'}
+
+        expect(response).to be_success
+
+        game = JSON.parse(response.body, symbolize_names: true)
+
+        expected_messages = "Your shot resulted in a Hit."
+        expect(game[:message]).to eq expected_messages
+
+      end
+
 
     xit "updates the message and board with a hit" do
       allow_any_instance_of(AiSpaceSelector).to receive(:fire!).and_return("Miss")
