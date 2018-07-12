@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   # API resources
   namespace :api do
     namespace :v1 do
+      post '/games', to: 'games#create'
       resources :games, only: [:show] do
         post ':id/ships', to: 'boards#update'
         post ':id/shots', to: 'games/shots#create'

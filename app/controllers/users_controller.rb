@@ -26,16 +26,11 @@ class UsersController < ApplicationController
 
   # POST /users
   def create
-    params = user_params.merge(api_key: User.generate_api_key)
-    @user = User.new(params)
-    if @user.save
-      login(@user)
-      BattleshipNotifierMailer.welcome(@user, request.base_url).deliver_now
-      flash[:notice] = "Logged in as #{@user.username}"
-      redirect_to "/dashboard/#{@user.id}" 
+    if params[:from] == "invitation" && params[:start]
+      create_and_activate(user_params)
     else
-      render :new
-    end
+      regular_create(user_params)
+    end 
   end
 
   # PATCH/PUT /users/1
@@ -59,8 +54,35 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
     end
 
+    def create_and_activate(user_params)
+      params = user_params.merge(api_key: User.generate_api_key)
+      @user = User.new(params)
+      @user.activated = true
+      if @user.save
+        login(@user)
+        BattleshipNotifierMailer.special_invitation(@user, request.base_url).deliver_now
+        flash[:notice] = "Logged in as #{@user.username}. Your account has been activated. Check your email for game invite from #{User.find(user_params[:start]).first_name}"
+        redirect_to "/dashboard/#{@user.id}" 
+      else
+        render :new
+      end
+    end
+
+    def regular_create(user_params)
+      params = user_params.merge(api_key: User.generate_api_key)
+      @user = User.new(params)
+      if @user.save
+        login(@user)
+        BattleshipNotifierMailer.welcome(@user, request.base_url).deliver_now
+        flash[:notice] = "Logged in as #{@user.username}"
+        redirect_to "/dashboard/#{@user.id}" 
+      else
+        render :new
+      end
+    end
+
     # Only allow a trusted parameter "white list" through.
     def user_params
-      params.require(:user).permit(:username, :first_name, :last_name, :password, :api_key, :activated, :password_confirmation)
+      params.require(:user).permit(:username, :first_name, :last_name, :password, :api_key, :activated, :password_confirmation, :start, :from)
     end
 end
