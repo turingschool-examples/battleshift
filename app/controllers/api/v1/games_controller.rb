@@ -5,6 +5,10 @@ module Api
         game = Game.find(params[:id])
         render json: game
       end
+
+      def create
+        require 'pry'; binding.pry
+      end
     end
   end
 end
