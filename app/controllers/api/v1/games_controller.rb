@@ -17,7 +17,7 @@ module Api
           player_not_activated(p1)
         else
           game = Game.create(player_1_id: p1, player_2_id: p2, player_1_api_key: p1.api_key, player_2_api_key: p2.api_key)
-          invite_player_2(p2, game)
+          invite_player_2(p1, p2, game)
         end
       end
 
