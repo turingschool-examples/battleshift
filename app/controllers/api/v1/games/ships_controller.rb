@@ -5,8 +5,9 @@ class Api::V1::Games::ShipsController < ApiController
     if request.env["HTTP_X_API_KEY"]
       board = game.player_2_board
     else
+      # binding.pry
       board = game.player_1_board
-    end 
+    end
     ShipPlacer.new(
       board: board,
       ship: ship,
