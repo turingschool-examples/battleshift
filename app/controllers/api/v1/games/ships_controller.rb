@@ -1,12 +1,18 @@
 class Api::V1::Games::ShipsController < ApiController
   def create
+    key = request.env["HTTP_X_API_KEY"]
+    user = User.find_by(api_key: key)
     game = Game.find(params[:game_id])
-    ship = Ship.new(params[:ship_size].to_i)
-    if request.env["HTTP_X_API_KEY"]
+    if game.player_1 == user
+      board = game.player_1_board
+    elsif game.player_2 == user
       board = game.player_2_board
     else
-      board = game.player_1_board
-    end 
+      render json: {"message" => "Bad request"}, status: 400
+    end
+
+    ship = Ship.new(params[:ship_size].to_i)
+
     ShipPlacer.new(
       board: board,
       ship: ship,

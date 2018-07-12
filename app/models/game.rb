@@ -8,6 +8,9 @@ class Game < ApplicationRecord
   validates :player_1_board, presence: true
   validates :player_2_board, presence: true
 
+  belongs_to :player_1, class_name: "User"
+  belongs_to :player_2, class_name: "User", required: false
+
   def set_message(message)
     @message = message
   end
