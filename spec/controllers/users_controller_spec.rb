@@ -34,8 +34,7 @@ RSpec.describe UsersController, type: :controller do
     username:     'yeah@gmail.com',
     password:     'password',
     api_key:      "#{User.generate_api_key}",
-    activated:    false,
-    playing:      false
+    activated:    false
     }
   }
 
@@ -111,8 +110,7 @@ RSpec.describe UsersController, type: :controller do
           username:     'yeah2@gmail.com',
           password:     'password',
           api_key:      "#{User.generate_api_key}",
-          activated:    false,
-          playing:      false
+          activated:    false
           }
       }
 
