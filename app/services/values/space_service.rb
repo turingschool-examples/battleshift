@@ -1,4 +1,4 @@
-class Space
+class SpaceService
   attr_reader :coordinates, :status, :contents
 
   def initialize(coordinates)

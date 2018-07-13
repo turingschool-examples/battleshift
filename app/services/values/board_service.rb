@@ -1,10 +1,11 @@
-class Board
-  attr_reader :length,
-              :board
+class BoardService 
+  attr_reader :length
 
-  def initialize(length)
+  def initialize(player, game, length)
     @length = length
-    @board = create_grid
+    @board = Board.create(active: true, user_id: player.id, game_id: game.id)
+    create_spaces
+    # @board = create_grid
   end
 
   def get_row_letters
@@ -24,31 +25,31 @@ class Board
   end
 
   def create_spaces
-    space_names.map do |name|
-      [name, Space.new(name)]
-    end.to_h
-  end
-
-  def assign_spaces_to_rows
-    space_names.each_slice(@length).to_a
-  end
-
-  def create_grid
-    spaces = create_spaces
-    assign_spaces_to_rows.map do |row|
-      row.each.with_index do |coordinates, index|
-        row[index] = {coordinates => spaces[coordinates]}
-      end
+    space_names.each do |name|
+      Space.create!(name: name, board_id: @board.id)
     end
   end
 
-  def locate_space(coordinates)
-    @board.each do |row|
-      row.each do |space_hash|
-        return space_hash[coordinates] if space_hash.keys[0] == coordinates
-      end
-    end
-  end
+  # def assign_spaces_to_rows
+  #   space_names.each_slice(@length).to_a
+  # end
+
+  # def create_grid
+  #   spaces = create_spaces
+  #   assign_spaces_to_rows.map do |row|
+  #     row.each.with_index do |coordinates, index|
+  #       row[index] = {coordinates => spaces[coordinates]}
+  #     end
+  #   end
+  # end
+
+  # def locate_space(coordinates)
+  #   @board.each do |row|
+  #     row.each do |space_hash|
+  #       return space_hash[coordinates] if space_hash.keys[0] == coordinates
+  #     end
+  #   end
+  # end
 
   def get_spaces_between(coordinate1, coordinate2)
     return get_row_spaces_between(coordinate1, coordinate2) if same_row?(coordinate1, coordinate2)
