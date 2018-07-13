@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Registered user' do
+describe 'Registered user', type: :request do
   let(:user1) { create(:user) }
   let(:user2) { create(:user) }
   let(:game) { create(:game, player_1_id: user1, player_2_id: user2)}
