@@ -27,7 +27,7 @@ describe "Api::V1::Shots" do
         expect(response).to be_success
 
         body = JSON.parse(response.body, symbolize_names: true)
-
+       
         expected_messages = "Your shot resulted in a Hit."
         expect(body[:message]).to eq expected_messages
 
