@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180313201116) do
+ActiveRecord::Schema.define(version: 20180712185945) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,20 @@ ActiveRecord::Schema.define(version: 20180313201116) do
     t.integer "current_turn"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "player_1_id"
+    t.integer "player_2_id"
+    t.index ["player_1_id"], name: "index_games_on_player_1_id"
+    t.index ["player_2_id"], name: "index_games_on_player_2_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email"
+    t.string "name"
+    t.string "password_digest"
+    t.string "api_key"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "is_activated", default: false
   end
 
 end
