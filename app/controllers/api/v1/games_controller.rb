@@ -16,8 +16,8 @@ module Api
           player_2_turns: 0,
           current_turn: "player 1"
         }
-        game = Game.create(attributes)
-
+        game = Game.create!(attributes)
+ 
         render json: game
       end
 

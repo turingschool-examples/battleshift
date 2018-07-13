@@ -1,20 +1,33 @@
 class Space
   attr_reader :coordinates, :status, :contents
 
-  def initialize(coordinates)
+  def initialize(coordinates, board)
     @coordinates = coordinates
     @contents    = nil
     @status      = "Not Attacked"
+    @board = board
   end
 
   def attack!
     @status = if contents && not_attacked?
-                contents.attack!
-                "Hit"
-              else
-                "Miss"
-              end
-  end
+      contents.attack!
+      if contents.is_sunk?
+        # left_alive = @board.left_alive
+        # binding.pry
+        if (@board.left_alive.count) == 0
+          # @board.game.winner
+          "Hit. Battleship sunk. Game over"
+        else
+          "Hit. Battleship sunk"
+        end #end of if board.left_alive
+      else
+        "Hit"
+      end #end of if is_sunk?
+    else
+      "Miss"
+    end # end of if hit
+    
+  end # end of method
 
   def occupy!(ship)
     @contents = ship

@@ -18,6 +18,12 @@ class Board
     2 - ships.count
   end
 
+  def left_alive
+    ships.find_all do |ship|
+         !ship.is_sunk?
+    end
+  end
+
   def length_of_remaining_ship
     if left_to_place == 1
       existing_length = ships.first.length
@@ -50,7 +56,7 @@ class Board
 
   def create_spaces
     space_names.map do |name|
-      [name, Space.new(name)]
+      [name, Space.new(name, self)]
     end.to_h
   end
 
