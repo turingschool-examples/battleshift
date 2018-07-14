@@ -20,12 +20,13 @@ describe 'creating helper' do
     ch = ControllerHelper.new(user1.api_key, game.id)
 
     expect(ch).to be_a(ControllerHelper)
+    expect(ch.valid).to eq(true)
   end
 
-  it 'returns nil if invalid' do
+  it 'returns false validation if invalid' do
     user1 = create(:user)
     user2 = create(:user2)
-    user3 = create(:user2, email: 'other@bob.bob')
+    user3 = User.create(email: 'other@bob.bob', name: 'other', password: '1928', api_key: '5647')
     b1 = Board.new(4)
     b2 = Board.new(4)
     attributes = {
@@ -41,7 +42,7 @@ describe 'creating helper' do
 
     ch = ControllerHelper.new(user3.api_key, game.id)
 
-    expect(ch).to_not be_a(ControllerHelper)
-    expect(ch).to eq(nil)
+    expect(ch).to be_a(ControllerHelper)
+    expect(ch.valid).to eq(false)
   end
 end
