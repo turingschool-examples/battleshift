@@ -9,9 +9,7 @@ module Api
 
           if user != game.player_1 && user != game.player_2
             return render json: {"message" => "Unauthorized"}, status: 401
-          end 
-
-
+          end
 
           if game.player_2 == user && game.current_turn == "player 2"
             board = game.player_1_board
@@ -21,11 +19,11 @@ module Api
             game.current_turn = "player 2"
           else
             game.set_message("Invalid move. It's your opponent's turn")
-            
+
             return render json: game, status: 400
           end
 
-          if game.winner 
+          if game.winner
             game.set_message("Invalid move. Game over.")
             return render json: game, status: 400
           end
@@ -40,10 +38,10 @@ module Api
           end
           if message.include?("Invalid coordinates")
             status = 400
-          else 
+          else
             status = 200
           end
-      
+
           render json: game, status: status
         end
       end
