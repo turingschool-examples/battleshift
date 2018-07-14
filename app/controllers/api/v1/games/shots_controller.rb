@@ -4,6 +4,10 @@ module Api
       class ShotsController < ApiController
         def create
           key = request.env["HTTP_X_API_KEY"]
+          game_id = params[:game_id]
+          ch = ControllerHelper.new(key, game_id)
+          game = ch.fire_shot(params[:target])
+
           user = User.find_by(api_key: key)
           game = Game.find(params[:game_id])
 
