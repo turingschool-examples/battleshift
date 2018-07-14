@@ -6,10 +6,6 @@ class TurnProcessor
     @messages = []
   end
 
-  # def attack(board)
-  #   attack_opponent(board)
-  # end
-
   def run!
     begin
 
@@ -34,16 +30,16 @@ class TurnProcessor
     game.player_1_turns += 1
   end
 
-  def ai_attack_back
-    result = AiSpaceSelector.new(player.board).fire!
-    @messages << "The computer's shot resulted in a #{result}."
-    game.player_2_turns += 1
-  end
-
-  def player
-    @user
-    # Player.new(game.player_1_board)
-  end
+  # def ai_attack_back
+  #   result = AiSpaceSelector.new(player.board).fire!
+  #   @messages << "The computer's shot resulted in a #{result}."
+  #   game.player_2_turns += 1
+  # end
+  #
+  # def player
+  #   @user
+  #   # Player.new(game.player_1_board)
+  # end
 
   def opponent
     # Player.new(game.player_2_board)
