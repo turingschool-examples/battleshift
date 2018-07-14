@@ -7,6 +7,37 @@ class Board
     @board = create_grid
   end
 
+  def ships
+    space_names.group_by do |space_name| 
+      space = locate_space(space_name)
+      space.contents
+    end.keys.compact
+  end
+
+  def left_to_place
+    2 - ships.count
+  end
+
+  def left_alive
+    ships.find_all do |ship|
+         !ship.is_sunk?
+    end
+  end
+
+  def length_of_remaining_ship
+    if left_to_place == 1
+      existing_length = ships.first.length
+      if existing_length == 2
+        " with a size of 3"
+      else 
+        " with a size of 2"
+      end 
+    else
+      ""
+    
+    end
+  end
+
   def get_row_letters
     ("A".."Z").to_a.shift(@length)
   end
@@ -25,7 +56,7 @@ class Board
 
   def create_spaces
     space_names.map do |name|
-      [name, Space.new(name)]
+      [name, Space.new(name, self)]
     end.to_h
   end
 
@@ -171,9 +202,10 @@ class Board
   def neighbors?(coordinate1, coordinate2)
     neighbors(coordinate1).include?(coordinate2)
   end
-  def contains?(coordinate)
-    create_space_names.include?(coordinate)
-  end
+
+  # def contains?(coordinate)
+  #   create_space_names.include?(coordinate)
+  # end
 
   def same_row?(coordinate1, coordinate2)
     get_row(coordinate1) == get_row(coordinate2)
@@ -203,4 +235,3 @@ class Board
     get_column(coordinate) == "1"
   end
 end
-
