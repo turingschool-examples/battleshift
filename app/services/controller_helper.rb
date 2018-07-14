@@ -15,7 +15,7 @@ class ControllerHelper
   end
 
   def place_ship(params)
-    return invalid unless valid
+    return invalid_user unless valid
     my_board = true
     ship = Ship.new(params[:ship_size])
     board = find_board(my_board)
@@ -33,14 +33,14 @@ class ControllerHelper
   def fire_shot(target)
     return invalid_user("Unauthorized", 401) unless valid
     return invalid_game("Invalid move. It's your opponent's turn", 400) unless right_turn
-    return invalid_game("Invalid move. Game over.", 400)
+    return invalid_game("Invalid move. Game over.", 400) if game.winner
     my_board = false
     board = find_board(my_board)
     tp = TurnProcessor.new(game, board, target)
     tp.run!
     message = game.set_message(tp.message)
-    evaluate_message(message)
-
+    finalize_turn(message)
+    game
   end
 
   # if user != game.player_1 && user != game.player_2
@@ -108,15 +108,28 @@ class ControllerHelper
     game
   end
 
+  def finalize_turn(message)
+    evaluate_message(message)
+    set_player_turn if @status_code == 200
+    game.save
+  end
+
+  def set_player_turn
+    if game.current_turn == "player 1"
+      game.current_turn = "player 2"
+    else
+      game.current_turn = "player 1"
+    end
+  end
+
   def evaluate_message(message)
     if message.include?("Battleship sunk. Game over")
       game.winner = user.id
-      game.save
     end
     if message.include?("Invalid coordinates")
-      @status = 400
+      @status_code = 400
     else
-      @status = 200
+      @status_code = 200
     end
   end
 end

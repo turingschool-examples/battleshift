@@ -144,6 +144,6 @@ describe 'fire shot' do
     game = ch.fire_shot("A1")
 
     expect(game).to be_a(Game)
-    expect(game.message).to eq("Miss")
+    expect(game.message).to eq("Your shot resulted in a Miss.")
   end
 end
