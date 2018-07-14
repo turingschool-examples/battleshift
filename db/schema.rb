@@ -24,9 +24,9 @@ ActiveRecord::Schema.define(version: 20180712214942) do
   end
 
   create_table "games", force: :cascade do |t|
-    t.integer "winner"
-    t.integer "player_1_turns"
-    t.integer "player_2_turns"
+    t.string "winner"
+    t.integer "player_1_turns", default: 0
+    t.integer "player_2_turns", default: 0
     t.string "current_turn", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 20180712214942) do
   end
 
   create_table "ships", force: :cascade do |t|
-    t.integer "damage"
+    t.integer "damage", default: 0
     t.integer "length"
   end
 

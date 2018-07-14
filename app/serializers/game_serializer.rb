@@ -1,6 +1,7 @@
 class GameSerializer < ActiveModel::Serializer
   attributes :id, :message, :current_turn,
-             :player_1_board, :player_2_board
+             :player_1_board, :player_2_board,
+             :winner
 
   def player_1_board
     BoardSerializer.new(object.boards.first).attributes
@@ -11,7 +12,6 @@ class GameSerializer < ActiveModel::Serializer
   end
 
   def message
-    require 'pry'; binding.pry
     @instance_options[:message]
   end
 end
