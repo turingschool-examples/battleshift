@@ -20,7 +20,8 @@ RSpec.describe Board, type: :model do
 
     ships = player_1_board.ships
     expect(ships).to eq([sm_ship, md_ship])
-  end 
+  end
+
   it 'returns how many ships are available for placement on board' do
     board = Board.new(4)
     sm_ship = Ship.new(2)
@@ -43,7 +44,8 @@ RSpec.describe Board, type: :model do
    ).run
 
     expect(board.left_to_place).to eq(0)
-  end 
+  end
+
   it 'returns the length of remaining ship' do
     board = Board.new(4)
     sm_ship = Ship.new(2)
