@@ -1,31 +1,28 @@
 class SpaceService
-  attr_reader :coordinates, :status, :contents
+  attr_reader :coordinates
 
   def initialize(coordinates)
-    @coordinates = coordinates
-    @contents    = nil
-    @status      = "Not Attacked"
+    @space = Space.find_by(name: coordinates)
   end
 
   def attack!
-    @status = if contents && not_attacked?
-                contents.attack!
+    @space.result = if !@space.ship_id.nil? && not_attacked?
+                @space.ship.damage += 1
                 "Hit"
               else
                 "Miss"
               end
   end
 
-  def occupy!(ship)
-    @contents = ship
+  def self.occupy!(space, ship)
+    space.update(ship_id: ship.id)
   end
 
-  def occupied?
-    !!@contents
+  def self.occupied?(space)
+    !space.ship_id.nil?
   end
 
   def not_attacked?
-    status == "Not Attacked"
+    @space.result.nil?
   end
 end
-
