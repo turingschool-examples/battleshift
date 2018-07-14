@@ -18,6 +18,7 @@ RSpec.describe Shooter, type: :model do
     board_1 = game.player_1_board
     board_2 = game.player_2_board
     # binding.pry
+    #ATTEMPT AT ALLOW_ANY_INSTANCE_OF
     # allow_any_instance_of(Board).to receive(:space_names).and_return("Hit")
     space = board_1.locate_space(coordinates)
 

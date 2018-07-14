@@ -1,3 +1,6 @@
+
+require 'rails_helper'
+
 require 'simplecov'
 SimpleCov.start 'rails' do
   add_filter '/bin/'
