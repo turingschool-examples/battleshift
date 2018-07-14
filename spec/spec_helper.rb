@@ -14,6 +14,7 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 require 'byebug'
+require 'capybara/rspec'
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
@@ -96,3 +97,27 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 =end
 end
+
+def current_user
+  User.create!(first_name: 'Bob', last_name: 'Smith', username: 'New@gmail.com', password_digest: 'password')
+end
+
+def create_spaces(board)
+  board.spaces.create(name: "A1", result: nil, ship_id: nil)
+  board.spaces.create(name: "A2", result: nil, ship_id: nil)
+  board.spaces.create(name: "A3", result: nil, ship_id: nil)
+  board.spaces.create(name: "A4", result: nil, ship_id: nil)
+  board.spaces.create(name: "B1", result: nil, ship_id: nil)
+  board.spaces.create(name: "B2", result: nil, ship_id: nil)
+  board.spaces.create(name: "B3", result: nil, ship_id: nil)
+  board.spaces.create(name: "B4", result: nil, ship_id: nil)
+  board.spaces.create(name: "C1", result: nil, ship_id: nil)
+  board.spaces.create(name: "C2", result: nil, ship_id: nil)
+  board.spaces.create(name: "C3", result: nil, ship_id: nil)
+  board.spaces.create(name: "C4", result: nil, ship_id: nil)
+  board.spaces.create(name: "D1", result: nil, ship_id: nil)
+  board.spaces.create(name: "D2", result: nil, ship_id: nil)
+  board.spaces.create(name: "D3", result: nil, ship_id: nil)
+  board.spaces.create(name: "D4", result: nil, ship_id: nil)
+end
+
