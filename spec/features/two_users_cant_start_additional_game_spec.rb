@@ -5,6 +5,7 @@ context "User 1 and User 2 are already playing a game" do
         user_1 = create(:user)
         user_2 = create(:user2)
 
-        game = create(:game)
+        # game = create(:game)
+        # binding.pry
   end
 end
