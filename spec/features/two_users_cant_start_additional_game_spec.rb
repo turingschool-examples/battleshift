@@ -21,6 +21,10 @@ context "User 1 and User 2 are already playing a game" do
                              current_turn: "player 1",
                              player_1_id: user_1.id,
                              player_2_id: user_2.id)
+        #ATTEMPT AT USING A SPY
+        # game_2 = spy('game_2')
+        # game_2.deliver
+        # expect(game_2).to have_received(:deliver)
         # binding.pry
     end
 end
