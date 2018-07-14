@@ -1,3 +1,4 @@
+# Controller Helper provides encapsulated, reusable methods place a ship or fire a shot on the appropriate board, or return an invalid message given a game id and a user api key from the controller
 class ControllerHelper
   attr_reader :valid
 
@@ -16,14 +17,12 @@ class ControllerHelper
     my_board = true
     ship = Ship.new(params[:ship_size])
     board = find_board(my_board)
-    sp = ShipPlacer.new(
+    ShipPlacer.new(
       board: board,
       ship: ship,
       start_space: params[:start_space],
       end_space: params[:end_space]
-    )
-    r = sp.run
-    # binding.pry
+    ).run
     @game.set_message("Successfully placed ship with a size of #{ship.length}. You have #{board.left_to_place} ship(s) to place#{board.length_of_remaining_ship}.")
     @game.save
     @game
@@ -38,7 +37,7 @@ class ControllerHelper
   private
 
   def find_board(my_board)
-    # Returns the appropriate board for ship placement or firing at
+    # Returns the appropriate board for ship placement or firing at for a specific user
     if (@user == @game.player_1) == my_board
       return @game.player_1_board
     else
@@ -46,33 +45,3 @@ class ControllerHelper
     end
   end
 end
-
-    # user = User.find_by(api_key: key)
-    # game = Game.find(params[:game_id])
-    # if game.player_1 == user
-    #   board = game.player_1_board
-    # elsif game.player_2 == user
-    #   board = game.player_2_board
-    # else
-    #   render json: {"message" => "Bad request"}, status: 400
-    # end
-    # if game.player_1 == user
-    #   board = game.player_1_board
-    # elsif game.player_2 == user
-    #   board = game.player_2_board
-    # else
-    #   render json: {"message" => "Bad request"}, status: 400
-    # end
-    #
-    # ship = Ship.new(params[:ship_size].to_i)
-    #
-    # ShipPlacer.new(
-    #   board: board,
-    #   ship: ship,
-    #   start_space: params[:start_space],
-    #   end_space: params[:end_space]
-    # ).run
-    # game.save
-    # game.set_message("Successfully placed ship with a size of #{ship.length}. You have #{board.left_to_place} ship(s) to place#{board.length_of_remaining_ship}.")
-    #
-    # render json: game
