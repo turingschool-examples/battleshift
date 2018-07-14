@@ -1,4 +1,12 @@
 class ShipPlacer
+  # sp = ShipPlacer.new(key, game_id, ship_params)
+
+  # def initialize(key, game_id, ship_params)
+  #   @key = key
+  #   @game_id = game_id
+  #   @ship_params = ship_params
+  # end
+  #
   def initialize(board:, ship:, start_space:, end_space:)
     @board       = board
     @ship        = ship
