@@ -35,6 +35,7 @@ class ControllerHelper
     return invalid_user("Unauthorized", 401) unless valid
     return invalid_game("Invalid move. It's your opponent's turn", 400) unless right_turn
     return invalid_game("Invalid move. Game over.", 400) if game.winner
+    return invalid_game("You must place all ships first.", 400) unless all_ships_placed?
     my_board = false
     board = find_board(my_board)
     tp = TurnProcessor.new(game, board, target)
@@ -51,6 +52,13 @@ class ControllerHelper
 
   def ships_placed?(board)
     board.left_to_place == 0
+  end
+
+  def all_ships_placed?
+    b1 = find_board(true)
+    b2 = find_board(false)
+    # binding.pry
+    ships_placed?(b1) && ships_placed?(b2)
   end
 
   def find_board(my_board)

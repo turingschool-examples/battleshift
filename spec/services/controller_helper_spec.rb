@@ -139,9 +139,36 @@ describe 'fire shot' do
       current_turn: "player 1"
     }
     game = Game.create(attributes)
+    b1 = game.player_1_board
+    b2 = game.player_2_board
+  
+    sm_ship = Ship.new(2)
+    md_ship = Ship.new(3)
+    ShipPlacer.new(board: b1,
+      ship: sm_ship,
+      start_space: "A1",
+      end_space: "A2").run
+
+
+    ShipPlacer.new(board: b2,
+      ship: sm_ship,
+      start_space: "A1",
+      end_space: "A2").run
+
+    ShipPlacer.new(board: b1,
+      ship: md_ship,
+      start_space: "B1",
+      end_space: "B3").run
+
+    ShipPlacer.new(board: b2,
+      ship: md_ship,
+      start_space: "B1",
+      end_space: "B3").run
+
+    game.save
 
     ch = ControllerHelper.new(user1.api_key, game.id)
-    game = ch.fire_shot("A1")
+    game = ch.fire_shot("C1")
 
     expect(game).to be_a(Game)
     expect(game.message).to eq("Your shot resulted in a Miss.")
