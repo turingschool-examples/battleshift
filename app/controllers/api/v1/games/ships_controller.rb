@@ -4,7 +4,7 @@ class Api::V1::Games::ShipsController < ApiController
     game_id = params[:game_id]
     ch = ControllerHelper.new(key, game_id)
     game = ch.place_ship(ship_params)
-    render json: game
+    render json: game, status: ch.status_code
   end
 
   private

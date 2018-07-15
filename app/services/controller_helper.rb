@@ -17,8 +17,9 @@ class ControllerHelper
   def place_ship(params)
     return invalid_user unless valid
     my_board = true
-    ship = Ship.new(params[:ship_size])
     board = find_board(my_board)
+    return invalid_game("You have already placed all your ships.", 400) if ships_placed?(board)
+    ship = Ship.new(params[:ship_size])
     ShipPlacer.new(
       board: board,
       ship: ship,
@@ -34,6 +35,7 @@ class ControllerHelper
     return invalid_user("Unauthorized", 401) unless valid
     return invalid_game("Invalid move. It's your opponent's turn", 400) unless right_turn
     return invalid_game("Invalid move. Game over.", 400) if game.winner
+    return invalid_game("You must place all ships first.", 400) unless all_ships_placed?
     my_board = false
     board = find_board(my_board)
     tp = TurnProcessor.new(game, board, target)
@@ -43,45 +45,21 @@ class ControllerHelper
     game
   end
 
-  # if user != game.player_1 && user != game.player_2
-  #   return render json: {"message" => "Unauthorized"}, status: 401
-  # end
-  #
-  # if game.player_2 == user && game.current_turn == "player 2"
-  #   board = game.player_1_board
-  #   game.current_turn = "player 1"
-  # elsif game.player_1 == user && game.current_turn == "player 1"
-  #   board = game.player_2_board
-  #   game.current_turn = "player 2"
-  # else
-  #   game.set_message("Invalid move. It's your opponent's turn")
-  #
-  #   return render json: game, status: 400
-  # end
-  #
-  # if game.winner
-  #   game.set_message("Invalid move. Game over.")
-  #   return render json: game, status: 400
-  # end
-  #
-  # turn_processor = TurnProcessor.new(game, board, params[:target])
-  #
-  # turn_processor.run!
-  # message = game.set_message(turn_processor.message)
-  # if message.include?("Battleship sunk. Game over")
-  #   game.winner = user.id
-  #   game.save
-  # end
-  # if message.include?("Invalid coordinates")
-  #   status = 400
-  # else
-  #   status = 200
-  # end
-  #
-  # render json: game, status: status
   private
+
   attr_reader :game,
               :user
+
+  def ships_placed?(board)
+    board.left_to_place == 0
+  end
+
+  def all_ships_placed?
+    b1 = find_board(true)
+    b2 = find_board(false)
+    # binding.pry
+    ships_placed?(b1) && ships_placed?(b2)
+  end
 
   def find_board(my_board)
     # Returns the appropriate board for ship placement or firing at for a specific user
