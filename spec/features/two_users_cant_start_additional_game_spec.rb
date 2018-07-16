@@ -26,5 +26,7 @@ context "User 1 and User 2 are already playing a game" do
         # game_2.deliver
         # expect(game_2).to have_received(:deliver)
         # binding.pry
+
+        # expect(game_2).to_not be_valid
     end
 end
