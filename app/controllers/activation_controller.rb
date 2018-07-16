@@ -5,9 +5,7 @@ class ActivationController < ApplicationController
       user.is_activated = true
       if user.save!
         session[:user_id] = user.id
-      else 
-        #testing comment
-      end 
+      end
     end
 
 end

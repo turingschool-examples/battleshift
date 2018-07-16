@@ -57,7 +57,6 @@ class ControllerHelper
   def all_ships_placed?
     b1 = find_board(true)
     b2 = find_board(false)
-    # binding.pry
     ships_placed?(b1) && ships_placed?(b2)
   end
 

@@ -12,10 +12,7 @@ class Space
     @status = if contents && not_attacked?
       contents.attack!
       if contents.is_sunk?
-        # left_alive = @board.left_alive
-        # binding.pry
         if (@board.left_alive.count) == 0
-          # @board.game.winner
           "Hit. Battleship sunk. Game over"
         else
           "Hit. Battleship sunk"
@@ -26,7 +23,6 @@ class Space
     else
       "Miss"
     end # end of if hit
-    
   end # end of method
 
   def occupy!(ship)
@@ -41,4 +37,3 @@ class Space
     status == "Not Attacked"
   end
 end
-
