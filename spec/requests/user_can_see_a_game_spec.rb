@@ -32,17 +32,17 @@ describe 'GET /api/v1/games/1' do
                      end_space: "D1"
                    ).run
 
-                   user1 = create(:user)
-                   user2 = create(:user2)
-                   game_attributes = {
-                     player_1: user1,
-                     player_2: user2,
-                     player_1_board: player_1_board,
-                     player_2_board: player_2_board,
-                     player_1_turns: 0,
-                      player_2_turns: 0,
-                      current_turn: "player 1"
-                    }
+     user1 = create(:user)
+     user2 = create(:user2)
+     game_attributes = {
+       player_1: user1,
+       player_2: user2,
+       player_1_board: player_1_board,
+       player_2_board: player_2_board,
+       player_1_turns: 0,
+        player_2_turns: 0,
+        current_turn: "player 1"
+      }
 
       game = Game.new(game_attributes)
       game.save!

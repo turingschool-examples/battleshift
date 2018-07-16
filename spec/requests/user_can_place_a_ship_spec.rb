@@ -24,7 +24,6 @@ describe "user can place a ship" do
 
     expect(data['message']).to eq('Successfully placed ship with a size of 3. You have 1 ship(s) to place with a size of 2.')
 
-    # binding.pry
     expect(Game.last.player_1_board.ships.count).to eq(1)
     expect(Game.last.player_2_board.ships.count).to eq(0)
   end

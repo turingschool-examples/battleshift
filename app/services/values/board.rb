@@ -8,7 +8,7 @@ class Board
   end
 
   def ships
-    space_names.group_by do |space_name| 
+    space_names.group_by do |space_name|
       space = locate_space(space_name)
       space.contents
     end.keys.compact
@@ -29,12 +29,11 @@ class Board
       existing_length = ships.first.length
       if existing_length == 2
         " with a size of 3"
-      else 
+      else
         " with a size of 2"
-      end 
+      end
     else
       ""
-    
     end
   end
 

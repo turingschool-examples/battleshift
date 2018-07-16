@@ -13,7 +13,7 @@ RSpec.describe Shooter, type: :model do
                        player_1_id: user_1.id,
                        player_2_id: user_2.id
     )
-    
+
     coordinates = "A1"
     board_1 = game.player_1_board
     board_2 = game.player_2_board
@@ -24,7 +24,7 @@ RSpec.describe Shooter, type: :model do
 
     shooter = Shooter.new(board: board_1, target: "A1")
 
- 
+
     # binding.pry
     shooter.fire!
 
@@ -34,7 +34,7 @@ RSpec.describe Shooter, type: :model do
     space_2 = board_2.locate_space(coordinates_2)
 
     shooter_2 = Shooter.new(board: board_2, target: space_2)
-    expect { shooter_2.fire! }.to raise_error
+    expect { shooter_2.fire! }.to raise_error(InvalidAttack)
 
   end
 end
