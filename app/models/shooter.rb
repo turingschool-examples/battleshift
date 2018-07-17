@@ -2,7 +2,7 @@ class Shooter
   def initialize(board:, target:)
     @board     = board
     @target    = target
-    @message   = ""
+    # @message   = ""
   end
 
   def fire!

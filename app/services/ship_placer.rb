@@ -1,4 +1,5 @@
 class ShipPlacer
+
   def initialize(board:, ship:, start_space:, end_space:)
     @board       = board
     @ship        = ship

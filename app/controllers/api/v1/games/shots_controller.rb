@@ -3,12 +3,12 @@ module Api
     module Games
       class ShotsController < ApiController
         def create
-          game = Game.find(params[:game_id])
+          key = request.env["HTTP_X_API_KEY"]
+          game_id = params[:game_id]
+          ch = ControllerHelper.new(key, game_id)
+          game = ch.fire_shot(params[:target])
 
-          turn_processor = TurnProcessor.new(game, params[:shot][:target])
-
-          turn_processor.run!
-          render json: game, message: turn_processor.message
+          render json: game, status: ch.status_code
         end
       end
     end
