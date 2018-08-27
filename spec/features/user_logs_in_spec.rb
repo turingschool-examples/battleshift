@@ -13,10 +13,10 @@ describe ' a user' do
 
       expect(current_path).to eq('/register')
 
-      fill_in :name, with: name
-      fill_in :email, with: email
-      fill_in :password, with: password
-      fill_in :password_confirmation, with: password
+      fill_in :user_username, with: name
+      fill_in :user_email, with: email
+      fill_in :user_password, with: password
+      fill_in :user_password_confirmation, with: password
       click_on 'Submit'
 
       expect(current_path).to eq('/dashboard')
