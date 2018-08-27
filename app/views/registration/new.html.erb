@@ -1,2 +1,11 @@
-<h1>Registration#new</h1>
-<p>Find me in app/views/registration/new.html.erb</p>
+<%= form_for @user do |f| %>
+  <%= f.label "Email" %>
+  <%= text_field (:email) %>
+  <%= f.label "Name" %>
+  <%= text_field (:name) %>
+  <%= f.label "Password" %>
+  <%= text_field (:password) %>
+  <%= f.label "Confirm Password" %>
+  <%= text_field (:password_confirmation) %>
+  <%= f.submit %>
+<% end %>
