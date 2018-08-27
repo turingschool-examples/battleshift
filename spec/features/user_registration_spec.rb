@@ -8,17 +8,17 @@ describe "An Unregistered User" do
       click_link 'Register'
      
       expect(current_path).to eq('/register')
-
+      
       attributes = {
                     email:    'fake@123.com',
                     name:     'Captain',
                     password: 'password'
                    }
 
-      fill_in 'Email',	with: attributes[:email]
-      fill_in 'Name',	with: attributes[:name]
-      fill_in 'Password',	with: attributes[:password]
-      fill_in 'Confirm Password',	with: attributes[:password]
+      fill_in 'user[email]',	with: attributes[:email]
+      fill_in 'user[name]',	with: attributes[:name]
+      fill_in 'user[password]',	with: attributes[:password]
+      fill_in 'user[password_confirmation]',	with: attributes[:password]
 
       click_button 'Submit'
 
