@@ -18,6 +18,8 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'rspec-rails'
   gem 'pry-rails'
+  gem 'capybara'
+  gem 'launchy'
 end
 
 group :test do

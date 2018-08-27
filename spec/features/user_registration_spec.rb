@@ -22,7 +22,7 @@ describe "An Unregistered User" do
 
       expect(current_path).to eq(dashboard_path)
       expect(current_page).to have_content("Logged in as #{attributes[:name]}")             
-      expect(current_page).to have_content("This account has not yet been activated. Please check your email."}
+      expect(current_page).to have_content("This account has not yet been activated. Please check your email.")
     end
   end
 end
