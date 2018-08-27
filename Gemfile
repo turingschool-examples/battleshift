@@ -11,6 +11,7 @@ gem 'puma', '~> 3.7'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'active_model_serializers', '0.10'
+gem 'bcrypt'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -18,10 +19,13 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'rspec-rails'
   gem 'pry-rails'
+  gem 'capybara'
+  gem 'launchy'
 end
 
 group :test do
   gem 'simplecov'
+  gem 'shoulda-matchers', '~> 3.1'
 end
 
 group :development do
