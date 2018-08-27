@@ -8,6 +8,7 @@ class Space
   end
 
   def attack!
+    # TODO: ship also has a .attack! method which determines damage, may want to rename attack! on ship class to avoid confusion
     @status = if contents && not_attacked?
                 contents.attack!
                 "Hit"
@@ -17,10 +18,12 @@ class Space
   end
 
   def occupy!(ship)
+    # TODO this could probably be done at initialize
     @contents = ship
   end
 
   def occupied?
+    #TODO Why are there two bangs?
     !!@contents
   end
 
@@ -28,4 +31,3 @@ class Space
     status == "Not Attacked"
   end
 end
-

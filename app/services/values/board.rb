@@ -16,6 +16,7 @@ class Board
   end
 
   def space_names
+    # TODO remove nested enumerable for more performant code.
     get_row_letters.map do |letter|
       get_column_numbers.map do |number|
         letter + number
@@ -203,4 +204,3 @@ class Board
     get_column(coordinate) == "1"
   end
 end
-
