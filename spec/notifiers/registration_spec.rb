@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe RegistrationNotifier, type: :mailer do
   describe 'instructions' do
-    # TODO: try factory bot if this works
+
     before :each do
       @user = create(:user)
     end
