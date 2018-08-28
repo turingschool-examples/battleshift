@@ -24,6 +24,7 @@ group :test do
   gem 'simplecov'
   gem 'database_cleaner'
   gem 'shoulda-matchers'
+  gem 'capybara'
 end
 
 group :development do
