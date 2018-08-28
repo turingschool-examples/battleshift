@@ -27,7 +27,7 @@ describe "An Unregistered User" do
       expect(page).to have_content("This account has not yet been activated. Please check your email.")
     end
 
-    it "cannot make register if password fields do not match" do
+    it "cannot register if password fields do not match" do
       visit '/register'
       
       attributes = {
@@ -43,9 +43,9 @@ describe "An Unregistered User" do
       fill_in 'user[password_confirmation]',	with: attributes[:unmatched_password]
 
       click_button 'Submit'
-                   
+                
       expect(current_path).to eq('/register')
-      expect(page).to have_content("Passwords did not match.")
+      expect(page).to have_content("Something went wrong")
     end
   end
 end
