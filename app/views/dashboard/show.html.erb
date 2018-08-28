@@ -1,0 +1,7 @@
+<p> Logged in as <%= @user.name %> </p>
+
+<% if @user.status == "inactive" %>
+  "This account has not yet been activated. Please check your email."
+<% else %>
+  "You're good to go!"
+<% end %>

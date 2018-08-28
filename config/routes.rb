@@ -8,5 +8,9 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :users, only: [:new, :index, :create]
+
   root to: "welcome#show"
+  get "/register", to: "users#new"
+  get "/dashboard", to: "dashboard#show"
 end
