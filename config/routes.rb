@@ -7,4 +7,8 @@ Rails.application.routes.draw do
       end
     end
   end
+  get '/', to: 'welcome#index'
+  resources :users, only: [:create]
+  get '/register', to: 'users#new'
+  get '/dashboard', to: 'dashboard#index'
 end
