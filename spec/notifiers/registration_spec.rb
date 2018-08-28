@@ -24,5 +24,9 @@ RSpec.describe RegistrationNotifier, type: :mailer do
     it 'assigns @name' do
       expect(mail.body.encoded).to match(@user.name)
     end
+
+    it 'assigns @auth_token' do
+      expect(mail.body.encoded).to match(@user.auth_token)
+    end
   end
 end
