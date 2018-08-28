@@ -17,6 +17,7 @@ describe 'a user' do
       expect(current_path).to eq('/dashboard')
       expect(page).to have_content('Logged in as Bob')
       expect(page).to have_content('This account has not yet been activated. Please check your email.')
+      expect(User.last.api_key).to be_a(String)
     end
     it 'cannot register n account without all required information' do
       visit '/'
