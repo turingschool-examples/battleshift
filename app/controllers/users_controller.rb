@@ -7,6 +7,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
+      StatusChangerMailer.change_status(@user).deliver_now
       redirect_to '/dashboard'
     else
       flash[:message] = 'Invalid input, please ensure all fields are filled out correctly.'

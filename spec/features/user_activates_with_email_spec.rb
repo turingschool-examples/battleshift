@@ -23,13 +23,13 @@ describe 'a user' do
       expect(page).to have_content("This account has not yet been activated. Please check your email")
 
       user = User.first
-      user_email = open_email(user.email)
+      user_email = open_email_for(user.email)
+      binding.pry
       expect(user_email).to have_subject('Activate your Battleshift account!')
       expect(user_email).to have_body_text('click here to activate')
 
       click_on 'click here to activate your account'
 
-      visit '/dashboard'
       expect(page).to have_content('Status: Active')
     end
   end
