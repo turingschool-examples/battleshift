@@ -61,6 +61,8 @@ class Board
   #   columns.map { |column| get_row(coordinate1) + column }
   # end
 
+  # TODO: check code below to see what is actually being used
+
   def get_column_spaces_between(coordinate1, coordinate2)
     rows = (get_smaller_row(coordinate1, coordinate2)..get_bigger_row(coordinate1, coordinate2)).to_a
     rows.map { |row| row + get_column(coordinate1) }
