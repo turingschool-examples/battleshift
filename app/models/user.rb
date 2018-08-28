@@ -7,6 +7,9 @@ class User < ApplicationRecord
 
   validates_presence_of :email, :status
 
-  enum status: ["inactive", "active"]
+  enum status: [:inactive, :active]
 
+  def confirm_registration
+    update_attributes(status: "active") if self.status == "inactive"
+  end
 end

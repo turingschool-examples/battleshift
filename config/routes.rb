@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :users, only: [:show] do
         get '/confirmation', to: "confirmation#update"
+        get '/confirmed', to: "confirmation#show"
       end
       resources :games, only: [:show] do
         post "/shots", to: "games/shots#create"
