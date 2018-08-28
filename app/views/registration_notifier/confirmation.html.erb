@@ -1,0 +1,5 @@
+Hello <%= @user.name %>,
+
+<p>Visit <%= link_to "here", api_v1_user_confirmation_url(@user) %> to activate your account.</p>
+
+<p> After registering you can use this key to play games: <%= @user.auth_token %></p>
