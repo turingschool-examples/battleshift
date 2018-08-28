@@ -8,7 +8,7 @@ describe User, type: :model do
     it { should validate_presence_of(:status) }
   end
 
-  it 'exists' do
+  it 'exists and defaults to inactive' do
     user = User.new(name: 'Angela', email: 'Bob@Bob.Bob', password: 'Bob')
 
     expect(user).to be_a(User)
