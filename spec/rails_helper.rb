@@ -8,13 +8,14 @@ require 'rspec/rails'
 require 'support/factory_bot'
 require 'webmock/rspec'
 require 'vcr'
+require 'email_spec'
+require 'email_spec/rspec'
 
 SimpleCov.start "rails"
 
 VCR.configure do |config|
   config.cassette_library_dir = "spec/cassettes"
   config.hook_into :webmock
-  # config.filter_sensitive_data('<GITHUB-API-KEY>') { ENV["TEST_TOKEN"] }
   config.configure_rspec_metadata!
 end
 

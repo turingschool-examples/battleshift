@@ -33,6 +33,7 @@ group :test do
   gem 'simplecov'
   gem 'webmock'
   gem 'vcr'
+  gem 'email_spec'
 end
 
 group :development do
