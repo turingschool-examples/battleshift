@@ -6,4 +6,12 @@ class ApplicationController < ActionController::Base
   def current_user
     @current_user = User.find_by(id: session[:id])
   end
+
+  def default_url_options
+    if Rails.env.production?
+      {:host => "infinite-fjord-32357.herokuapp.com"}
+    else
+      {}
+    end
+  end
 end
