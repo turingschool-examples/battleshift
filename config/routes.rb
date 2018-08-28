@@ -8,6 +8,8 @@ Rails.application.routes.draw do
     end
   end
   root 'welcome#index'
+  get '/login', to: 'sessions#new', as: 'login'
+  post '/login', to: 'sessions#create'
   get '/register', to: 'users#new', as: 'register'
   get '/dashboard', to: 'dashboard#show', as: 'dashboard'
   resources :users, only: [:create]
