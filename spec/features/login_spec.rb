@@ -2,34 +2,32 @@ require 'rails_helper'
 
 describe 'a user' do
   describe 'visiting the root page' do
-    it 'can register for an account' do
+    it 'can log in successfuly' do
+      user = User.create(name: 'Angela', email: 'Bob@Bob.Bob', password: 'Bob')
       visit '/'
-      click_on 'Register'
+      click_on 'Log In'
 
-      expect(current_path).to eq('/register')
+      expect(current_path).to eq('/login')
 
-      fill_in :user_name, with: 'Bob'
-      fill_in :user_email, with: 'Bob@Bob.Bob'
-      fill_in :user_password, with: 'Ben'
-      fill_in :user_password_confirmation, with: 'Ben'
+      fill_in :email, with: user.email
+      fill_in :password, with: user.password
       click_on 'Submit'
 
       expect(current_path).to eq('/dashboard')
-      expect(page).to have_content('Logged in as Bob')
-      expect(page).to have_content('This account has not yet been activated. Please check your email.')
+      expect(page).to have_content('Logged in as Angela')
     end
-    it 'cannot register n account without all required information' do
+    it 'can not log in with bad credentials' do
+      user = User.create(name: 'Angela', email: 'Bob@Bob.Bob', password: 'Bob')
       visit '/'
-      click_on 'Register'
+      click_on 'Log In'
 
-      expect(current_path).to eq('/register')
+      expect(current_path).to eq('/login')
 
-      fill_in :user_name, with: 'Bob'
-      fill_in :user_password, with: 'Ben'
-      fill_in :user_password_confirmation, with: 'Ben'
+      fill_in :email, with: user.email
+      fill_in :password, with: 'Sally'
       click_on 'Submit'
 
-      expect(page).to have_content('Create a new account')
+      expect(page).to have_content('Log in to your account')
     end
   end
 end
