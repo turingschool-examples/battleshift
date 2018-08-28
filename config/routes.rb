@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     end
   end
   root 'welcome#index'
+  get '/logout', to: 'sessions#destroy', as: 'logout'
   get '/login', to: 'sessions#new', as: 'login'
   post '/login', to: 'sessions#create'
   get '/register', to: 'users#new', as: 'register'
