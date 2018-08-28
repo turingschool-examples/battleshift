@@ -1,3 +1,5 @@
+include Rails.application.routes.url_helpers
+
 class RegistrationNotifier < ApplicationMailer
   def confirmation(user)
     @user = user
