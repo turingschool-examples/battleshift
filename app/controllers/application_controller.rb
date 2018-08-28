@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
 
   def default_url_options
     if Rails.env.production?
-      {:host => "infinite-fjord-32357.herokuapp.com"}
+      {:host => "https://infinite-fjord-32357.herokuapp.com"}
     else
       {}
     end
