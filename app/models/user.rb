@@ -4,7 +4,7 @@ class User < ApplicationRecord
   validates_presence_of :status, require: true
 
   validates_presence_of :password, require: true
-  validates_confirmation_of :password, :message => "Passwords did not match."
+  validates_confirmation_of :password
 
   enum status: [:inactive, :active]
 

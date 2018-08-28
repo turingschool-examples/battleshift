@@ -21,11 +21,11 @@ class UsersController < ApplicationController
   end
 
   def update
-    #change status to active after clicking email link
-    user = User.find_by(user_token: params[:user_token])
-    user.update!(status: 1)
-    session[:user_token] = user.user_token
-    redirect_to dashboard_path
+    # change status to active after clicking email link
+    # user = User.find_by(user_token: params[:user_token])
+    # user.update!(status: 1)
+    # session[:user_token] = user.user_token
+    # redirect_to dashboard_path
   end
   
   private
