@@ -7,5 +7,6 @@ Rails.application.routes.draw do
       end
     end
   end
-  root: 'welcome#index'
+  root 'welcome#index'
+  resources :users, only: [:new, :create]
 end
