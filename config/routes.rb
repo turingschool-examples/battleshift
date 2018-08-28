@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get '/register', to: 'users#new'
   post '/dashboard', to: 'users#create'
   get '/dashboard', to: 'dashboard#index'
+  get '/status', to: 'status#index', as: :status_change
 
   namespace :api do
     namespace :v1 do
