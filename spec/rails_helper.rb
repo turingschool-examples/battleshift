@@ -9,6 +9,13 @@ require 'support/factory_bot'
 
 SimpleCov.start "rails"
 
+SimpleCov.start 'rails' do
+ add_filter "app/channels/application_cable/channel.rb"
+ add_filter "app/channels/application_cable/connection.rb"
+ add_filter "app/jobs/application_job.rb"
+ add_filter "app/mailers/application_mailer.rb"
+end
+
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -31,6 +38,23 @@ SimpleCov.start "rails"
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
+
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :truncation
+    DatabaseCleaner.clean_with(:truncation)
+  end
+  config.around(:each) do |example|
+    DatabaseCleaner.cleaning do
+      example.run
+    end
+  end
+
+  Shoulda::Matchers.configure do |config|
+    config.integrate do |with|
+      with.test_framework :rspec
+      with.library :rails
+    end
+  end
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 

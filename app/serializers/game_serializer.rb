@@ -11,6 +11,7 @@ class GameSerializer < ActiveModel::Serializer
   end
 
   def message
+    # instance_options allows you to pass arguments to serializer
     @instance_options[:message]
   end
 end
