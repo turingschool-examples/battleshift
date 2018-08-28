@@ -6,9 +6,9 @@ class UsersController < ApplicationController
 
   def create
     if user_params[:password] == user_params[:password_confirmation]
-      user = User.create(user_params)
-      session[:user_id] = user.id
-      redirect_to '/dashboard'
+      @user = User.create(user_params)
+      session[:user_id] = @user.id
+      redirect_to confirmation_path
     else
       flash[:notice] = 'Password and Password Confirmation do not match'
       render :new

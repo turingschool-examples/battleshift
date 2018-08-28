@@ -11,4 +11,6 @@ Rails.application.routes.draw do
   resources :users, only: [:create]
   get '/register', to: 'users#new'
   get '/dashboard', to: 'dashboard#index'
+  get '/confirmation', to: 'confirmation#create'
+  post '/confirmation', to: 'confirmation#update'
 end
