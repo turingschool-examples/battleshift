@@ -2,7 +2,6 @@ module Api
   module V1
     class GamesController < ActionController::API
       def show
-        binding.pry
         if game = Game.find(params[:id])
           render json: game
         else
