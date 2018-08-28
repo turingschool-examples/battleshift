@@ -4,5 +4,6 @@ class User < ApplicationRecord
   validates :password, confirmation: { case_sensitive: true }
   validates :email, uniqueness: true, presence: true
   has_secure_password
-
+  enum status: ['inactive', 'active']
+  
 end

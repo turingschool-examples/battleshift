@@ -5,7 +5,7 @@ class CreateUsers < ActiveRecord::Migration[5.1]
       t.string :email
       t.string :password_digest
       t.string :api_key
-      t.integer :status
+      t.integer :status, default: 0
 
       t.timestamps
     end

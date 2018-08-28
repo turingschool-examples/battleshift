@@ -8,5 +8,7 @@ Rails.application.routes.draw do
     end
   end
   root 'welcome#index'
-  resources :users, only: [:new, :create]
+  get '/register', to: 'users#new', as: 'register'
+  get '/dashboard', to: 'dashboard#show', as: 'dashboard'
+  resources :users, only: [:create]
 end

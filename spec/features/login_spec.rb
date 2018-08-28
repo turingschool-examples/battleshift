@@ -8,10 +8,10 @@ describe 'a user' do
 
       expect(current_path).to eq('/register')
 
-      fill_in user[:name], with: 'Bob'
-      fill_in user[:email], with: 'Bob@Bob.Bob'
-      fill_in user[:password], with: 'Ben'
-      fill_in user[:password_confirmation], with: 'Ben'
+      fill_in :user_name, with: 'Bob'
+      fill_in :user_email, with: 'Bob@Bob.Bob'
+      fill_in :user_password, with: 'Ben'
+      fill_in :user_password_confirmation, with: 'Ben'
       click_on 'Submit'
 
       expect(current_path).to eq('/dashboard')
