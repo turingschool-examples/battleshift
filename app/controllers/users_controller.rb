@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     if @user.save
       UserConfirmationMailer.confirmation(@user).deliver_now
       session[:user_id] = @user.id
-      redirect_to root_url
+      redirect_to dashboard_path
     else
       render :new
     end

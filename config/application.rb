@@ -24,6 +24,18 @@ module BattleshipWeb
       app.config.paths.add 'app/services/values', :eager_load => true
     end
 
+    config.action_mailer.delivery_method = :smtp
+
+    config.action_mailer.smtp_settings = {
+      :user_name => ENV['SENDGRID_USERNAME'],
+      :password => ENV['SENDGRID_PASSWORD'],
+      :domain => 'battleshift-game.herokuapp.com',
+      :address => 'smtp.sendgrid.net',
+      :port => 587,
+      :authentication => :plain,
+      :enable_starttls_auto => true
+    }
+
     config.to_prepare do
       Dir[ File.expand_path(Rails.root.join("app/services/values/*.rb")) ].each do |file|
         require_dependency file
