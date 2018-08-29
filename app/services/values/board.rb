@@ -42,6 +42,8 @@ class Board
     end
   end
 
+  ### All methods above are for initialize
+
   def locate_space(coordinates)
     @board.each do |row|
       row.each do |space_hash|
@@ -203,4 +205,3 @@ class Board
     get_column(coordinate) == "1"
   end
 end
-

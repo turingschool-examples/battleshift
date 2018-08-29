@@ -1,5 +1,14 @@
 Rails.application.routes.draw do
-  get '/', to: "welcome#show"
+  root to: "welcome#index"
+  get "/register", to: 'users#new'
+
+  resources :user do
+    member do
+      get :confirm_email
+    end
+  end
+
+  resources :users, only: [:create]
 
   namespace :api do
     namespace :v1 do
