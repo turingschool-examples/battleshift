@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   def create
     user = User.create(user_params)
-    AccountActivationMailer.activation_token(user).deliver
+    AccountActivationMailer.activation_token(user).deliver_now
     redirect_to dashboard_path
   end
 
