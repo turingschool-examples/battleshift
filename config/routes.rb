@@ -5,14 +5,14 @@ Rails.application.routes.draw do
 
   resources :users do
     member do
-      get :confirm_email
+      get :confirm_email, to: 'confirmation#show'
     end
   end
 
   get '/register', to: 'users#new'
   post '/register', to: 'users#create'
   get '/dashboard', to: 'dashboard#show'
-  get '/confirmation', to: 'confirmation#show'
+
 
 
   namespace :api do

@@ -1,3 +1,5 @@
+require 'securerandom'
+
 class User < ApplicationRecord
   before_create :generate_email_token
   has_secure_password
@@ -9,14 +11,14 @@ class User < ApplicationRecord
   def email_activate
     self.email_confirmed = true
     self.email_token = nil
-    save!(:validate => false)
+    save!
   end
 
   private
 
   def generate_email_token
     if self.email_token.blank?
-      self.email_token = SecureRandom.hex(10)
+      self.email_token = SecureRandom.urlsafe_base64
     end
   end
 end

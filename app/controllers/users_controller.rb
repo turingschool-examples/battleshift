@@ -17,18 +17,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def confirm_email
-    user = User.find_by_email_token(params[:id])
-    if user
-      user.email_activate
-      flash[:success] = "Welcome to Battleshift"
-      redirect_to dashboard_path
-    else
-      flash[:error] = "You have to set up your account prior to play"
-      redirect_to '/register'
-    end
-  end
-
   private
 
   def user_params
