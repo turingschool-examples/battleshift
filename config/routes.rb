@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get '/register', to: 'users#new'
   post '/register', to: 'users#create'
   get '/dashboard', to: 'dashboard#show'
+  get '/confirmation', to: 'confirmation#show'
 
 
   namespace :api do

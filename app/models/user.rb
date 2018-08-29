@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  before_create :generate_email_token
   has_secure_password
 
   validates_presence_of :name
@@ -7,7 +8,7 @@ class User < ApplicationRecord
 
   def email_activate
     self.email_confirmed = true
-    self.confirm_token = nil
+    self.email_token = nil
     save!(:validate => false)
   end
 
