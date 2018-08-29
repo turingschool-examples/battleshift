@@ -22,7 +22,7 @@ class UsersController < ApplicationController
 
   def update
     user = User.find_by(user_token: params[:token])
-    user.status = 1
+    user.update!(status: 1)
     flash[:success] = "Account successfully activated"
     redirect_to dashboard_path
   end
