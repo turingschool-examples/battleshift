@@ -1,9 +1,8 @@
 class UserConfirmationMailer < ApplicationMailer
-  default :from => 'address@example.com'
 
-  def confirmation_email(user)
+  def confirmation(user)
     @user = user
-    mail( :to => @user.email, :subject => 'Activate your account')
+    mail(:to => @user.email, :subject => 'Activate your account')
   end
 
 end
