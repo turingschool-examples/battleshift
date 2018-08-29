@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    if user_params[:password] == user_params[:password_confirmation]
+    if user_params[:password] == params["user"]["password_confirmation"]
       @user = User.create(user_params)
       session[:user_id] = @user.id
       redirect_to confirmation_path
@@ -17,7 +17,7 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password)
   end
 
 end
