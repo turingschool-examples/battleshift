@@ -45,6 +45,7 @@ describe 'GET /api/v1/games/1' do
 
       get "/api/v1/games/#{game.id}"
 
+
       actual  = JSON.parse(response.body, symbolize_names: true)
       expected = Game.last
 
@@ -62,7 +63,6 @@ describe 'GET /api/v1/games/1' do
 
   describe 'with no game' do
     it 'returns a 400' do
-
       get "/api/v1/games/1"
 
       expect(response.status).to be(400)
