@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find_by_user_token(session[:user_token])
   end
-  
+
   def new
     @user = User.new
   end
@@ -13,7 +13,7 @@ class UsersController < ApplicationController
       flash[:success] = "User successfully created"
       session[:user_token] = @user.user_token
       redirect_to dashboard_path
-      #send an email that includes user_token
+      UserActivationMailer.user_activation(@user).deliver_now
     else
       flash[:error] = "Something went wrong"
       render 'new'
@@ -21,15 +21,15 @@ class UsersController < ApplicationController
   end
 
   def update
-    #change status to active after clicking email link
-    user = User.find_by(user_token: params[:user_token])
-    user.update!(status: 1)
-    session[:user_token] = user.user_token
-    redirect_to dashboard_path
+    # change status to active after clicking email link
+    # user = User.find_by(user_token: params[:user_token])
+    # user.update!(status: 1)
+    # session[:user_token] = user.user_token
+    # redirect_to dashboard_path
   end
-  
+
   private
-  
+
   def user_params
     params.require(:user).permit(:email, :name, :password, :password_confirmation)
   end
