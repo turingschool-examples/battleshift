@@ -18,7 +18,6 @@ describe "an unregistered user" do
 
     visit dashboard_path
 
-
     expect(user.reload.status).to eq("active")
   end
 end
