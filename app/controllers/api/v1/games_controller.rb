@@ -1,11 +1,9 @@
 module Api
   module V1
     class GamesController < ActionController::API
+      before_action :authenticate
       def create
         auth_token = request.headers["HTTP_X_API_KEY"]
-        Game.create(
-
-        )
       end
 
 
