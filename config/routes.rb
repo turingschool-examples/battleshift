@@ -3,16 +3,16 @@ Rails.application.routes.draw do
 
   root to: 'welcome#index'
 
-  resources :users
-  get '/register', to: 'users#new'
-  post '/register', to: 'users#create'
-  get '/dashboard', to: 'dashboard#show'
-
   resources :users do
     member do
       get :confirm_email
     end
   end
+
+  get '/register', to: 'users#new'
+  post '/register', to: 'users#create'
+  get '/dashboard', to: 'dashboard#show'
+
 
   namespace :api do
     namespace :v1 do
