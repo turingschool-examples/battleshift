@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_create :generate_email_token
 
   def new
     @user = User.new
