@@ -8,6 +8,7 @@ class UsersController < ApplicationController
   end
 
   def create
+    #consider creator class
     @user = User.new(user_params)
     if @user.save
       flash[:success] = "User successfully created"
