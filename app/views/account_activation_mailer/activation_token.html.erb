@@ -1,0 +1,6 @@
+HI <%= @user.username %>,
+your api token is <%= @user.api_token %>
+
+click the url below to activate your account
+
+<%= confirm_email_user_url(@user.api_token) %>

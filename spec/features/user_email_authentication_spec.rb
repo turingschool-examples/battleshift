@@ -12,7 +12,7 @@ describe 'User visits root' do
       name = 'Dude'
 
       fill_in :user_username, with: name
-      fill_in :user_email, with: 'dude@dudness.bro'
+      fill_in :user_email, with: 'chris.ian.powell@gmail.com'
       fill_in :user_password, with: 'You76734'
 
       click_on 'Submit'
