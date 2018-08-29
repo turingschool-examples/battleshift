@@ -5,6 +5,12 @@ class User < ApplicationRecord
   validates :email, uniqueness: true, presence: true
   validates :password, presence: true, allow_nil: true
 
+  def email_activate
+    self.email_confirmed = true
+    self.confirm_token = nil
+    save!(:validate => false)
+  end
+
   private
 
   def generate_email_token
