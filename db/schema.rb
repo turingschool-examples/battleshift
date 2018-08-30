@@ -24,8 +24,8 @@ ActiveRecord::Schema.define(version: 20180829234040) do
     t.integer "current_turn"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "challenger_token"
-    t.string "opponent_token"
+    t.string "player_1_token"
+    t.string "player_2_token"
   end
 
   create_table "users", force: :cascade do |t|
