@@ -3,13 +3,24 @@ class Api::V1::Games::ShipPlacementController < ApiController
     game = Game.find(params[:game_id])
     user = User.find_by(user_token: request.env["HTTP_X_API_KEY"])
 
-    if user.user_token == game.player_1_token
+    if user.id == game.player_1_id
       board = game.player_1_board
     else
       board = game.player_2_board
     end
 
-    
-    require 'pry'; binding.pry
+    ship = Ship.new(params["ship_size"])
+    ship.place(params[:start_space], params[:end_space])
+    ship_placer = ShipPlacer.new(board, ship, params[:ship_placement][:start_space], params[:end_space])
+
+    game.turn_switcher(user)
+
+    game.save
+
+    if params["ship_size"] == 3
+      render json: game, message: "Successfully placed ship with a size of 3. You have 1 ship(s) to place with a size of 2."
+    else
+      render json: game, message: "Successfully placed ship with a size of 2. You have 0 ship(s) to place."
+    end
   end
 end
