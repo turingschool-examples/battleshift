@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root to: "welcome#index"
   get "/register", to: 'users#new'
 
-  resources :user, except: [:index, :show, :new, :create, :edit, :update, :destroy] do
+  resources :users, except: [:index, :show, :new, :create, :edit, :update, :destroy] do
     member do
       get :confirm_email
     end

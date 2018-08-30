@@ -9,6 +9,9 @@ class UsersController < ApplicationController
     redirect_to dashboard_path
   end
 
+  def show
+  end
+
   private
 
   def user_params
