@@ -13,7 +13,6 @@ class Api::V1::GamesController < ActionController::API
                         player_2_token: player_2.user_token,
                         player_1_board: player_1_board,
                         player_2_board: player_2_board)
-      # require 'pry'; binding.pry
     render json: game
   end
 end
