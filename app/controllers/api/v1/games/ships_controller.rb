@@ -1,9 +1,9 @@
-
 class Api::V1::Games::ShipsController < ApiController
 
 # TODO create authentication method for create function
 
   def create
+    # TODO: remove class method, find by user auth_token?
     @game = Game.find(params[:game_id])
 
     ship = Ship.new(params[:ship_size])
@@ -18,7 +18,18 @@ class Api::V1::Games::ShipsController < ApiController
                   ).run
     @game.save
 
-    render(json: { message: "Successfully placed ship with a size of 3. You have 1 ship(s) to place with a size of 2."}, status: 200)
+    # board.board.map do |row|
+    #   row.map do |space|
+    #     binding.pry
+    #   end
+    # end
+
+    "Successfully placed ship with a size of #{ship.length}. You have 1 ship(s) to place with a size of 2."
+
+    message = ShipMessage.new(board, ship).validate
+
+    render json: @game, message: message
+
   end
 
   private
