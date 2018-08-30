@@ -4,10 +4,14 @@ class UsersController < ApplicationController
   end
 
   def create
-    user = User.create(user_params)
-    AccountActivationMailer.activation_token(user).deliver_now
-    session[:user_id] = user.id
-    redirect_to dashboard_path
+    @user = User.new(user_params)
+    if @user.save
+      AccountActivationMailer.activation_token(@user).deliver_now
+      session[:user_id] = @user.id
+      redirect_to dashboard_path
+    else
+      redirect_to root_path
+    end
   end
 
   def show

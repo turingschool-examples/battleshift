@@ -5,11 +5,11 @@ Rails.application.routes.draw do
   get '/dashboard', to: 'users#show'
   resources :users, only: [:new, :create]
 
-  resources :users, except: [:index, :show, :new, :create, :edit, :update, :destroy] do
-    member do
-      get :confirm_email
-    end
-  end
+  # resources :users, except: [:index, :show, :new, :create, :edit, :update, :destroy] do
+  #   member do
+  #     get :confirm_email
+  #   end
+  # end
 
   namespace :api do
     namespace :v1 do
