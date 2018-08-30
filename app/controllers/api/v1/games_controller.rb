@@ -12,13 +12,13 @@ module Api
           player_2_board: Board.new(4),
           player_1_turns: 0,
           player_2_turns: 0,
-          player_1_auth_token: User.find_by(auth_token: request.headers["auth_token"]).auth_token,
+          player_1_auth_token: User.find_by(auth_token: request.headers["X-API-KEY"]).auth_token,
           player_2_auth_token: User.find_by(email: params[:email]).auth_token,
           current_turn: "player_1"
         })
 
         game.save!
-        render json: game
+        render json: { id: "#{game.id}" }
       end
 
       def show
@@ -33,7 +33,7 @@ module Api
       private
 
       def authenticate_token
-        api_key = request.headers['auth_token']
+        api_key = request.headers['X-API-KEY']
         user = User.where(auth_token: api_key).first if api_key
         unless user
           head(:bad_request)

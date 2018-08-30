@@ -8,7 +8,7 @@ class Api::V1::Games::ShipsController < ApiController
 
     ship = Ship.new(params[:ship_size])
 
-    board = authenticate_board(request.headers["auth_token"])
+    board = authenticate_board(request.headers["X-API-KEY"])
 
     ShipPlacer.new(
                      board: board,
