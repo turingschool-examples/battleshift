@@ -1,9 +1,6 @@
 <%= form_for @user do |f| %>
-<%= f.label :username %>
-Name: <%= f.text_field :username %>
-<%= f.label :email %>
-Email: <%= f.text_field :email %>
-<%= f.label :password %>
-Password: <%= f.password_field :password %>
+  Name: <%= f.text_field :username %>
+  Email: <%= f.text_field :email %>
+  Password: <%= f.password_field :password %>
 <%= f.submit "Submit" %>
 <% end %>

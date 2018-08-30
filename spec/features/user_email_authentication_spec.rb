@@ -17,7 +17,7 @@ describe 'User visits root' do
 
       click_on 'Submit'
 
-      expect(current_path).to be(dashboard_path)
+      expect(current_path).to eq(dashboard_path)
       expect(page).to have_content("Logged in as #{name}")
       expect(page).to have_content("This account has not been activated. Please check your email.")
     end
