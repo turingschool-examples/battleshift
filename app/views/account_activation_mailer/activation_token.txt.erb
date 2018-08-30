@@ -1,0 +1,10 @@
+Hi <%= @user.username %>,
+Thanks for signing up for Battleshift!
+
+Your api token is <%= @user.api_token %>.
+
+Click the url below to activate your account.
+
+<%= activate_url(@user.api_token) %>
+
+The Battleshift Team
