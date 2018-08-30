@@ -19,13 +19,13 @@ ActiveRecord::Schema.define(version: 20180829234040) do
     t.text "player_1_board"
     t.text "player_2_board"
     t.integer "winner"
-    t.integer "player_1_turns"
-    t.integer "player_2_turns"
+    t.integer "player_1_turns", default: 0
+    t.integer "player_2_turns", default: 0
     t.integer "current_turn"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "player_1_token"
-    t.string "player_2_token"
+    t.integer "player_1_id"
+    t.integer "player_2_id"
   end
 
   create_table "users", force: :cascade do |t|
