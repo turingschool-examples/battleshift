@@ -1,4 +1,7 @@
 Logged in as <%= current_user.username %>
-<% if !current_user.active %>
+
+<% if current_user.active %>
+  <p>Status: Active</p>
+<% else %>
   <p>This account has not been activated. Please check your email.</p>
 <% end %>
