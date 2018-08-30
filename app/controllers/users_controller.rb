@@ -6,6 +6,7 @@ class UsersController < ApplicationController
   def create
     user = User.create(user_params)
     AccountActivationMailer.activation_token(user).deliver_now
+    session[:user_id] = user.id
     redirect_to dashboard_path
   end
 
