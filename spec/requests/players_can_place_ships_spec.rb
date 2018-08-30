@@ -26,10 +26,11 @@ describe "a player" do
 
       # expect(response.body[:message]).to include("Successfully placed ship with a size of 3. You have 1 ship(s) to place with a size of 2.")
 
-      response = post "/api/v1/games/#{@game.id}/ships", params: ship_1_payload, headers: headers
+      post "/api/v1/games/#{@game.id}/ships", params: ship_1_payload, headers: headers
 
-      binding.pry
+      payload = JSON.parse(response.body, symbolize_names: true)
 
+      expect(payload[:message]).to eq("Successfully placed ship with a size of 3. You have 1 ship(s) to place with a size of 2.")
       @game.reload
 
       expect(@game.player_1_board.board.first.first["A1"].contents).to be_a(Ship)
