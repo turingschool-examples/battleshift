@@ -22,13 +22,8 @@ ActiveRecord::Schema.define(version: 20180829211544) do
     t.integer "player_1_turns"
     t.integer "player_2_turns"
     t.integer "current_turn"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "user_tokens", force: :cascade do |t|
-    t.integer "user_id"
-    t.string "token"
+    t.integer "player_id"
+    t.integer "opponent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
