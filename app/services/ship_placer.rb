@@ -37,7 +37,7 @@ class ShipPlacer
   end
 
   def place_in_column
-    column = start_space[1]
+    column  = start_space[1]
     range   = start_space[0]..end_space[0]
     raise InvalidShipPlacement unless range.count == ship.length
     range.each { |row| place_ship(row, column) }
