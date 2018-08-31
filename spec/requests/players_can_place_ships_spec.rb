@@ -57,8 +57,9 @@ describe "a player" do
       @game.reload
 
       expect(payload[:message]).to eq("Successfully placed ship with a size of 2. You have 0 ship(s) to place.")
-      expect(@game.player_1_board.board.fourth.first["A1"].contents).to be_a(Ship)
-      expect(@game.player_1_board.board.fourth.second["A2"].contents).to be_a(Ship)
+
+      expect(@game.player_1_board.board.fourth.first["D1"].contents).to be_a(Ship)
+      expect(@game.player_1_board.board.fourth.second["D2"].contents).to be_a(Ship)
     end
 
     xit "can not place a ship if it is not involved in the game" do

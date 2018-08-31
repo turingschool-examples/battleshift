@@ -1,6 +1,4 @@
 class Shooter
-  #TODO board and target probably don't need to be passed in as symbols?
-  #TODO edge case test an incorrect target
   def initialize(board:, target:)
     @board     = board
     @target    = target
@@ -9,9 +7,8 @@ class Shooter
 
   def fire!
     if valid_shot?
-      space.attack!
+      space.change_status
     else
-      #TODO test as edge case if this untested
       raise InvalidAttack.new("Invalid coordinates.")
     end
   end

@@ -6,7 +6,7 @@ class Ship
     @damage = 0
   end
 
-  def attack!
+  def take_damage
     @damage += 1
   end
 
