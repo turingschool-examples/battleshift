@@ -2,9 +2,6 @@ class Api::V1::GamesController < ActionController::API
   before_action :authenticate_token, :authenticate_email
 
   def create
-
-    # TODO: validate_game_response(game_data: response.body, board_size: board_size)
-
     game = Game.new({
       player_1_board: Board.new(4),
       player_2_board: Board.new(4),
