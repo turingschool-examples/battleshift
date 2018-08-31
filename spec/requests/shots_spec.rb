@@ -59,13 +59,38 @@ describe "Api::V1::Shots" do
     it "player_1 can fire a shot" do
       headers = { "CONTENT_TYPE" => "application/json", "X-API-KEY" => "#{@user_1.auth_token}" }
 
+      targeted_space = "A1"
+
+      json_payload = {target: targeted_space}.to_json
+
+      post "/api/v1/games/#{@game.id}/shots", params: json_payload, headers: headers
+
+      payload = JSON.parse(response.body, symbolize_names: true)
+
+      @game.reload
+
+      expect(@game.player_2_board.board.first.first[targeted_space].status).to eq("Hit")
+      expect(response).to be_success
+      expect(payload[:message]).to eq("Your shot resulted in a Hit.")
+    end
+
+    it "player 1 can not fire 2 shots in a row" do
+      headers = { "CONTENT_TYPE" => "application/json", "X-API-KEY" => "#{@user_1.auth_token}" }
+
       json_payload = {target: "A1"}.to_json
 
       post "/api/v1/games/#{@game.id}/shots", params: json_payload, headers: headers
 
-      expect(response).to be_success
-      expect(respone.body[:message]).to eq("Your shot resulted in a Hit")
-      expect()
+      targeted_space = "A2"
+
+      json_payload = {target: targeted_space}.to_json
+
+      post "/api/v1/games/#{@game.id}/shots", params: json_payload, headers: headers
+
+      payload = JSON.parse(response.body, symbolize_names: true)
+
+      expect(expect(@game.player_2_board.board.first.second[targeted_space].status).to eq("Not Attacked"))
+      expect(payload[:message]).to eq("Invalid move. It's your opponent's turn")
     end
   end
 end

@@ -12,4 +12,29 @@ describe Game, type: :model do
     expect(game.player_2_auth_token).to eq("98has98hasd")
     expect(game.current_turn).to eq("player_1")
   end
+
+  describe "instance methods" do
+    describe "#change_turns" do
+      it "can switch turn from player_1 to player_2" do
+        game = create(:game)
+
+        game.change_turns
+
+        expect(game.current_turn).to eq("player_2")
+      end
+    end
+
+    describe "#validate_turn" do
+      it "validates current_turn" do
+        game = create(:game)
+        auth_token = "ouhasdio"
+
+        expect(game.validate_turn(auth_token)).to eq(true)
+
+        game.change_turns
+
+        expect(game.validate_turn(auth_token)).to eq("Invalid move. It's your opponent's turn")
+      end
+    end
+  end
 end
