@@ -24,8 +24,7 @@ class TurnProcessor
   attr_reader :game, :target
 
   def attack_opponent
-    binding.pry
-    result = Shooter.fire!(board: opponent.board, target: target)
+    result = Shooter.new(board: opponent.board, target: target).fire!
     @messages << "Your shot resulted in a #{result}."
     game.player_1_turns += 1
   end
@@ -35,7 +34,7 @@ class TurnProcessor
   #   @messages << "The computer's shot resulted in a #{result}."
   #   game.player_2_turns += 1
   # end
-  #
+
   def player
     Player.new(game.player_1_board)
   end
