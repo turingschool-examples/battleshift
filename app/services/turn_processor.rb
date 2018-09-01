@@ -1,7 +1,7 @@
 class TurnProcessor
   def initialize(game, target)
-    @game   = game
-    @target = target
+    @game     = game
+    @target   = target
     @messages = []
   end
 
@@ -34,6 +34,7 @@ class TurnProcessor
     if has_ship? && space.contents.is_sunk?
       @messages << "Battleship sunk."
       if game_over?
+        game.update!(winner: game.current_turn_user.email)
         @messages << "Game over."
       end
     end
