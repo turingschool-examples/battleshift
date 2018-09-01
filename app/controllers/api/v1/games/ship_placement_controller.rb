@@ -10,12 +10,10 @@ class Api::V1::Games::ShipPlacementController < ApiController
     end
 
     ship = Ship.new(params["ship_size"])
-    ship.place(params[:start_space], params[:end_space])
-    ship_placer = ShipPlacer.new(board, ship, params[:ship_placement][:start_space], params[:end_space])
+    ship_placer = ShipPlacer.new(board, ship, params[:start_space], params[:end_space])
 
-    game.turn_switcher(user)
-
-    game.save
+    ship_placer.run
+    game.save!
 
     if params["ship_size"] == 3
       render json: game, message: "Successfully placed ship with a size of 3. You have 1 ship(s) to place with a size of 2."

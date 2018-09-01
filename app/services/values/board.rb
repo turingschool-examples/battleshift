@@ -7,6 +7,22 @@ class Board
     @board = create_grid
   end
 
+  def ships
+    get_contents.compact.uniq
+  end
+
+  def get_spaces
+    @board.flatten.flat_map do |spaces|
+      spaces.values
+    end
+  end
+
+  def get_contents
+    get_spaces.map do |space|
+      space.contents
+    end
+  end
+
   def get_row_letters
     ("A".."Z").to_a.shift(@length)
   end
@@ -203,4 +219,3 @@ class Board
     get_column(coordinate) == "1"
   end
 end
-
