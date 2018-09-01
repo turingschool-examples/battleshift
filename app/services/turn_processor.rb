@@ -18,6 +18,12 @@ class TurnProcessor
     @messages.join(" ")
   end
 
+  def game_over?
+    opponent.ships.all? do |ship|
+      ship.is_sunk?
+    end
+  end
+
   private
 
   attr_reader :game, :target
@@ -25,12 +31,15 @@ class TurnProcessor
   def attack_opponent
     result = Shooter.fire!(board: opponent, target: target)
     @messages << "Your shot resulted in a #{space.status}."
-    if contents? && space.contents.is_sunk?
+    if has_ship? && space.contents.is_sunk?
       @messages << "Battleship sunk."
+      if game_over?
+        @messages << "Game over."
+      end
     end
   end
 
-  def contents?
+  def has_ship?
     space.contents != nil
   end
 
