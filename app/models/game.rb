@@ -1,7 +1,4 @@
 class Game < ApplicationRecord
-
-  # TODO: create validations for appropriate game_attributes
-
   attr_accessor :messages
 
   enum current_turn: ["player_1", "player_2"]

@@ -6,7 +6,7 @@ class Api::V1::Games::ShipsController < ApiController
     # TODO: remove class method, find by user auth_token?
     @game = Game.find(params[:game_id])
     ship = Ship.new(params[:ship_size])
-    board = authenticate_board(request.headers["X-API-KEY"])
+    board = authenticate_board(request.headers["X-API-KEY"], @game)
 
     ShipPlacer.new(
                      board: board,
@@ -17,15 +17,5 @@ class Api::V1::Games::ShipsController < ApiController
     @game.save
     message = ShipMessage.new(board, ship).validate
     render json: @game, message: message
-  end
-
-  private
-
-  def authenticate_board(auth_token)
-    if auth_token == @game.player_1_auth_token
-      @game.player_1_board
-    elsif auth_token == @game.player_2_auth_token
-      @game.player_2_board
-    end
   end
 end

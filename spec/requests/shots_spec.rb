@@ -92,72 +92,82 @@ describe "Api::V1::Shots" do
       expect(expect(@game.player_2_board.board.first.second[targeted_space].status).to eq("Not Attacked"))
       expect(payload[:message]).to eq("Invalid move. It's your opponent's turn")
     end
+
+    it "player 1 can fire and then player 2 can fire" do
+      headers = { "CONTENT_TYPE" => "application/json", "X-API-KEY" => "#{@user_1.auth_token}" }
+
+      json_payload = {target: "A1"}.to_json
+
+      post "/api/v1/games/#{@game.id}/shots", params: json_payload, headers: headers
+
+      headers = { "CONTENT_TYPE" => "application/json", "X-API-KEY" => "#{@user_2.auth_token}" }
+
+      targeted_space = "A3"
+
+      json_payload = {target: "A3"}.to_json
+
+      post "/api/v1/games/#{@game.id}/shots", params: json_payload, headers: headers
+
+      payload = JSON.parse(response.body, symbolize_names: true)
+
+      @game.reload
+
+      expect(expect(@game.player_1_board.board.first.third[targeted_space].status).to eq("Miss"))
+      expect(payload[:message]).to eq("Your shot resulted in a Miss.")
+    end
+
+    it "player 2 can not fire first" do
+      headers = { "CONTENT_TYPE" => "application/json", "X-API-KEY" => "#{@user_2.auth_token}" }
+
+      json_payload = {target: "A1"}.to_json
+
+      post "/api/v1/games/#{@game.id}/shots", params: json_payload, headers: headers
+
+      targeted_space = "A1"
+
+      payload = JSON.parse(response.body, symbolize_names: true)
+
+      @game.reload
+
+      expect(expect(@game.player_1_board.board.first.first[targeted_space].status).to eq("Not Attacked"))
+      expect(payload[:message]).to eq("Invalid move. It's your opponent's turn")
+    end
+
+    it "sends message about invalid coordinates and set status to 400" do
+      headers = { "CONTENT_TYPE" => "application/json", "X-API-KEY" => "#{@user_1.auth_token}" }
+
+      targeted_space = "D5"
+      json_payload = {target: targeted_space}.to_json
+
+      post "/api/v1/games/#{@game.id}/shots", params: json_payload, headers: headers
+
+      payload = JSON.parse(response.body, symbolize_names: true)
+
+      @game.reload
+
+      expect(response).to have_http_status(400)
+      expect(payload[:message]).to eq("Invalid coordinates.")
+    end
+
+    it "displays a message when a battleship is sunk" do
+      headers = { "CONTENT_TYPE" => "application/json", "X-API-KEY" => "#{@user_1.auth_token}" }
+      json_payload = {target: "A1"}.to_json
+      post "/api/v1/games/#{@game.id}/shots", params: json_payload, headers: headers
+
+      headers = { "CONTENT_TYPE" => "application/json", "X-API-KEY" => "#{@user_2.auth_token}" }
+      json_payload = {target: "A3"}.to_json
+      post "/api/v1/games/#{@game.id}/shots", params: json_payload, headers: headers
+      payload = JSON.parse(response.body, symbolize_names: true)
+
+      headers = { "CONTENT_TYPE" => "application/json", "X-API-KEY" => "#{@user_1.auth_token}" }
+      json_payload = {target: "A2"}.to_json
+      post "/api/v1/games/#{@game.id}/shots", params: json_payload, headers: headers
+      payload = JSON.parse(response.body, symbolize_names: true)
+
+      @game.reload
+
+      expect(response).to have_http_status(200)
+      expect(payload[:message]).to eq("Your shot resulted in a Hit. Battleship sunk.")
+    end
   end
 end
-
-# let(:player_1_board)   { Board.new(4) }
-# let(:player_2_board)   { Board.new(4) }
-# let(:sm_ship) { Ship.new(2) }
-# let(:game)    {
-#   create(:game,
-#     player_1_board: player_1_board,
-#     player_2_board: player_2_board
-#   )
-# }
-#
-# it "updates the message and board with a hit" do
-#   allow_any_instance_of(AiSpaceSelector).to receive(:fire!).and_return("Miss")
-#   ShipPlacer.new(board: player_2_board,
-#                  ship: sm_ship,
-#                  start_space: "A1",
-#                  end_space: "A2").run
-#
-#   headers = { "CONTENT_TYPE" => "application/json" }
-#   json_payload = {target: "A1"}.to_json
-#
-#   post "/api/v1/games/#{game.id}/shots", params: json_payload, headers: headers
-#
-#   expect(response).to be_success
-#
-#   game = JSON.parse(response.body, symbolize_names: true)
-#
-#   expected_messages = "Your shot resulted in a Hit. The computer's shot resulted in a Miss."
-#   player_2_targeted_space = game[:player_2_board][:rows].first[:data].first[:status]
-#
-#
-#   expect(game[:message]).to eq expected_messages
-#   expect(player_2_targeted_space).to eq("Hit")
-# end
-#
-# it "updates the message and board with a miss" do
-#   allow_any_instance_of(AiSpaceSelector).to receive(:fire!).and_return("Miss")
-#
-#   headers = { "CONTENT_TYPE" => "application/json" }
-#   json_payload = {target: "A1"}.to_json
-#
-#   post "/api/v1/games/#{game.id}/shots", params: json_payload, headers: headers
-#
-#   expect(response).to be_success
-#
-#   game = JSON.parse(response.body, symbolize_names: true)
-#
-#   expected_messages = "Your shot resulted in a Miss. The computer's shot resulted in a Miss."
-#   player_2_targeted_space = game[:player_2_board][:rows].first[:data].first[:status]
-#
-#
-#   expect(game[:message]).to eq expected_messages
-#   expect(player_2_targeted_space).to eq("Miss")
-# end
-#
-# it "updates the message but not the board with invalid coordinates" do
-#   player_1_board = Board.new(1)
-#   player_2_board = Board.new(1)
-#   game = create(:game, player_1_board: player_1_board, player_2_board: player_2_board)
-#
-#   headers = { "CONTENT_TYPE" => "application/json" }
-#   json_payload = {target: "B1"}.to_json
-#   post "/api/v1/games/#{game.id}/shots", params: json_payload, headers: headers
-#
-#   game = JSON.parse(response.body, symbolize_names: true)
-#   expect(game[:message]).to eq "Invalid coordinates."
-# end
