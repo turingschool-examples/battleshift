@@ -1,8 +1,9 @@
 class Api::V1::Games::ShotsController < ApiController
-  before_action :game_over?
+  before_action :game_over?, :authorized?
 
   def create
     game = Game.find(params[:game_id])
+
     if current_users_turn?
       turn_processor = TurnProcessor.new(game, params[:shot][:target])
       turn_processor.run!
