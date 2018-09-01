@@ -34,7 +34,8 @@ class TurnProcessor
     if has_ship? && space.contents.is_sunk?
       @messages << "Battleship sunk."
       if game_over?
-        game.update!(winner: game.current_turn_user.email)
+        game.winner = game.current_turn_user.email
+        game.save!
         @messages << "Game over."
       end
     end

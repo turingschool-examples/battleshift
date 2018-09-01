@@ -1,8 +1,7 @@
 class Api::V1::GamesController < ApiController
 
   def show
-    game = Game.find(params[:id])
-    render json: game
+    find_valid_game(params[:id])
   end
 
   def create
@@ -18,3 +17,4 @@ class Api::V1::GamesController < ApiController
     render json: game
   end
 end
+
