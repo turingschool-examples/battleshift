@@ -16,7 +16,6 @@ describe "Api::V1::Shots" do
     
     context "when a player makes a hit" do           
       it "updates the message and board with a hit" do
-        allow_any_instance_of(AiSpaceSelector).to receive(:fire!).and_return("Miss")
         ShipPlacer.new(player_2_board,
                       sm_ship,
                       "A1",
@@ -31,7 +30,7 @@ describe "Api::V1::Shots" do
 
         game = JSON.parse(response.body, symbolize_names: true)
 
-        expected_messages = "Your shot resulted in a Hit. The computer's shot resulted in a Miss."
+        expected_messages = "Your shot resulted in a Hit"
         player_2_targeted_space = game[:player_2_board][:rows].first[:data].first[:status]
 
 
@@ -40,24 +39,25 @@ describe "Api::V1::Shots" do
       end
     end
 
-    it "updates the message and board with a miss" do
-      allow_any_instance_of(AiSpaceSelector).to receive(:fire!).and_return("Miss")
+    context "when a player misses" do
+      it "updates the message and board with a miss" do
+       
+        headers = { "CONTENT_TYPE" => "application/json" }
+        json_payload = {target: "A1"}.to_json
 
-      headers = { "CONTENT_TYPE" => "application/json" }
-      json_payload = {target: "A1"}.to_json
+        post "/api/v1/games/#{game.id}/shots", params: json_payload, headers: headers
 
-      post "/api/v1/games/#{game.id}/shots", params: json_payload, headers: headers
+        expect(response).to be_success
 
-      expect(response).to be_success
+        game = JSON.parse(response.body, symbolize_names: true)
 
-      game = JSON.parse(response.body, symbolize_names: true)
-
-      expected_messages = "Your shot resulted in a Miss. The computer's shot resulted in a Miss."
-      player_2_targeted_space = game[:player_2_board][:rows].first[:data].first[:status]
+        expected_messages = "Your shot resulted in a Miss"
+        player_2_targeted_space = game[:player_2_board][:rows].first[:data].first[:status]
 
 
-      expect(game[:message]).to eq expected_messages
-      expect(player_2_targeted_space).to eq("Miss")
+        expect(game[:message]).to eq expected_messages
+        expect(player_2_targeted_space).to eq("Miss")
+      end
     end
 
     it "updates the message but not the board with invalid coordinates" do

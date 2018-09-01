@@ -8,6 +8,7 @@ class Shooter
   def fire!
     if valid_shot?
       space.attack!
+      "#{space.status}"
     else
       raise InvalidAttack.new("Invalid coordinates.")
     end

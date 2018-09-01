@@ -45,6 +45,7 @@ class ShipPlacer
     def place_ship(row, column)
       coordinates = "#{row}#{column}"
       space = board.locate_space(coordinates)
+
       if space.occupied?
         raise InvalidShipPlacement.new("Attempting to place ship in a space that is already occupied.")
       else

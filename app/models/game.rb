@@ -20,4 +20,9 @@ class Game < ApplicationRecord
       update(current_turn: 0)
     end
   end
+
+  def current_player
+    
+  end
+  
 end
