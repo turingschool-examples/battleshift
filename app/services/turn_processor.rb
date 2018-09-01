@@ -24,8 +24,18 @@ class TurnProcessor
 
   def attack_opponent
     result = Shooter.fire!(board: opponent, target: target)
-    @messages << "Your shot resulted in a #{result}"
-    # game.player_1_turns += 1
+    @messages << "Your shot resulted in a #{space.status}."
+    if contents? && space.contents.is_sunk?
+      @messages << "Battleship sunk."
+    end
+  end
+
+  def contents?
+    space.contents != nil
+  end
+
+  def space
+    @space ||= opponent.locate_space(target)
   end
 
   # def ai_attack_back
