@@ -1,5 +1,4 @@
 class ApiController < ActionController::API
-
   def authenticate_board(auth_token, game)
     if auth_token == game.player_1_auth_token
       game.player_1_board
