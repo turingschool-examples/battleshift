@@ -7,10 +7,9 @@ class Space
     @status      = "Not Attacked"
   end
 
-  def attack!
-    # TODO: ship also has a .attack! method which determines damage, may want to rename attack! on ship class to avoid confusion
+  def change_status
     @status = if contents && not_attacked?
-                contents.attack!
+                contents.take_damage
                 "Hit"
               else
                 "Miss"
@@ -18,7 +17,6 @@ class Space
   end
 
   def occupy!(ship)
-    # TODO this could probably be done at initialize
     @contents = ship
   end
 

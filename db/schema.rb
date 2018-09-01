@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180827235844) do
+ActiveRecord::Schema.define(version: 20180901065620) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,12 +18,16 @@ ActiveRecord::Schema.define(version: 20180827235844) do
   create_table "games", force: :cascade do |t|
     t.text "player_1_board"
     t.text "player_2_board"
-    t.integer "winner"
+    t.string "winner"
     t.integer "player_1_turns"
     t.integer "player_2_turns"
     t.integer "current_turn"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "player_1_auth_token"
+    t.string "player_2_auth_token"
+    t.integer "player_1_id"
+    t.integer "player_2_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -36,4 +40,7 @@ ActiveRecord::Schema.define(version: 20180827235844) do
     t.string "auth_token"
     t.index ["auth_token"], name: "index_users_on_auth_token", unique: true
   end
+
+  add_foreign_key "games", "users", column: "player_1_id"
+  add_foreign_key "games", "users", column: "player_2_id"
 end
