@@ -9,7 +9,7 @@ class Shooter
     if valid_shot?
       ship_status[:ship_status] = space.change_status
       ship_status[:sunk] = space.contents.is_sunk? if !space.contents.nil?
-      binding.pry
+      ship_status[:game_over] = true if board.ships.all? { |ship| ship.is_sunk? }
       ship_status
     else
       raise InvalidAttack.new("Invalid coordinates.")

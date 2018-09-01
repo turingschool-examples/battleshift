@@ -7,6 +7,15 @@ class Board
     @board = create_grid
   end
 
+  def ships
+    self.board.inject([]) do |acc, row|
+      row.each do |space|
+        acc << space.values.first.contents if !space.values.first.contents.nil?
+      end
+      acc
+    end.uniq
+  end
+
   def get_row_letters
     ("A".."Z").to_a.shift(@length)
   end
