@@ -22,6 +22,10 @@ class ApiController < ActionController::API
     end
   end
 
+  # def game_exists?
+  #   if current_user.games.find(params[:game_id])
+  # end
+
   private
 
   def game

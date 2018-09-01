@@ -11,4 +11,8 @@ describe User do
 
     it { should validate_confirmation_of(:password) }
   end
+  
+  context 'relationships' do
+    it { should have_many(:games) } 
+  end
 end
