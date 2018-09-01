@@ -9,19 +9,21 @@ class Api::V1::GamesController < ActionController::API
   end
 
   def create
-    ENV['BATTLESHIFT_OPPONENT_EMAIL'] = params[:opponent_email]
-    api_key = request.headers['X-API-Key']
+    if User.find_by(api_token: request.headers['X-API-Key'])
 
-    game_attributes = {
-      player_1_board: Board.new(4),
-      player_2_board: Board.new(4),
-      player_1_turns: 0,
-      player_2_turns: 0,
-      current_turn: 0,
-      player_id: User.find_by(api_token: api_key).id,
-      opponent_id: User.find_by(email: ENV['BATTLESHIFT_OPPONENT_EMAIL']).id
-    }
+      game_attributes = {
+        player_1_board: Board.new(4),
+        player_2_board: Board.new(4),
+        player_1_turns: 0,
+        player_2_turns: 0,
+        current_turn: 0,
+        player_key: User.find_by(api_token: request.headers['X-API-Key']).api_token,
+        opponent_key: User.find_by(email: params[:opponent_email]).api_token
+      }
 
-    render json: Game.create(game_attributes)
+      render json: Game.create(game_attributes)
+    else
+      render :file => "public/401.html", :status => :unauthorized
+    end
   end
 end

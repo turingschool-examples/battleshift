@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180829211544) do
+ActiveRecord::Schema.define(version: 20180901201026) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,8 +22,8 @@ ActiveRecord::Schema.define(version: 20180829211544) do
     t.integer "player_1_turns"
     t.integer "player_2_turns"
     t.integer "current_turn"
-    t.integer "player_id"
-    t.integer "opponent_id"
+    t.integer "player_key"
+    t.integer "opponent_key"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
