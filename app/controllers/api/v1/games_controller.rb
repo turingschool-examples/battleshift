@@ -3,7 +3,7 @@ class Api::V1::GamesController < ApiController
 
   def create
     player_1 = User.find_by(auth_token: request.headers["X-API-KEY"])
-    player_2 = User.find_by(email: params[:opponent_email])
+    player_2 = User.find_by(email: params["opponent-email"]) || User.find_by(email: params[:opponent_email])
 
     game = Game.new({
       player_1_board: Board.new(4),

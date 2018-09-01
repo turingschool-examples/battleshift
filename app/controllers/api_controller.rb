@@ -18,6 +18,7 @@ class ApiController < ActionController::API
   def authenticate_token
     api_key = request.headers['X-API-KEY']
     user = User.where(auth_token: api_key).first if api_key
+
     unless user
       head(:bad_request)
       return false
@@ -25,8 +26,9 @@ class ApiController < ActionController::API
   end
 
   def authenticate_email
-    email = params[:opponent_email]
+    email = params["opponent-email"] || params[:opponent_email]
     user = User.where(email: email).first if email
+
     unless user
       head(:bad_request)
       return false
