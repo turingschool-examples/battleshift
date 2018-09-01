@@ -8,12 +8,20 @@ class Space
   end
 
   def change_status
-    @status = if contents && not_attacked?
-                contents.take_damage
-                "Hit"
-              else
-                "Miss"
-              end
+    if contents && not_attacked?
+      hit
+    else
+      miss
+    end
+  end
+
+  def hit
+    contents.take_damage
+    @status = "Hit"
+  end
+
+  def miss
+    @status = "Miss"
   end
 
   def occupy!(ship)
@@ -21,7 +29,6 @@ class Space
   end
 
   def occupied?
-    #TODO Why are there two bangs?
     !!@contents
   end
 
