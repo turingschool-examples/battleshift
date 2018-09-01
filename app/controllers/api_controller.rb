@@ -6,7 +6,13 @@ class ApiController < ActionController::API
     end
   end
 
-  def your_turn?
-    
+  def current_users_turn?
+    current_user == game.current_turn_user
+  end
+  
+  private
+
+  def game
+    @game ||= Game.find(params[:game_id])
   end
 end

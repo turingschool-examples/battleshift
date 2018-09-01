@@ -12,7 +12,6 @@ class Api::V1::Games::ShipPlacementController < ApiController
     ship = Ship.new(params["ship_size"])
     ship_placer = ShipPlacer.new(board, ship, params[:start_space], params[:end_space])
     ship_placer.run
-    game.turn_switcher(user)
     
     game.save!
 

@@ -4,6 +4,7 @@ class Game < ApplicationRecord
   attr_accessor :messages
 
   enum current_turn: ["player 1", "player 2"]
+
   serialize :player_1_board
   serialize :player_2_board
 
@@ -14,15 +15,18 @@ class Game < ApplicationRecord
   validates :player_2_board, presence: true
 
   def turn_switcher(user)
-    if user.id == player_1.id
+    if user == player_1
       update(current_turn: 1)
-    elsif user.id == player_2.id
+    elsif user == player_2
       update(current_turn: 0)
     end
   end
-
-  def current_player
-    
-  end
   
+  def current_turn_user
+    if current_turn == "player 1"
+      player_1
+    else
+      player_2
+    end
+  end
 end
