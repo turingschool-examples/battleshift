@@ -23,13 +23,4 @@ class Api::V1::GamesController < ApiController
       render json: "The game could not be made."
     end
   end
-
-
-  def show
-    if game = Game.find_by_id(params[:id])
-      render json: game
-    else
-      head :bad_request
-    end
-  end
 end
