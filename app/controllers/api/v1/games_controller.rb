@@ -9,8 +9,7 @@ class Api::V1::GamesController < ActionController::API
   end
 
   def create
-    #if curent_user.active && params[api_key] == current_user.api_key
-    #need email to create player_2 i.e. params[:oppnent_email]
+    ENV['BATTLESHIFT_OPPONENT_EMAIL'] = params[:opponent_email]
     api_key = request.headers['X-API-Key']
 
     game_attributes = {

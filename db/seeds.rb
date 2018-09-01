@@ -26,17 +26,15 @@ ShipPlacer.new(board: player_2_board,
                start_space: "B1",
                end_space: "D1").run
 
-user_1 = User.create({id: 1,
-          username: 'matt',
+user_1 = User.create({username: 'matt',
           email: 'mattphoolishis@gmail.com',
           password: 'password',
-          api_token: ENV['BATTLESHIFT_API_KEY']})
+          active: true})
 
-user_2 = User.create({id: 2,
-          username: 'chris',
+user_2 = User.create({username: 'chris',
           email: 'matt.phoolishis@gmail.com',
-          password: 'password',
-          api_token: ENV['BATTLESHIFT_OPPONENT_API_KEY']})
+          password: 'drowssap',
+          active: true})
 
 game_attributes = {
   player_1_board: player_1_board,
