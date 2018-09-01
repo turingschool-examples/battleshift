@@ -1,5 +1,6 @@
 class TurnProcessor
-  def initialize(game, target, board)
+  def initialize(game, target, board, user)
+    @user     = user
     @game     = game
     @target   = target
     @messages = []
@@ -28,5 +29,6 @@ class TurnProcessor
     @messages << "Your shot resulted in a #{result[:ship_status]}."
     @messages << "Battleship sunk." if result[:sunk] == true
     @messages << "Game over." if result[:game_over] == true
+    @game.winner = @user.email if result[:game_over] == true
   end
 end

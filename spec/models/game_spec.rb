@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe Game, type: :model do
   it "has attributes" do
-    game = create(:game)
+    game = create(:game, player_1: create(:user), player_2: create(:user, auth_token: "andrew", email: "califormula@gmail.com"))
 
     expect(game.player_1_board).to be_a(Board)
     expect(game.player_2_board).to be_a(Board)
@@ -11,12 +11,19 @@ describe Game, type: :model do
     expect(game.player_1_auth_token).to eq("ouhasdio")
     expect(game.player_2_auth_token).to eq("98has98hasd")
     expect(game.current_turn).to eq("player_1")
+    expect(game.player_1).to eq(User.first)
+    expect(game.player_2).to eq(User.last)
+  end
+
+  describe "Relationships" do
+    it { should belong_to(:player_1) }
+    it { should belong_to(:player_2) }
   end
 
   describe "instance methods" do
     describe "#change_turns" do
       it "can switch turn from player_1 to player_2" do
-        game = create(:game)
+        game = create(:game, player_1: create(:user), player_2: create(:user, auth_token: "andrew", email: "califormula@gmail.com"))
 
         game.change_turns
 
@@ -26,7 +33,7 @@ describe Game, type: :model do
 
     describe "#validate_turn" do
       it "validates current_turn" do
-        game = create(:game)
+        game = create(:game, player_1: create(:user), player_2: create(:user, auth_token: "andrew", email: "califormula@gmail.com"))
         auth_token = "ouhasdio"
 
         expect(game.validate_turn(auth_token)).to eq(true)

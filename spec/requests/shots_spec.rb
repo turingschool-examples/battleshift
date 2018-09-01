@@ -51,7 +51,9 @@ describe "Api::V1::Shots" do
                         player_2_turns: 0,
                         player_1_auth_token: @user_1.auth_token,
                         player_2_auth_token: @user_2.auth_token,
-                        current_turn: "player_1"
+                        current_turn: "player_1",
+                        player_1: @user_1,
+                        player_2: @user_2
                       )
 
     end
@@ -166,6 +168,7 @@ describe "Api::V1::Shots" do
 
       @game.reload
 
+      expect(payload[:winner]).to eq(nil)
       expect(response).to have_http_status(200)
       expect(payload[:message]).to eq("Your shot resulted in a Hit. Battleship sunk.")
     end
@@ -175,10 +178,18 @@ describe "Api::V1::Shots" do
       p2_board = Board.new(4)
 
       sm_ship = Ship.new(2)
+      sm2_ship = Ship.new(2)
 
       ShipPlacer.new(
                       board: p2_board,
                       ship: sm_ship,
+                      start_space: "A1",
+                      end_space: "A2"
+                    ).run
+
+      ShipPlacer.new(
+                      board: p1_board,
+                      ship: sm2_ship,
                       start_space: "A1",
                       end_space: "A2"
                     ).run
@@ -191,27 +202,45 @@ describe "Api::V1::Shots" do
                         player_2_turns: 0,
                         player_1_auth_token: @user_1.auth_token,
                         player_2_auth_token: @user_2.auth_token,
-                        current_turn: "player_1"
+                        current_turn: "player_1",
+                        player_1: @user_1,
+                        player_2: @user_2
                       )
 
       headers = { "CONTENT_TYPE" => "application/json", "X-API-KEY" => "#{@user_1.auth_token}" }
       json_payload = {target: "A1"}.to_json
       post "/api/v1/games/#{game.id}/shots", params: json_payload, headers: headers
 
+      game.reload
+
       headers = { "CONTENT_TYPE" => "application/json", "X-API-KEY" => "#{@user_2.auth_token}" }
       json_payload = {target: "A3"}.to_json
       post "/api/v1/games/#{game.id}/shots", params: json_payload, headers: headers
 
+      game.reload
+
+      payload = JSON.parse(response.body, symbolize_names: true)
+
       headers = { "CONTENT_TYPE" => "application/json", "X-API-KEY" => "#{@user_1.auth_token}" }
       json_payload = {target: "A2"}.to_json
       post "/api/v1/games/#{game.id}/shots", params: json_payload, headers: headers
-      payload = JSON.parse(response.body, symbolize_names: true)
 
       game.reload
 
+      payload = JSON.parse(response.body, symbolize_names: true)
+
       expect(response).to have_http_status(200)
-      expect(payload[:message]).to eq("Your shot resulted in a Hit. Battleship sunk. Game over.")
       expect(payload[:winner]).to eq("#{@user_1.email}")
+      expect(payload[:message]).to eq("Your shot resulted in a Hit. Battleship sunk. Game over.")
+
+      headers = { "CONTENT_TYPE" => "application/json", "X-API-KEY" => "#{@user_2.auth_token}" }
+      json_payload = {target: "A4"}.to_json
+      post "/api/v1/games/#{game.id}/shots", params: json_payload, headers: headers
+
+      payload = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to have_http_status(400)
+      expect(payload[:message]).to include("Invalid move. Game over.")
     end
   end
 end

@@ -32,4 +32,11 @@ class ApiController < ActionController::API
       return false
     end
   end
+
+  def game_over
+    game = Game.find(params[:game_id])
+    if game.winner
+      render json: @game, message: "Invalid move. Game over.", status: 400
+    end
+  end
 end
