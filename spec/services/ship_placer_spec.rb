@@ -25,7 +25,7 @@ describe ShipPlacer do
     expect(a2.contents).to be_nil
     expect(a3.contents).to be_nil
     expect(b1.contents).to be_nil
-binding.pry
+
     @placer.run
 
     expect(a1.contents).to eq(@ship)
