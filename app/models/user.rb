@@ -7,6 +7,8 @@ class User < ApplicationRecord
 
   validates_presence_of :email, :status
 
+  has_many :games
+
   enum status: [:inactive, :active]
 
   def confirm_registration

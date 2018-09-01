@@ -5,8 +5,12 @@ class Shooter
   end
 
   def fire!
+    ship_status = {}
     if valid_shot?
-      space.change_status
+      ship_status[:ship_status] = space.change_status
+      ship_status[:sunk] = space.contents.is_sunk? if !space.contents.nil?
+      ship_status[:game_over] = true if board.ships.all? { |ship| ship.is_sunk? }
+      ship_status
     else
       raise InvalidAttack.new("Invalid coordinates.")
     end

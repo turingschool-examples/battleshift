@@ -1,7 +1,4 @@
 class Game < ApplicationRecord
-
-  # TODO: create validations for appropriate game_attributes
-
   attr_accessor :messages
 
   enum current_turn: ["player_1", "player_2"]
@@ -10,6 +7,9 @@ class Game < ApplicationRecord
 
   validates :player_1_board, presence: true
   validates :player_2_board, presence: true
+
+  belongs_to :player_1, class_name: "User"
+  belongs_to :player_2, class_name: "User"
 
   def validate_turn(auth_token)
     if auth_token == self.player_1_auth_token && current_turn == "player_1" || auth_token == self.player_2_auth_token && current_turn == "player_2"
