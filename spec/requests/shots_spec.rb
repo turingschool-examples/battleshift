@@ -210,7 +210,7 @@ describe "Api::V1::Shots" do
       game.reload
 
       expect(response).to have_http_status(200)
-      expect(payload[:message]).to eq("Your shot resulted in a Hit. Battleship sunk. Game Over.")
+      expect(payload[:message]).to eq("Your shot resulted in a Hit. Battleship sunk. Game over.")
       expect(payload[:winner]).to eq("#{@user_1.email}")
     end
   end

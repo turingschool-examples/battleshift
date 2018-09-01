@@ -25,7 +25,6 @@ class TurnProcessor
 
   def attack_opponent
     result = Shooter.new(board: @board, target: target).fire!
-    binding.pry
     @messages << "Your shot resulted in a #{result[:ship_status]}."
     @messages << "Battleship sunk." if result[:sunk] == true
     @messages << "Game over." if result[:game_over] == true
