@@ -9,7 +9,13 @@ class ApiController < ActionController::API
   def current_users_turn?
     current_user == game.current_turn_user
   end
-  
+
+  def game_over?
+    if game.winner
+      render json: game, message: "Invalid move. Game over.", status: 400
+    end
+  end
+
   private
 
   def game
