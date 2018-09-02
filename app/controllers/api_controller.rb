@@ -18,17 +18,19 @@ class ApiController < ActionController::API
   def authenticate_token
     api_key = request.headers['X-API-KEY']
     user = User.where(auth_token: api_key).first if api_key
+
     unless user
-      head(:bad_request)
+      render json: { message: "Unauthorized" }, status: 401
       return false
     end
   end
 
   def authenticate_email
-    email = params[:opponent_email]
+    email = params["opponent-email"] || params[:opponent_email]
     user = User.where(email: email).first if email
+
     unless user
-      head(:bad_request)
+      render json: { message: "Invalid email." }, status: 400
       return false
     end
   end

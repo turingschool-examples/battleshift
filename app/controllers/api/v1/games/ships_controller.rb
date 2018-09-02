@@ -1,6 +1,5 @@
 class Api::V1::Games::ShipsController < ApiController
-
-# TODO create authentication method for create function
+  before_action :authenticate_token
 
   def create
     @game = Game.find(params[:game_id])
@@ -14,6 +13,7 @@ class Api::V1::Games::ShipsController < ApiController
                      end_space: params[:end_space]
                   ).run
     @game.save
+
     message = ShipMessage.new(board, ship).validate
     render json: @game, message: message
   end

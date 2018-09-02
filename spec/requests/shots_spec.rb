@@ -76,6 +76,38 @@ describe "Api::V1::Shots" do
       expect(payload[:message]).to eq("Your shot resulted in a Hit.")
     end
 
+    it "can not fire on an invalid coordinate" do
+      headers = { "CONTENT_TYPE" => "application/json", "X-API-KEY" => "#{@user_1.auth_token}" }
+      json_payload = {target: "A5"}.to_json
+      post "/api/v1/games/#{@game.id}/shots", params: json_payload, headers: headers
+      payload = JSON.parse(response.body, symbolize_names: true)
+
+      @game.reload
+
+      expect(response.status).to eq(400)
+      expect(payload[:message]).to eq("Invalid coordinates.")
+    end
+
+    it "fires on an already fired upon coordinate" do
+      headers = { "CONTENT_TYPE" => "application/json", "X-API-KEY" => "#{@user_1.auth_token}" }
+      json_payload = {target: "A1"}.to_json
+      post "/api/v1/games/#{@game.id}/shots", params: json_payload, headers: headers
+
+      headers = { "CONTENT_TYPE" => "application/json", "X-API-KEY" => "#{@user_2.auth_token}" }
+      json_payload = {target: "A1"}.to_json
+      post "/api/v1/games/#{@game.id}/shots", params: json_payload, headers: headers
+
+      headers = { "CONTENT_TYPE" => "application/json", "X-API-KEY" => "#{@user_1.auth_token}" }
+      json_payload = {target: "A1"}.to_json
+      post "/api/v1/games/#{@game.id}/shots", params: json_payload, headers: headers
+      payload = JSON.parse(response.body, symbolize_names: true)
+
+      @game.reload
+
+      expect(response.status).to eq(200)
+      expect(payload[:message]).to eq("Your shot resulted in a Miss.")
+    end
+
     it "player 1 can not fire 2 shots in a row" do
       headers = { "CONTENT_TYPE" => "application/json", "X-API-KEY" => "#{@user_1.auth_token}" }
 
