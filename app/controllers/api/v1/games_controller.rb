@@ -18,6 +18,7 @@ class Api::V1::GamesController < ActionController::API
         player_2_board: Board.new(4),
         player_1_turns: 0,
         player_2_turns: 0,
+        current_turn: 0,
         player_key: User.find_by(api_token: request.headers['X-API-Key']).api_token,
         opponent_key: User.find_by(email: ENV['BATTLESHIFT_OPPONENT_EMAIL']).api_token
       }
