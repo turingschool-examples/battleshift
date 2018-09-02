@@ -41,7 +41,6 @@ describe "a player" do
 
     it "player 1 places two ships on the board" do
       post "/api/v1/games/#{@game.id}/ships", params: @ship_1_payload, headers: @player_1_headers
-      JSON.parse(response.body, symbolize_names: true)
       post "/api/v1/games/#{@game.id}/ships", params: @ship_2_payload, headers: @player_1_headers
       payload = JSON.parse(response.body, symbolize_names: true)
       @game.reload
@@ -53,7 +52,6 @@ describe "a player" do
 
     it "raises error when placing a ship on a preexisting ship" do
       post "/api/v1/games/#{@game.id}/ships", params: @ship_1_payload, headers: @player_1_headers
-      JSON.parse(response.body, symbolize_names: true)
       @game.reload
 
       ship_2_payload =  {
@@ -96,9 +94,7 @@ describe "a player" do
 
     it "can not place more than 2 ships" do
       post "/api/v1/games/#{@game.id}/ships", params: @ship_1_payload, headers: @player_1_headers
-      JSON.parse(response.body, symbolize_names: true)
       post "/api/v1/games/#{@game.id}/ships", params: @ship_2_payload, headers: @player_1_headers
-      JSON.parse(response.body, symbolize_names: true)
 
       ship_3_payload = {
                           ship_size: 3,

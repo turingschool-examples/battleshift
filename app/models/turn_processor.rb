@@ -11,8 +11,6 @@ class TurnProcessor
     begin
       attack_opponent
       game.save!
-    rescue InvalidMove => e
-      @messages << e.message
     end
   end
 
