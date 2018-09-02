@@ -15,6 +15,16 @@ class Space
     end
   end
 
+  def occupy!(ship)
+    @contents = ship
+  end
+
+  def occupied?
+    !!@contents
+  end
+
+  private
+
   def hit
     contents.take_damage
     @status = "Hit"
@@ -22,14 +32,6 @@ class Space
 
   def miss
     @status = "Miss"
-  end
-
-  def occupy!(ship)
-    @contents = ship
-  end
-
-  def occupied?
-    !!@contents
   end
 
   def not_attacked?
