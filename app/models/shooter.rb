@@ -5,9 +5,8 @@ class Shooter
   end
 
   def fire!
-    ship_status = {}
     if valid_shot?
-      status_report(ship_status)
+      status_report
     else
       raise InvalidMove.new("Invalid coordinates.")
     end
@@ -17,7 +16,8 @@ class Shooter
 
   attr_reader :board, :target
 
-  def status_report(ship_status)
+  def status_report
+    ship_status = {}
     ship_status[:ship_status] = space.change_status
     ship_status[:sunk] = space.contents.is_sunk? if !space.contents.nil?
     ship_status[:game_over] = true if board.ships.all? { |ship| ship.is_sunk? }

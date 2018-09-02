@@ -5,7 +5,17 @@ class Api::V1::GamesController < ApiController
     player_1 = User.find_by(auth_token: request.headers["X-API-KEY"])
     player_2 = User.find_by(email: params["opponent-email"]) || User.find_by(email: params[:opponent_email])
 
-    game = Game.new({
+    if create_game(player_1, player_2).save!
+      render json: @game
+    else
+      render json: "The game could not be made."
+    end
+  end
+
+  private
+
+  def create_game(player_1, player_2)
+    @game = Game.new({
       player_1_board: Board.new(4),
       player_2_board: Board.new(4),
       player_1_turns: 0,
@@ -16,11 +26,5 @@ class Api::V1::GamesController < ApiController
       player_1: player_1,
       player_2: player_2
     })
-
-    if game.save!
-      render json: game
-    else
-      render json: "The game could not be made."
-    end
   end
 end
