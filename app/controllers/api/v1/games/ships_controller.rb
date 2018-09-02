@@ -1,4 +1,6 @@
 class Api::V1::Games::ShipsController < ApiController
+  before_action :authenticate_token
+
   def create
     @game = Game.find(params[:game_id])
     ship = Ship.new(params[:ship_size])
