@@ -10,6 +10,13 @@ class Api::V1::GamesController < ApiController
   def set_players
     @player_1 = User.find_by(auth_token: request.headers["X-API-KEY"])
     @player_2 = User.find_by(email: params["opponent-email"]) || User.find_by(email: params[:opponent_email])
+    validate_status(@player_1, @player_2)
+  end
+
+  def validate_status(player_1, player_2)
+    unless [player_1, player_2].all? { |player| player.status == "active" }
+      render json: { message: "Unauthorized" }, status: 401
+    end
   end
 
   def create_game(player_1, player_2)
