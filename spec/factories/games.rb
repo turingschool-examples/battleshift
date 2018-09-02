@@ -6,7 +6,7 @@ FactoryBot.define do
     player_1_turns { 0 }
     player_2_turns { 0 }
     current_turn { 0 }
-    player_1_id { create(:user).id }
-    player_2_id { create(:user).id }
+    player_1_id { 1 }
+    player_2_id { 2 }
   end
 end
