@@ -20,7 +20,7 @@ class ApiController < ActionController::API
     user = User.where(auth_token: api_key).first if api_key
 
     unless user
-      render json: { message: "Invalid information." }, status: 400
+      render json: { message: "Unauthorized" }, status: 401
       return false
     end
   end

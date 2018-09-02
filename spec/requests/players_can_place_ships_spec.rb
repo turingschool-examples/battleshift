@@ -26,11 +26,9 @@ describe "a player" do
                         }.to_json
     end
 
-    it "places a ship on their board" do
+    it "player 1 places a ship on their board" do
       headers = { "CONTENT_TYPE" => "application/json", "X-API-KEY" => "#{@user_1.auth_token}"}
-
       post "/api/v1/games/#{@game.id}/ships", params: @ship_1_payload, headers: headers
-
       payload = JSON.parse(response.body, symbolize_names: true)
 
       @game.reload
@@ -41,39 +39,39 @@ describe "a player" do
       expect(@game.player_1_board.board.first.third["A3"].contents).to be_a(Ship)
     end
 
-    it "places two ships on the board" do
+    it "player 1 places two ships on the board" do
       headers = { "CONTENT_TYPE" => "application/json", "X-API-KEY" => "#{@user_1.auth_token}"}
-
       post "/api/v1/games/#{@game.id}/ships", params: @ship_1_payload, headers: headers
-
-      payload = JSON.parse(response.body, symbolize_names: true)
+      JSON.parse(response.body, symbolize_names: true)
 
       headers = { "CONTENT_TYPE" => "application/json", "X-API-KEY" => "#{@user_1.auth_token}"}
-
       post "/api/v1/games/#{@game.id}/ships", params: @ship_2_payload, headers: headers
-
       payload = JSON.parse(response.body, symbolize_names: true)
-
       @game.reload
 
       expect(payload[:message]).to eq("Successfully placed ship with a size of 2. You have 0 ship(s) to place.")
-
       expect(@game.player_1_board.board.fourth.first["D1"].contents).to be_a(Ship)
       expect(@game.player_1_board.board.fourth.second["D2"].contents).to be_a(Ship)
     end
 
-    xit "can not place a ship if it is not involved in the game" do
-
-      headers = { "CONTENT_TYPE" => "application/json", "X-API-KEY" => "#8y123998ashd"}
-
-      post "/api/v1/games/#{@game.id}/ships", params: @ship_1_payload, headers: headers
-
+    it "player 2 places a ship on board" do
+      headers = { "CONTENT_TYPE" => "application/json", "X-API-KEY" => "#{@user_2.auth_token}"}
+      post "/api/v1/games/#{@game.id}/ships", params: @ship_2_payload, headers: headers
       payload = JSON.parse(response.body, symbolize_names: true)
+      @game.reload
 
-      expect(response[:message]).to eq("Successfully placed ship with a size of 3. You have 1 ship(s) to place with a size of 2.")
-      expect(@game.player_1_board.board.first.first["A1"].contents).to be_a(Ship)
-
+      expect(payload[:message]).to eq("Successfully placed ship with a size of 2. You have 1 ship(s) to place with a size of 3.")
+      expect(@game.player_2_board.board.fourth.first["D1"].contents).to be_a(Ship)
+      expect(@game.player_2_board.board.fourth.second["D2"].contents).to be_a(Ship)
     end
 
+    it "can not place a ship if it is not involved in the game" do
+      headers = { "CONTENT_TYPE" => "application/json", "X-API-KEY" => "#8y123998ashd"}
+      post "/api/v1/games/#{@game.id}/ships", params: @ship_1_payload, headers: headers
+      payload = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to have_http_status(401)
+      expect(payload[:message]).to eq("Unauthorized")
+    end
   end
 end

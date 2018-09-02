@@ -1,14 +1,16 @@
 class Api::V1::GamesController < ApiController
-  before_action :authenticate_token, :authenticate_email
+  before_action :authenticate_token, :authenticate_email, :set_players
 
   def create
-    player_1 = User.find_by(auth_token: request.headers["X-API-KEY"])
-    player_2 = User.find_by(email: params["opponent-email"]) || User.find_by(email: params[:opponent_email])
-
-    render json: @game if create_game(player_1, player_2).save!
+    render json: @game if create_game(@player_1, @player_2).save!
   end
 
   private
+
+  def set_players
+    @player_1 = User.find_by(auth_token: request.headers["X-API-KEY"])
+    @player_2 = User.find_by(email: params["opponent-email"]) || User.find_by(email: params[:opponent_email])
+  end
 
   def create_game(player_1, player_2)
     @game = Game.new({

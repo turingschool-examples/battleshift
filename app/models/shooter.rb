@@ -5,11 +5,7 @@ class Shooter
   end
 
   def fire!
-    if valid_shot?
-      status_report
-    else
-      raise InvalidMove.new("Invalid coordinates.")
-    end
+    status_report
   end
 
   private
@@ -26,9 +22,5 @@ class Shooter
 
   def space
     @space ||= board.locate_space(target)
-  end
-
-  def valid_shot?
-    board.space_names.include?(target)
   end
 end

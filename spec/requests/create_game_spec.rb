@@ -34,8 +34,8 @@ describe 'post api/v1/games' do
 
     payload = JSON.parse(response.body, symbolize_names: true)
 
-    expect(response).to have_http_status(400)
-    expect(payload[:message]).to eq("Invalid information.")
+    expect(response).to have_http_status(401)
+    expect(payload[:message]).to eq("Unauthorized")
     expect(Game.count).to eq(0)
   end
 end
