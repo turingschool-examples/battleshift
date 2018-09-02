@@ -20,7 +20,7 @@ class ApiController < ActionController::API
     user = User.where(auth_token: api_key).first if api_key
 
     unless user
-      head(:bad_request)
+      render json: { message: "Invalid information." }, status: 400
       return false
     end
   end
@@ -30,7 +30,7 @@ class ApiController < ActionController::API
     user = User.where(email: email).first if email
 
     unless user
-      head(:bad_request)
+      render json: { message: "Invalid email." }, status: 400
       return false
     end
   end

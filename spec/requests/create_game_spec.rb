@@ -15,14 +15,29 @@ describe 'post api/v1/games' do
     expect(Game.count).to eq(1)
   end
 
-  it "can not create a game with invalid information" do
+  it "can not create a game with invalid email" do
     user_1 = create(:user)
-
     headers = { "CONTENT_TYPE" => "application/json", "X-API-KEY" => "#{user_1.auth_token}"}
     json_payload = {opponent_email: "0js09j0jads"}.to_json
+    post "/api/v1/games", params: json_payload, headers: headers
 
-    post = post "/api/v1/games", params: json_payload, headers: headers
+    payload = JSON.parse(response.body, symbolize_names: true)
 
+    expect(response).to have_http_status(400)
+    expect(payload[:message]).to eq("Invalid email.")
+    expect(Game.count).to eq(0)
+  end
+
+  it "can not create a game with invalid token" do
+    user_1 = create(:user)
+    headers = { "CONTENT_TYPE" => "application/json", "X-API-KEY" => "0u9jdasiojoid"}
+    json_payload = {opponent_email: "0js09j0jads"}.to_json
+    post "/api/v1/games", params: json_payload, headers: headers
+
+    payload = JSON.parse(response.body, symbolize_names: true)
+
+    expect(response).to have_http_status(400)
+    expect(payload[:message]).to eq("Invalid information.")
     expect(Game.count).to eq(0)
   end
 end

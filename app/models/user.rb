@@ -8,9 +8,6 @@ class User < ApplicationRecord
 
   validates_presence_of :status
 
-  has_many :games, class_name: 'Game', foreign_key: 'player_1_id', dependent: :destroy
-  has_many :games, class_name: 'Game', foreign_key: 'player_2_id', dependent: :destroy
-
   enum status: [:inactive, :active]
 
   def confirm_registration
