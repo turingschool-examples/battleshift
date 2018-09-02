@@ -1,5 +1,4 @@
 class ApiController < ActionController::API
-
   def current_user
     if request.env["HTTP_X_API_KEY"]
       @current_user ||= User.find_by(user_token: request.env["HTTP_X_API_KEY"])
@@ -14,6 +13,13 @@ class ApiController < ActionController::API
     if request.env["HTTP_X_API_KEY"] != game.player_1.user_token && request.env["HTTP_X_API_KEY"] != game.player_2.user_token
       render json: game, message: "Unauthorized", status: 401
     end
+  end
+
+  def find_valid_game(id)
+    game ||= Game.find(params[:id])
+    render json: game
+  rescue 
+    render json:{ "message": "Game Does Not Exist."}, status: 400
   end
 
   def game_over?

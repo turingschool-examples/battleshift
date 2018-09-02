@@ -11,4 +11,7 @@ class User < ApplicationRecord
 
   has_secure_password
   has_secure_token :user_token
+
+  has_many :games, class_name: "Game", foreign_key: "player_1_id"
+  has_many :games, class_name: "Game", foreign_key: "player_2_id"
 end
