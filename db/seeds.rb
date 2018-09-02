@@ -32,7 +32,7 @@ user_1 = User.create({username: 'matt',
           active: true})
 
 user_2 = User.create({username: 'chris',
-          email: 'matt.phoolishis@gmail.com',
+          email: 'matt.phoolish@gmail.com',
           password: 'drowssap',
           active: true})
 
