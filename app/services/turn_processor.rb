@@ -49,16 +49,6 @@ class TurnProcessor
     @space ||= opponent.locate_space(target)
   end
 
-  # def ai_attack_back
-  #   result = AiSpaceSelector.new(player.board).fire!
-  #   @messages << "The computer's shot resulted in a #{result}."
-  #   game.player_2_turns += 1
-  # end
-
-  def player
-    Player.new(game.player_1_board)
-  end
-
   def opponent
     if game.current_turn == "player 1"
       game.player_2_board
