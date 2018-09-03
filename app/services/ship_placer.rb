@@ -4,7 +4,6 @@ class ShipPlacer
     @ship        = ship
     @start_space = start_space
     @end_space   = end_space
-
   end
 
   def run

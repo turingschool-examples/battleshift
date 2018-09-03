@@ -20,7 +20,10 @@ class TurnProcessor
   end
 
   def two_player_run!
-    if game.current_turn == 'challenger' && @key == game.player_key
+  if game.winner != nil
+    @messages << "Invalid move. Game over."
+    @status = 400
+  elsif game.current_turn == 'challenger' && @key == game.player_key
       begin
         attack_opponent
         game.save!
@@ -53,6 +56,17 @@ class TurnProcessor
     if result == "Invalid coordinates"
       @status = 400
       @messages << result
+    elsif result == "Hit. Battleship sunk."
+      game.opponent_sunk_counter += 1
+      if game.opponent_sunk_counter < 2
+        @messages << "Your shot resulted in a #{result}."
+        game.player_1_turns += 1
+        game.current_turn = 2
+      else
+        @messages << "Your shot resulted in a #{result} Game over."
+        user = User.find_by(api_token: game.player_key)
+        game.update_attribute(:winner, user.email)
+      end
     else
       @messages << "Your shot resulted in a #{result}."
       game.player_1_turns += 1
@@ -65,9 +79,20 @@ class TurnProcessor
     if result == "Invalid coordinates"
       @status = 400
       @messages << result
+    elsif result == "Hit. Battleship sunk."
+      game.player_sunk_counter += 1
+      if game.player_sunk_counter < 2
+        @messages << "Your shot resulted in a #{result}."
+        game.player_2_turns += 1
+        game.current_turn = 0
+      else
+        @messages << "Your shot resulted in a #{result} Game over."
+        user = User.find_by(api_token: game.opponent_key)
+        game.update_attribute(:winner, user.email)
+      end
     else
       @messages << "Your shot resulted in a #{result}."
-      game.player_1_turns += 1
+      game.player_2_turns += 1
       game.current_turn = 0
     end
   end
