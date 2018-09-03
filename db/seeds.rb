@@ -43,7 +43,7 @@ game_attributes = {
   player_2_turns: 0,
   current_turn: 0,
   player_key: user_1.api_token,
-  opponent_key: user_2.api_token
+  opponent_key: nil
 }
 
 game = Game.new(game_attributes)

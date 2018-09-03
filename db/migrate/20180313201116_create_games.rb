@@ -8,7 +8,7 @@ class CreateGames < ActiveRecord::Migration[5.1]
       t.integer :player_2_turns
       t.integer :current_turn
       t.text :player_id
-      t.text :opponent_id
+      t.text :opponent_id, default: 'computer'
 
       t.timestamps
     end
