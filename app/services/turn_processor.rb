@@ -49,17 +49,27 @@ class TurnProcessor
   attr_reader :game, :target
 
   def attack_opponent
-    result = Shooter.fire!(board: opponent.board, target: target)
-    @messages << "Your shot resulted in a #{result}."
-    game.player_1_turns += 1
-    game.current_turn = 2
+    result = Shooter.new(board: opponent.board, target: target).fire!
+    if result == "Invalid coordinates"
+      @status = 400
+      @messages << result
+    else
+      @messages << "Your shot resulted in a #{result}."
+      game.player_1_turns += 1
+      game.current_turn = 2
+    end
   end
 
   def attack_player
-    result = Shooter.fire!(board: player.board, target: target)
-    @messages << "Your shot resulted in a #{result}."
-    game.player_1_turns += 1
-    game.current_turn = 0
+    result = Shooter.new(board: player.board, target: target).fire!
+    if result == "Invalid coordinates"
+      @status = 400
+      @messages << result
+    else
+      @messages << "Your shot resulted in a #{result}."
+      game.player_1_turns += 1
+      game.current_turn = 0
+    end
   end
 
   def ai_attack_back
