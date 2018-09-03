@@ -15,6 +15,24 @@ class TurnProcessor
     end
   end
 
+  def two_player_run!
+    if game.current_turn == 'challenger'
+      begin
+        attack_opponent
+        game.save!
+      rescue InvalidAttack => e
+        @messages << e.message
+      end
+    elsif game.current_turn == 'opponent'
+      begin
+        attack_player
+        game.save!
+      rescue InvalidAttack => e
+        @messages << e.message
+      end
+    end
+  end
+
   def message
     @messages.join(" ")
   end
@@ -27,6 +45,14 @@ class TurnProcessor
     result = Shooter.fire!(board: opponent.board, target: target)
     @messages << "Your shot resulted in a #{result}."
     game.player_1_turns += 1
+    game.current_turn = 2
+  end
+
+  def attack_player
+    result = Shooter.fire!(board: player.board, target: target)
+    @messages << "Your shot resulted in a #{result}."
+    game.player_1_turns += 1
+    game.current_turn = 0
   end
 
   def ai_attack_back
@@ -42,5 +68,4 @@ class TurnProcessor
   def opponent
     Player.new(game.player_2_board)
   end
-
 end
