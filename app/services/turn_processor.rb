@@ -1,8 +1,12 @@
 class TurnProcessor
-  def initialize(game, target)
+  attr_reader :status
+
+  def initialize(game, target, key = 'computer')
     @game   = game
     @target = target
     @messages = []
+    @key = key
+    @status = 200
   end
 
   def run!
@@ -16,20 +20,23 @@ class TurnProcessor
   end
 
   def two_player_run!
-    if game.current_turn == 'challenger'
+    if game.current_turn == 'challenger' && @key == game.player_key
       begin
         attack_opponent
         game.save!
       rescue InvalidAttack => e
         @messages << e.message
       end
-    elsif game.current_turn == 'opponent'
+    elsif game.current_turn == 'opponent' && @key == game.opponent_key
       begin
         attack_player
         game.save!
       rescue InvalidAttack => e
         @messages << e.message
       end
+    else
+      @status = 400
+      @messages << "Invalid move. It's your opponent's turn"
     end
   end
 
