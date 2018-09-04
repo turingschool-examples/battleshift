@@ -52,6 +52,14 @@ class ShipPlacer
       space.occupy!(ship)
     end
   end
+
+  def message
+    if ship.length == 3
+      "Successfully placed ship with a size of 3. You have 1 ship(s) to place with a size of 2."
+    elsif ship.length == 2
+      "Huh Dooh!"
+    end
+  end
 end
 
 class InvalidShipPlacement < StandardError
