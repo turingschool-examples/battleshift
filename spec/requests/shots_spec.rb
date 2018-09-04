@@ -167,7 +167,7 @@ describe "Api::V1::Shots" do
       expect(payload[:message]).to eq("Invalid move. It's your opponent's turn")
     end
 
-    it "sends message about invalid coordinates and set status to 400" do
+    it "sends message about invalid coordinates and returns 400 status" do
       headers = { "CONTENT_TYPE" => "application/json", "X-API-KEY" => "#{@user_1.auth_token}" }
 
       targeted_space = "D5"
@@ -243,15 +243,9 @@ describe "Api::V1::Shots" do
       json_payload = {target: "A1"}.to_json
       post "/api/v1/games/#{game.id}/shots", params: json_payload, headers: headers
 
-      game.reload
-
       headers = { "CONTENT_TYPE" => "application/json", "X-API-KEY" => "#{@user_2.auth_token}" }
       json_payload = {target: "A3"}.to_json
       post "/api/v1/games/#{game.id}/shots", params: json_payload, headers: headers
-
-      game.reload
-
-      payload = JSON.parse(response.body, symbolize_names: true)
 
       headers = { "CONTENT_TYPE" => "application/json", "X-API-KEY" => "#{@user_1.auth_token}" }
       json_payload = {target: "A2"}.to_json
