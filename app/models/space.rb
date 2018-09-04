@@ -7,13 +7,12 @@ class Space
     @status      = "Not Attacked"
   end
 
-  def attack!
-    @status = if contents && not_attacked?
-                contents.attack!
-                "Hit"
-              else
-                "Miss"
-              end
+  def change_status
+    if contents && not_attacked?
+      hit
+    else
+      miss
+    end
   end
 
   def occupy!(ship)
@@ -24,8 +23,18 @@ class Space
     !!@contents
   end
 
+  private
+
+  def hit
+    contents.take_damage
+    @status = "Hit"
+  end
+
+  def miss
+    @status = "Miss"
+  end
+
   def not_attacked?
     status == "Not Attacked"
   end
 end
-
