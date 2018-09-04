@@ -11,6 +11,8 @@ describe 'post api/v1/games' do
     game = Game.last
 
     expect(Game.count).to eq(1)
+    expect(game.player_1_auth_token).to eq(user_1.auth_token)
+    expect(game.player_2_auth_token).to eq(user_2.auth_token)
   end
 
   it "can not create a game with invalid email" do
