@@ -9,6 +9,10 @@ class UserService
     get_json("/api/v1/users/#{filter[:id]}")
   end
 
+  def all_user_data
+    get_json("/api/v1/users")
+  end
+  
   private
 
   def conn
