@@ -19,3 +19,5 @@
 /coverage
 
 .byebug_history
+
+config/application.yml
