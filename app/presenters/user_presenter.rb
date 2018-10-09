@@ -9,6 +9,12 @@ class UserPresenter
     UserDisplay.new(user_service.single_user_data)
   end
 
+  def all_users
+    user_service.all_users_data.map do |user_data|
+      UserDisplay.new(user_data)
+    end
+  end
+
   private
 
   def user_service
