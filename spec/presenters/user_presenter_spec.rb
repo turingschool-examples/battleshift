@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe UserPresenter
+describe UserPresenter do
   it 'exists' do
     user_presenter = UserPresenter.new
 
@@ -12,7 +12,7 @@ describe UserPresenter
       it 'should return a single user_display object' do
         user_presenter = UserPresenter.new
 
-        expectuser_presenter.single_user_object({id: 1})).to be_a(UserDisplay)
+        expect(user_presenter.single_user_object({id: 1})).to be_a(UserDisplay)
       end
     end
   end
