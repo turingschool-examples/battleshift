@@ -1,21 +1,27 @@
 class UserService
-  def initialize(id)
-    @id = id
+  attr_reader :filter
+
+  def initialize(filter = {})
+    @filter = filter
   end
 
-  def user_data
-    JSON.parse(response.body, symbolize_names: true)
+  def single_user_data
+    get_json("/api/v1/users/#{filter[:id]}")
+  end
+
+  def all_user_data
+    get_json("/api/v1/users")
   end
 
   private
 
   def conn
-    Faraday.new(url: ENV['API_DOMAIN_NAME']) do |faraday|
+    Faraday.new("http://localhost:3000") do |faraday|
       faraday.adapter Faraday.default_adapter
     end
   end
 
-  def response
-    conn.get("/api/v1/users/#{@id}")
+  def get_json(url)
+    JSON.parse(conn.get(url).body, symbolize_names: true)
   end
 end

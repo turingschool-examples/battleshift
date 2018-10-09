@@ -1,11 +1,23 @@
 class UserPresenter
+  attr_reader :filter
 
-  def user_service(id)
-    UserService.new(id)
+  def initialize(filter = {})
+    @filter = filter
   end
 
-  def user_object(id)
-    UserDisplay.new(user_service(id).user_data)
+  def single_user_object
+    @user ||= UserDisplay.new(user_service.single_user_data)
   end
 
+  def all_users
+    @users ||= user_service.all_user_data.map do |user_data|
+      UserDisplay.new(user_data)
+    end
+  end
+
+  private
+
+  def user_service
+    UserService.new(filter)
+  end
 end
