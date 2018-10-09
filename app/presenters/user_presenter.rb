@@ -6,11 +6,11 @@ class UserPresenter
   end
 
   def single_user_object
-    UserDisplay.new(user_service.single_user_data)
+    @user ||= UserDisplay.new(user_service.single_user_data)
   end
 
   def all_users
-    user_service.all_user_data.map do |user_data|
+    @users ||= user_service.all_user_data.map do |user_data|
       UserDisplay.new(user_data)
     end
   end
