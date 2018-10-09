@@ -12,7 +12,7 @@ class UserService
   def all_user_data
     get_json("/api/v1/users")
   end
-  
+
   private
 
   def conn
