@@ -23,6 +23,7 @@ group :development, :test do
   gem 'pry'
   gem 'launchy'
   gem 'shoulda-matchers'
+  gem 'database_cleaner'
 end
 
 group :test do
