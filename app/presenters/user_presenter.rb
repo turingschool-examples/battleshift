@@ -1,11 +1,12 @@
 class UserPresenter
 
-  def user_service(id)
-    UserService.new(id)
+  def single_user_object(filter)
+    UserDisplay.new(user_service(filter).single_user_data)
   end
 
-  def user_object(id)
-    UserDisplay.new(user_service(id).user_data)
-  end
+  private
 
+  def user_service(filter)
+    UserService.new(filter)
+  end
 end
