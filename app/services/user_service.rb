@@ -10,9 +10,9 @@ class UserService
   private
 
   def conn
-    Faraday.new(:url => ENV["API_DOMAIN_NAME"]) do |faraday|
+    Faraday.new(url: ENV['API_DOMAIN_NAME']) do |faraday|
       faraday.adapter Faraday.default_adapter
-    end 
+    end
   end
 
   def response
