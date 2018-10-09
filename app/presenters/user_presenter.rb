@@ -10,7 +10,7 @@ class UserPresenter
   end
 
   def all_users
-    user_service.all_users_data.map do |user_data|
+    user_service.all_user_data.map do |user_data|
       UserDisplay.new(user_data)
     end
   end

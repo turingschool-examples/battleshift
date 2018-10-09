@@ -19,5 +19,15 @@ describe UserService do
         expect(user_service.single_user_data).to have_key(:email)
       end
     end
+    describe '#all_user_data' do
+      it 'returns the parsed response' do
+        user_service = UserService.new
+
+        expect(user_service.all_user_data).to be_a(Array)
+        expect(user_service.all_user_data.first).to have_key(:id)
+        expect(user_service.all_user_data.first).to have_key(:name)
+        expect(user_service.all_user_data.first).to have_key(:email)
+      end
+    end
   end
 end
