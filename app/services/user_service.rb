@@ -1,10 +1,12 @@
 class UserService
+  attr_reader :filter
+
   def initialize(filter = {})
     @filter = filter
   end
 
   def single_user_data
-    get_json("/api/v1/users/#{@filter[:id]}")
+    get_json("/api/v1/users/#{filter[:id]}")
   end
 
   private

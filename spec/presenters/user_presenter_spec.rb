@@ -10,9 +10,9 @@ describe UserPresenter do
   context 'instance methods' do
     context '#single_user_object' do
       it 'should return a single user_display object' do
-        user_presenter = UserPresenter.new
+        user_presenter = UserPresenter.new({id: 1})
 
-        expect(user_presenter.single_user_object({id: 1})).to be_a(UserDisplay)
+        expect(user_presenter.single_user_object).to be_a(UserDisplay)
       end
     end
   end
