@@ -9,4 +9,6 @@ Rails.application.routes.draw do
       resources :users, only: [:index, :show]
     end
   end
+  
+  get '/users/:id', to: 'get_users#show'
 end
