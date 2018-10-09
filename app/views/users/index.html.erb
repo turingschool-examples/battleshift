@@ -1,5 +1,6 @@
-
-<% @search_users.each do |user| %>
-  <div class='name'> <%= user.name %> </div>
-  <div class='email'> <%= user.email %> </div>
+<% @search_result.all_users.each do |user| %>
+  <div class='user'>
+    <p class='name'> <%= user.name %> </p>
+    <p class='email'> <%= user.email %> </p>
+  </div>
 <% end %>
