@@ -1,0 +1,147 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://localhost:3000/api/v1/users
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.15.3
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"b06a3d53fddb4876ea1b4e4c696d64a1"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 727be582-523d-4e3f-a994-92ab71d03beb
+      X-Runtime:
+      - '0.003690'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '[{"id":1,"name":"Josiah Bartlet","email":"jbarlet@example.com"},{"id":2,"name":"Bob
+        Smith","email":"bobsmith@example.com"}]'
+    http_version: 
+  recorded_at: Tue, 09 Oct 2018 21:20:31 GMT
+- request:
+    method: get
+    uri: http://localhost:3000/api/v1/users
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.15.3
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"b06a3d53fddb4876ea1b4e4c696d64a1"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - f667b230-66ce-4acb-9bbf-d91cbf958575
+      X-Runtime:
+      - '0.002806'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '[{"id":1,"name":"Josiah Bartlet","email":"jbarlet@example.com"},{"id":2,"name":"Bob
+        Smith","email":"bobsmith@example.com"}]'
+    http_version: 
+  recorded_at: Tue, 09 Oct 2018 21:20:31 GMT
+- request:
+    method: get
+    uri: http://localhost:3000/api/v1/users
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.15.3
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"b06a3d53fddb4876ea1b4e4c696d64a1"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 34a582b8-d9de-417e-9801-5f188729e28f
+      X-Runtime:
+      - '0.002401'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '[{"id":1,"name":"Josiah Bartlet","email":"jbarlet@example.com"},{"id":2,"name":"Bob
+        Smith","email":"bobsmith@example.com"}]'
+    http_version: 
+  recorded_at: Tue, 09 Oct 2018 21:20:31 GMT
+- request:
+    method: get
+    uri: http://localhost:3000/api/v1/users
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.15.3
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"b06a3d53fddb4876ea1b4e4c696d64a1"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 58f18096-b0c8-4cab-8359-25a5ba28668c
+      X-Runtime:
+      - '0.002484'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '[{"id":1,"name":"Josiah Bartlet","email":"jbarlet@example.com"},{"id":2,"name":"Bob
+        Smith","email":"bobsmith@example.com"}]'
+    http_version: 
+  recorded_at: Tue, 09 Oct 2018 21:20:31 GMT
+recorded_with: VCR 4.0.0

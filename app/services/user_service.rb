@@ -16,7 +16,7 @@ class UserService
   private
 
   def conn
-    Faraday.new("http://localhost:3000") do |faraday|
+    Faraday.new(ENV["API_DOMAIN_NAME"]) do |faraday|
       faraday.adapter Faraday.default_adapter
     end
   end
