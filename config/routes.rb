@@ -10,5 +10,5 @@ Rails.application.routes.draw do
     end
   end
   
-  get '/users/:id', to: 'users_search#show'
+  resources :users, only: [:index, :show]
 end

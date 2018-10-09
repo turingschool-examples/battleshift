@@ -1,8 +1,10 @@
-class ExpectedUser 
-  attr_reader :name, 
+class ResultUser 
+  attr_reader :id,
+              :name, 
               :email
               
   def initialize(data)
+    @id   = data[:id]
     @name = data[:name]
     @email = data[:email]
   end 
