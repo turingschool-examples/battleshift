@@ -5,7 +5,7 @@ describe UserDisplay do
     hash = {
               id: 1,
               name: "Billy Bob",
-              email: billybob@example.com
+              email: "billybob@example.com"
             }
 
     user_display = UserDisplay.new(hash)
@@ -17,7 +17,7 @@ describe UserDisplay do
     hash = {
               id: 1,
               name: "Billy Bob",
-              email: billybob@example.com
+              email: "billybob@example.com"
             }
 
     user_display = UserDisplay.new(hash)
