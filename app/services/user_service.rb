@@ -10,10 +10,12 @@ class UserService
   private
 
   def conn
-    Faraday.new
+    Faraday.new(:url => ENV["API_DOMAIN_NAME"]) do |faraday|
+      faraday.adapter Faraday.default_adapter
+    end 
   end
 
   def response
-    conn.get("http://localhost:3000/api/v1/users/#{@id}")
+    conn.get("/api/v1/users/#{@id}")
   end
 end
