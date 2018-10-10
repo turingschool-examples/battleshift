@@ -6,7 +6,7 @@ feature 'Guest user sees user information' do
     # As a guest user
     # When I visit "/users/1"
     visit "/users/1"
-    
+  
     # Then I should see the user's name Josiah Bartlet
     # And I should see the user's email address jbartlet@example.com
     expect(page).to have_content(user.name)
