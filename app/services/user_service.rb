@@ -13,7 +13,7 @@ class UserService
   end
 
   def user_patch(hash)
-    conn.patch("/api/v1/users/#{@id}", hash)
+    conn.patch("/api/v1/users/#{@id}", body = hash)
   end
 
  private
