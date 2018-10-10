@@ -7,4 +7,7 @@ class UsersController < ApplicationController
   def show
     @search_result = UserPresenter.new({id: params[:id]})
   end
+
+  def edit
+  end
 end
