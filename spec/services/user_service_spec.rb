@@ -33,5 +33,17 @@ describe UserService do
         end
       end
     end
+    describe '#update_user_data' do
+      it 'returns the parsed response with updated information' do
+        VCR.use_cassette("updated_user_data") do
+          user_service = UserService.new
+
+          expect(user_service.updated_user_data).to be_a(Hash)
+          expect(user_service.updated_user_data.first).to have_key(:id)
+          expect(user_service.updated_user_data.first).to have_key(:name)
+          expect(user_service.updated_user_data.first).to have_key(:email)
+        end
+      end
+    end
   end
 end
