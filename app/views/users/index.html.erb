@@ -1,6 +1,7 @@
 <% @users_facade.users.each do |user| %>
-  <ul>
+  <ul id="user-<%= user.id %>"    >
     <li><%= user.name %></li>
     <li><%= user.email %></li>
+    <li> <%= link_to "Edit", "/users/#{user.id}/edit" %> </li>
   </ul>
 <% end  %>

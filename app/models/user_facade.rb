@@ -1,5 +1,4 @@
 class UserFacade
-  attr_reader :name, :email
 
   def initialize(id)
     @id = id
@@ -8,7 +7,7 @@ class UserFacade
   def user
       # this returns the parsed response (hash)
 
-    @user ||= User.new(service.user_search)
+    user ||= User.new(service.user_search)
   end
 
     private
