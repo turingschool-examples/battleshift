@@ -16,7 +16,7 @@ require 'rails_helper'
 
       visit '/users'
 
-      user = User.create(id: 1, name: 'Josiah', email: 'jbarlet@example.com')
+      user = User.create(id: 1, name: 'Josiah Bartlet', email: 'jbarlet@example.com')
 
       within("#user-#{user.id}") do
         click_on 'Edit'
@@ -28,7 +28,7 @@ require 'rails_helper'
       click_on 'Save'
 
       expect(current_path).to eq('/users')
-      expect(page).to have_content('Successfully updated Josiah.')
+      expect(page).to have_content('Successfully updated Josiah Bartlet.')
       expect(page).to have_content('josiah@example.com')
       expect(page).to_not have_content('jbartlet@example.com')
     end
