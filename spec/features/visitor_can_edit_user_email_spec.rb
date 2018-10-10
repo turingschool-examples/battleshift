@@ -8,7 +8,7 @@ feature 'visitor can edit email' do
 # And I click on `Edit` for Josiah Bartlet
   within "#user-1" do
     click_on "Edit"
-  end 
+  end
 
   # Then I should be on "/users/1/edit"
   expect(current_path).to eq("/users/1/edit")

@@ -17,7 +17,7 @@ class UsersController < ApplicationController
     service = UserService.new(params[:id])
     service.user_patch(hash.to_json)
 
-    flash[:notice] = "Successfully updated "
+    flash[:notice] = "Successfully updated  "
       redirect_to "/users"
   end
 
