@@ -1,4 +1,4 @@
-class FindUser
+class UserLogic
   
   def initialize(filter = {})
     @filter = filter

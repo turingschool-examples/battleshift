@@ -1,10 +1,11 @@
 class UsersController < ApplicationController
   
   def show
-    @user = FindUser.new(params[:id])
+    @user = UserLogic.new(params).expected_user
   end
   
   def index
-    @users = FindUser.new
+    @users = UserLogic.new.expected_users
   end
+  
 end

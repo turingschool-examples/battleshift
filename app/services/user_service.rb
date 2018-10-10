@@ -4,7 +4,7 @@ class UserService
   end
   
   def get_user
-    get_json("/api/v1/users/#{@filter}")
+    get_json("/api/v1/users/#{@filter[:id]}")
   end
   
   def get_users 
