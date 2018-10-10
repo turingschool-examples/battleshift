@@ -18,6 +18,6 @@ class FindUser
   
   private 
     def service
-      UserService.new{@filter}
+      UserService.new(@filter)
     end
 end 

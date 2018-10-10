@@ -10,8 +10,8 @@ describe UserService do
   it 'returns users' do 
     user_service = UserService.new
     
-    user = user_service.get_user.first
-    expect(user_service.get_user.count).to eq(2)
+    user = user_service.get_users.first
+    expect(user_service.get_users.count).to eq(2)
     expect(user).to have_key(:name)
     expect(user).to have_key(:email)
   end
