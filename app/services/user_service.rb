@@ -14,7 +14,7 @@ class UserService
   end
 
   def update_user_data(new_email)
-    # conn.patch("/api/v1/users/#{filter[:id]}", body = {email: new_email}.to_s)
+    # refactor by taking params out of URI
     conn.patch("/api/v1/users/#{filter[:id]}?email=#{new_email}")
   end
 
