@@ -12,6 +12,10 @@ class UserService
     get_json("/api/v1/users")
   end
 
+  def user_patch(hash)
+    conn.patch("/api/v1/users/#{@id}", hash)
+  end
+
  private
 
     def conn
