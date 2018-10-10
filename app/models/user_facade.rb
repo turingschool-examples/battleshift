@@ -1,5 +1,4 @@
 class UserFacade
-  attr_reader :name, :email
 
   def initialize(id)
     @id = id

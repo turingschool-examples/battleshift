@@ -1,6 +1,4 @@
 class UsersFacade
-  attr_reader :name, :email
-
 
   def users
       # this returns the parsed response (hash)
