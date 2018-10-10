@@ -13,6 +13,11 @@ class UserService
     get_json("/api/v1/users")
   end
 
+  def update_user_data(new_email)
+    # conn.patch("/api/v1/users/#{filter[:id]}", body = {email: new_email}.to_s)
+    conn.patch("/api/v1/users/#{filter[:id]}?email=#{new_email}")
+  end
+
   private
 
   def conn
