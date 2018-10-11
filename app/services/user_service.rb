@@ -12,8 +12,8 @@ class UserService
     get_json("/api/v1/users")
   end
 
-  def user_patch(hash)
-    conn.patch("/api/v1/users/#{@id}", body = hash)
+  def user_patch(email)
+    conn.patch("/api/v1/users/#{@id}.params?email=#{email}")
   end
 
  private
