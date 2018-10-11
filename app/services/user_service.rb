@@ -19,7 +19,7 @@ class UserService
  private
 
     def conn
-      Faraday.new(url: "http://localhost:3000/") do |faraday|
+      Faraday.new(url: "https://sleepy-reef-89338.herokuapp.com/") do |faraday|
         faraday.adapter Faraday.default_adapter
       end
     end
