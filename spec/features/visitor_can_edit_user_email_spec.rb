@@ -3,11 +3,15 @@ require 'rails_helper'
 feature 'visitor can edit email' do
   scenario 'edits email' do
 # When I visit "/users"
+VCR.use_cassette("visitor_can_edit_email#index") do
   visit "/users"
+end
 
 # And I click on `Edit` for Josiah Bartlet
   within "#user-1" do
-    click_on "Edit"
+    VCR.use_cassette("visitor_click_on_edit") do
+      click_on "Edit"
+    end
   end
 
   # Then I should be on "/users/1/edit"
@@ -17,7 +21,9 @@ feature 'visitor can edit email' do
   fill_in :Email, with: "josiah@example.com"
 
   # And I click "Save"
-  click_on "Save"
+  VCR.use_cassette("visitor_click_on_save") do
+    click_on "Save"
+  end
   # Then I should be on "/users"
   expect(current_path).to eq("/users")
   # And I should see a flash message that says "Successfully updated Josiah Bartlet."

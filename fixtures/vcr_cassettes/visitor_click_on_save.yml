@@ -1,0 +1,92 @@
+---
+http_interactions:
+- request:
+    method: patch
+    uri: https://sleepy-reef-89338.herokuapp.com/api/v1/users/1.params?email=josiah@example.com
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.15.3
+      Content-Length:
+      - '0'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Cowboy
+      Date:
+      - Thu, 11 Oct 2018 17:12:25 GMT
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"a51a15a3c1a744c42334e37f2fd62eef"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - b3bf66a9-9f12-4dda-a3d1-034627bcbdbd
+      X-Runtime:
+      - '0.007217'
+      Transfer-Encoding:
+      - chunked
+      Via:
+      - 1.1 vegur
+    body:
+      encoding: UTF-8
+      string: '{"id":1,"name":"Josiah Bartlet","email":"josiah@example.com"}'
+    http_version: 
+  recorded_at: Thu, 11 Oct 2018 17:12:25 GMT
+- request:
+    method: get
+    uri: https://sleepy-reef-89338.herokuapp.com/api/v1/users
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.15.3
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Cowboy
+      Date:
+      - Thu, 11 Oct 2018 17:12:25 GMT
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"99022e306c382f49cddfa80cc625fc99"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - c511d490-1430-4a71-90cb-3b8d31433317
+      X-Runtime:
+      - '0.008169'
+      Transfer-Encoding:
+      - chunked
+      Via:
+      - 1.1 vegur
+    body:
+      encoding: UTF-8
+      string: '[{"id":2,"name":"Mike Tyson","email":"ironmike@happypuppy.com"},{"id":1,"name":"Josiah
+        Bartlet","email":"josiah@example.com"}]'
+    http_version: 
+  recorded_at: Thu, 11 Oct 2018 17:12:25 GMT
+recorded_with: VCR 4.0.0
