@@ -12,14 +12,14 @@ class UserService
     get_json("/api/v1/users")
   end
 
-  def user_patch(hash)
-    conn.patch("/api/v1/users/#{@id}", body = hash)
+  def user_patch(email)
+    conn.patch("/api/v1/users/#{@id}.params?email=#{email}")
   end
 
  private
 
     def conn
-      Faraday.new(url: "https://sleepy-reef-89338.herokuapp.com/") do |faraday|
+      Faraday.new(url: "http://localhost:3000/") do |faraday|
         faraday.adapter Faraday.default_adapter
       end
     end

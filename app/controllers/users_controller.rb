@@ -13,9 +13,8 @@ class UsersController < ApplicationController
   end
 
   def update
-    hash = {email: params[:email]}
     service = UserService.new(params[:id])
-    service.user_patch(hash.to_json)
+    service.user_patch(params[:email])
     flash[:notice] = "Successfully updated "
     redirect_to "/users"
   end
