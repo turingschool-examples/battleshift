@@ -13,14 +13,14 @@ describe "As a visitor" do
       # And when I fill in an email address (required)
       # And I fill in name (required)
       # And I fill in password and password confirmation (required)
-      fill_in :email, with: "bob@123@gmail"
-      fill_in :name, with: "Bob Saget"
-      fill_in :password, with: "password"
-      fill_in :password_confirmation, with: "password"
+      fill_in :user_email, with: "bob@123@gmail"
+      fill_in :user_name, with: "Bob Saget"
+      fill_in :user_password, with: "password"
+      fill_in :user_password_confirmation, with: "password"
       # And I click submit
       click_on "Submit"
       # Then I should be redirected to "/dashboard"
-      expect(curret_path).to eq("/dashboard")
+      expect(current_path).to eq("/dashboard")
       # And I should see a message that says "Logged in as <SOME_NAME>"
       expect(page).to have_content("Logged in as Bob Saget")
       # And I should see "This account has not yet been activated. Please check your email."

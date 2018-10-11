@@ -19,4 +19,24 @@ class UsersController < ApplicationController
     redirect_to "/users"
   end
 
+  def new
+    @user = User.new
+  end
+
+  def create
+    @user = User.create(user_params)
+    if @user.save
+      redirect_to dashboard_path(id: @user.id)
+    else
+      render :new
+    end
+  end
+
+  private
+
+    def user_params
+      params.require(:user).permit(:id, :name, :email, :password, :password_confirmation)
+
+    end
+
 end
