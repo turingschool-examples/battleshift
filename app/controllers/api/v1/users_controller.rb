@@ -11,7 +11,9 @@ module Api
 
       def update
         user = User.find(params[:id])
-        render json: user if user.update(user_params)
+        if user.update(user_params)
+          render json: user
+        end
       end
 
       private

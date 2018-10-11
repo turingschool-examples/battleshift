@@ -14,8 +14,8 @@ class UsersController < ApplicationController
 
   def update
     service = UserService.new(params[:id])
-    service.user_patch(params[:email])
-    flash[:notice] = "Successfully updated "
+    user = JSON.parse(service.user_patch(params[:email]).body)
+    flash[:notice] = "Successfully updated #{user["name"]}."
     redirect_to "/users"
   end
 
