@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root to: "welcome#index"
   get '/register', to: "users#new"
   get '/dashboard', to: "welcome#show"
+  get '/activation', to: "activation#index"
 
   namespace :api do
     namespace :v1 do

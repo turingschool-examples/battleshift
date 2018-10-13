@@ -7,11 +7,11 @@
 # stripe_publishable_key: pk_test_ro9jV5SNwGb1yYlQfzG17LHK
 #
 production:
-  path: https://sleepy-reef-89338.herokuapp.com/
+  path: https://sleepy-reef-89338.herokuapp.com
 #   stripe_api_key: sk_live_EeHnL644i6zo4Iyq4v1KdV9H
 #   stripe_publishable_key: pk_live_9lcthxpSIHbGwmdO941O1XVU
 development:
   path: http://localhost:3000
 
 test:
-  path: http://localhost:3000
+  path: https://sleepy-reef-89338.herokuapp.com
