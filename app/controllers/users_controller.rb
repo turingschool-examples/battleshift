@@ -1,3 +1,5 @@
+require 'securerandom'
+
 class UsersController < ApplicationController
 
   def show
@@ -26,7 +28,11 @@ class UsersController < ApplicationController
   def create
     @user = User.create(user_params)
     if @user.save
-      redirect_to dashboard_path(id: @user.id)
+      session[:user_id] = @user.id
+      @user.api_key = SecureRandom.urlsafe_base64
+      UserMailer.activation(@user)
+      flash[:notice] = "This account has not yet been activated. Please check your email."
+      redirect_to dashboard_path
     else
       render :new
     end
@@ -36,7 +42,6 @@ class UsersController < ApplicationController
 
     def user_params
       params.require(:user).permit(:id, :name, :email, :password, :password_confirmation)
-
     end
 
 end
