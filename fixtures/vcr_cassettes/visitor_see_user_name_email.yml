@@ -21,7 +21,7 @@ http_interactions:
       Server:
       - Cowboy
       Date:
-      - Sat, 13 Oct 2018 20:15:43 GMT
+      - Sat, 13 Oct 2018 21:08:25 GMT
       Connection:
       - keep-alive
       Content-Type:
@@ -31,9 +31,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 5ea6249b-bf27-4561-b1a0-30e870c82bd6
+      - 6a35e2d4-b655-46e9-9983-31fd641a73da
       X-Runtime:
-      - '0.006058'
+      - '0.005446'
       Transfer-Encoding:
       - chunked
       Via:
@@ -42,7 +42,7 @@ http_interactions:
       encoding: UTF-8
       string: '{"id":1,"name":"Josiah Bartlet","email":"josiah@example.com"}'
     http_version: 
-  recorded_at: Sat, 13 Oct 2018 20:15:43 GMT
+  recorded_at: Sat, 13 Oct 2018 21:08:25 GMT
 - request:
     method: get
     uri: https://sleepy-reef-89338.herokuapp.com/api/v1/users/1
@@ -64,7 +64,7 @@ http_interactions:
       Server:
       - Cowboy
       Date:
-      - Sat, 13 Oct 2018 20:15:44 GMT
+      - Sat, 13 Oct 2018 21:08:25 GMT
       Connection:
       - keep-alive
       Content-Type:
@@ -74,9 +74,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 525ef387-62a1-47b4-81ab-027186c4ff42
+      - 04e26bd5-6c01-4bfa-bf2c-722c78e39fce
       X-Runtime:
-      - '0.005906'
+      - '0.007102'
       Transfer-Encoding:
       - chunked
       Via:
@@ -85,5 +85,5 @@ http_interactions:
       encoding: UTF-8
       string: '{"id":1,"name":"Josiah Bartlet","email":"josiah@example.com"}'
     http_version: 
-  recorded_at: Sat, 13 Oct 2018 20:15:44 GMT
+  recorded_at: Sat, 13 Oct 2018 21:08:26 GMT
 recorded_with: VCR 4.0.0

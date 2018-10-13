@@ -21,7 +21,7 @@ http_interactions:
       Server:
       - Cowboy
       Date:
-      - Sat, 13 Oct 2018 20:15:42 GMT
+      - Sat, 13 Oct 2018 21:08:23 GMT
       Connection:
       - keep-alive
       Content-Type:
@@ -31,9 +31,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - d20322d6-f93d-476b-b73c-c7d00428c73d
+      - 7cb363ca-f922-456e-b477-837e9ac862ae
       X-Runtime:
-      - '0.009656'
+      - '0.079954'
       Transfer-Encoding:
       - chunked
       Via:
@@ -43,5 +43,5 @@ http_interactions:
       string: '[{"id":2,"name":"Mike Tyson","email":"ironmike@happypuppy.com"},{"id":1,"name":"Josiah
         Bartlet","email":"josiah@example.com"}]'
     http_version: 
-  recorded_at: Sat, 13 Oct 2018 20:15:42 GMT
+  recorded_at: Sat, 13 Oct 2018 21:08:24 GMT
 recorded_with: VCR 4.0.0
