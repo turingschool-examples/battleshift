@@ -23,7 +23,7 @@ http_interactions:
       Server:
       - Cowboy
       Date:
-      - Sat, 13 Oct 2018 20:15:42 GMT
+      - Sat, 13 Oct 2018 21:08:24 GMT
       Connection:
       - keep-alive
       Content-Type:
@@ -33,9 +33,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 82b897eb-8cd3-46f7-bfeb-8606116e9be7
+      - 63bba5fc-930c-45d0-8aaf-b4feee119d36
       X-Runtime:
-      - '0.020539'
+      - '0.029260'
       Transfer-Encoding:
       - chunked
       Via:
@@ -44,7 +44,7 @@ http_interactions:
       encoding: UTF-8
       string: '{"id":1,"name":"Josiah Bartlet","email":"josiah@example.com"}'
     http_version: 
-  recorded_at: Sat, 13 Oct 2018 20:15:43 GMT
+  recorded_at: Sat, 13 Oct 2018 21:08:24 GMT
 - request:
     method: get
     uri: https://sleepy-reef-89338.herokuapp.com/api/v1/users
@@ -66,7 +66,7 @@ http_interactions:
       Server:
       - Cowboy
       Date:
-      - Sat, 13 Oct 2018 20:15:42 GMT
+      - Sat, 13 Oct 2018 21:08:25 GMT
       Connection:
       - keep-alive
       Content-Type:
@@ -76,9 +76,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 663dc368-b1be-44bc-8d13-53cb33923474
+      - 353bb7e4-870c-43f8-b4ba-ebf5618f81b2
       X-Runtime:
-      - '0.008687'
+      - '0.008476'
       Transfer-Encoding:
       - chunked
       Via:
@@ -88,5 +88,5 @@ http_interactions:
       string: '[{"id":2,"name":"Mike Tyson","email":"ironmike@happypuppy.com"},{"id":1,"name":"Josiah
         Bartlet","email":"josiah@example.com"}]'
     http_version: 
-  recorded_at: Sat, 13 Oct 2018 20:15:43 GMT
+  recorded_at: Sat, 13 Oct 2018 21:08:25 GMT
 recorded_with: VCR 4.0.0

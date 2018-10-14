@@ -1,4 +1,4 @@
-# require 'rails_helper'
+require 'rails_helper'
 #
 # # Background: The registration process will trigger this story
 # #
@@ -11,9 +11,16 @@ describe 'As a non-activated user' do
                          email: "tcraig@aol.com",
                          password: "password",
                          api_key: SecureRandom.urlsafe_base64,
-                         activated: false
+                         activated: true
                        )
 
+      visit "/activation/#{user.id}?api_key=#{user.api_key}"
+
+      expect(page).to have_content("Thank you! Your account is now activated.")
+
+      visit "/dashboard?api_key=#{user.api_key}"
+
+      expect(page).to have_content("Status: Active")
     end
   end
 end
