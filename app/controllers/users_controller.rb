@@ -26,13 +26,13 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.create(user_params)
+    @user = User.new(user_params)
+    @user.update(api_key: SecureRandom.urlsafe_base64)
     if @user.save
       session[:user_id] = @user.id
-      @user.api_key = SecureRandom.urlsafe_base64
-      UserMailer.activation(@user)
+      UserMailer.activation(@user).deliver_now
       flash[:notice] = "This account has not yet been activated. Please check your email."
-      redirect_to dashboard_path
+      redirect_to dashboard_path(api_key: @user.api_key)
     else
       render :new
     end
