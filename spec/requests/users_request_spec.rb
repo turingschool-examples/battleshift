@@ -3,7 +3,8 @@ require 'rails_helper'
 describe "users api endpoints" do
   context "GET /api/v1/users" do
     it "returns a list of users" do
-      create_list(:user, 2)
+      cj   = User.create!(name: "C.J. Cregg", id: 111, email: "adfdfb", password: "open")
+      toby = User.create!(name: "Toby Ziegler", id: 222, email: "adfdfa", password: "open")
 
       get "/api/v1/users"
 
@@ -22,7 +23,7 @@ describe "users api endpoints" do
 
   context "GET /api/v1/users/:id" do
     it "returns a specific user" do
-      cj   = User.create!(name: "C.J. Cregg", id: 111, email: "adfdfa", password: "open")
+      cj   = User.create!(name: "C.J. Cregg", id: 111, email: "adfdfb", password: "open")
       toby = User.create!(name: "Toby Ziegler", id: 222, email: "adfdfa", password: "open")
 
       get "/api/v1/users/#{cj.id}"
